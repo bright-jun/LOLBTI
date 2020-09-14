@@ -51,6 +51,7 @@
 			- `vue -version`
 	- `/frontend`에서 환경설정
 		- 통합명령어
+            - `yarn install`
 			- `yarn add node-sass sass-loader && yarn add vue-router vuex && yarn add vue-session && yarn add vue bootstrap-vue bootstrap && yarn add axios && yarn add firebase && yarn add proj4`
 		- sass-loader 설치
 			- `yarn add node-sass sass-loader`
@@ -137,11 +138,11 @@
 			generated-sources       maven-status    webcuration-0.0.1-SNAPSHOT.jar.original
 			generated-test-sources  test-classes
 			```
-			- `mvn clean packagevm`
+			- `mvn clean package`
 				- 에러남 무슨차이?
 		- 백엔드 서버 가동 : 내부의 tomcat 서버 가동
 			- `.jar` 파일이 있는 `target`경로에 들어가서
-			- `sudo java -jar webcuration-0.0.1-SNAPSHOT.jar`
+			- `sudo java -jar webcuration-0.0.1-SNAPSHOT.jar &`
 	- PM2
 		- [PM2란?](https://cheese10yun.github.io/PM2/)
 			- 앱에서 충돌이 발생할 경우 앱을 자동으로 다시 시작
@@ -182,3 +183,11 @@
 
 
 	- WAS(Tomcat8 설치)
+
+- 백엔드(django)설치
+    - python 설치
+        - https://aliwo.github.io/swblog/linux/ubuntu/ubuntu-new-python/#
+    - pip3 설치
+        - `sudo apt install python3-pip`
+    - django 설치
+        - `pip install django~=2.2.7`
