@@ -2,20 +2,27 @@
   <nav>
     <v-toolbar flat app class="maincolor">
       <v-toolbar-title class="grey--text">
-        <span class="font-weight-light">lol</span>
-        <span>BTI</span>
+        <!-- <span class="font-weight-light">lol</span>
+        <span>BTI</span> -->
+
+        <v-img
+          class="mt-2 mb-2"
+          src="../assets/images/lolBTI_logo.png"
+          height="55"
+          width="100"
+        />
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-flex xs-4>
-        <v-form>
-          <v-text-field
-            outline
-            label="닉네임 검색"
-            append-icon="search"
-          ></v-text-field>
-        </v-form>
-      </v-flex>
-      <v-btn flat class="btncolor">
+
+      <v-form class="mr-4 mt-5">
+        <v-text-field
+          outline
+          label="닉네임 검색"
+          append-icon="search"
+        ></v-text-field>
+      </v-form>
+
+      <v-btn flat class="btncolor mr-4">
         <span>로그인</span>
         <v-icon right>login</v-icon>
       </v-btn>
