@@ -34,9 +34,9 @@ public class RecommendController {
     public Object recommendChampion(@RequestParam String summonerName, @RequestParam int type) {
         List<Champion> champList = new ArrayList<>();
         BasicResponse result = new BasicResponse();
-        if(type == 0){
+        if(type == 0){  // 숙련도
 
-        } else if(type == 1){
+        } else if(type == 1){   // 챔피언 매치기록
 
         }
 
