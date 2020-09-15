@@ -119,3 +119,4 @@ matchlists -> championID == match -> championID
 type
 participantId -> 몇번째 유저
 itemId -> 아이템 아이디
+itemId -> 아이템 아이디
