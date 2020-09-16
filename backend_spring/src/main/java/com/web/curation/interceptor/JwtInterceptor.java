@@ -30,6 +30,7 @@ public class JwtInterceptor implements HandlerInterceptor{
 			// request의 parameter에서 auth-token으로 넘어온 녀석을 찾는다
 			String token = request.getHeader("jwt-auth-token");
 			if(token!=null && token.length()>0) {
+				// 유효성을 테스트한다
 				jwtService.checkVaild(token);
 				log.trace("토큰 사용 가능:{}",token);
 				return true;
