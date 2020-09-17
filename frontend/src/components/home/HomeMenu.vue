@@ -23,7 +23,11 @@
 
       <v-tab-item v-for="i in tabs" :key="i" :value="'tab-' + i">
         <v-card flat tile>
-          <v-card-text>{{ text }}</v-card-text>
+          <v-card-text>
+            <ChampRecom v-if="i==='챔프추천'" />
+            <MbtiRecom v-if="i==='MBTI추천'" />
+            <DuoRecom v-if="i==='듀오추천'" />
+          </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs>
@@ -31,7 +35,16 @@
 </template>
 
 <script>
+import DuoRecom from "../../components/home/DuoRecom.vue";
+import ChampRecom from "../../components/home/ChampRecom.vue";
+import MbtiRecom from "../../components/home/MbtiRecom";
+
 export default {
+  components: {
+    DuoRecom,
+    ChampRecom,
+    MbtiRecom,
+  },
   data() {
     return {
       tab: null,
