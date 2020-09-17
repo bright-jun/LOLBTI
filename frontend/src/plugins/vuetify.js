@@ -9,8 +9,8 @@ export default new Vuetify({
   theme: {
     themes: {
       light: {
-        maincolor: "#FFCC80",
-        btncolor: "#ffa300",
+        maincolor: "#01121f",
+        btncolor: "#0DA970",
       },
     },
   },

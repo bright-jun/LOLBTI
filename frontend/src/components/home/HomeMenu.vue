@@ -2,9 +2,10 @@
   <div>
     <v-tabs
       v-model="tab"
-      background-color="btncolor"
+      background-color="maincolor"
       class="elevation-2"
       dark
+      color="btncolor accent-4"
       :centered="centered"
       :grow="grow"
       :vertical="vertical"
