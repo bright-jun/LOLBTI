@@ -13,18 +13,23 @@ export default {
   },
   data() {
     return {
-      options: null,
       loaded: false,
       chartData: null,
     };
   },
   async mounted() {
     this.chartData = {
-      labels: ["승", "패"],
+      labels: ["탑", "미들", "정글", "바텀", "써폿"],
       datasets: [
         {
-          backgroundColor: ["#41B883", "#E46651"],
-          data: [40, 60],
+          backgroundColor: [
+            "#EF6C00",
+            "#1E88E5",
+            "#B2FF59",
+            "#00838F",
+            "#D81B60",
+          ],
+          data: [20, 20, 20, 20, 20],
         },
       ],
     };

@@ -4,8 +4,9 @@
       <v-col md="4">
         <v-card>
           <v-card-text>
-            <win-lose-chart />
+            승패 기록
           </v-card-text>
+          <win-lose-chart />
         </v-card>
       </v-col>
       <v-col md="4">
@@ -13,7 +14,10 @@
       </v-col>
       <v-col md="4">
         <v-card>
-          <v-card-text>hi</v-card-text>
+          <v-card-text>
+            선호 라인
+          </v-card-text>
+          <fre-line-chart />
         </v-card>
       </v-col>
     </v-row>
@@ -27,12 +31,14 @@
 import RecommendChampList from "./RecommendChampList.vue";
 import FreChampList from "./FreChampList.vue";
 import WinLoseChart from "./WinLoseChart.vue";
+import FreLineChart from "./FreLineChart.vue";
 
 export default {
   components: {
     RecommendChampList,
     FreChampList,
     WinLoseChart,
+    FreLineChart,
   },
 };
 </script>
