@@ -17,4 +17,6 @@ public class User {
     @Id
     private String id;
     private String password;
+    private String summoner_id;
+    private String mbti;
 }

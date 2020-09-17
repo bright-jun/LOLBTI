@@ -46,6 +46,8 @@ public class UserService {
 		if(u.isPresent()) {
 			u.get().setId(user.getId());
 			u.get().setPassword(user.getPassword());
+			u.get().setSummoner_id(user.getSummoner_id());
+			u.get().setMbti(user.getMbti());
 			userDao.save(u.get());
 		}
 	}
