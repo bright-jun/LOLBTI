@@ -33,6 +33,10 @@ export default {
           title: "Ali Connors",
           avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
         },
+        {
+          title: "Ali Connors",
+          avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+        },
       ],
     };
   },
