@@ -13,6 +13,7 @@ export default {
   },
   data() {
     return {
+      options: null,
       loaded: false,
       chartData: null,
     };
