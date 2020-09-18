@@ -1,4 +1,4 @@
-# 🌏 AWS
+# 🌏 AWS 
 - server : ubuntu 18.04
 	- 서버가 하나의 노트북이라고 생각하면 됩니다.
 - hostname : j3a109.p.ssafy.io
