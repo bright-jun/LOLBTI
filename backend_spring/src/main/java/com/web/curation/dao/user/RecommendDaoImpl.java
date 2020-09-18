@@ -62,7 +62,7 @@ public class RecommendDaoImpl implements RecommendDao {
             champList.add(champ);
         }
 
-        return null;
+        return champList;
     }
     
 }

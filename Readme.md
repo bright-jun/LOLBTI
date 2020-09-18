@@ -74,8 +74,9 @@
 > 프로젝트를 배포한 url과 테스트하기 위한 계정 ID/PW를 적어주세요
 
 ## 데이터 정제
+
 0.전처리용 테이블
-최상위유저 테이블 /lol/league/v4/challengerleagues/by-queue/{queue}
+> 최상위유저 테이블 /lol/league/v4/challengerleagues/by-queue/{queue}
 /lol/league/v4/grandmasterleagues/by-queue/{queue}
 
 1. Django
@@ -154,3 +155,5 @@ mbti 궁합(간단), mbti + 챔프 ->듀오 추천 -나
 라인추천 주, 부 (생각좀 ㄱㄱ)
 챔피언 역할군 (암살자, 전사, 마법사 등)
 itemId -> 아이템 아이디
+
+
