@@ -28,7 +28,7 @@ export default {
     items: [
       { header: "recent" },
       {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+        avatar: "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/Lux.png",
         title: "Brunch this weekend?",
         subtitle:
           "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
