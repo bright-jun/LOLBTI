@@ -1,6 +1,6 @@
 
 const axios = require('axios');
-const hostname = '';
+const hostname = 'localhost';
 const BASE_URL = 'http://' + hostname + ':8080';
 
 const requestLogin = (data,callback,errorCallback) => {
