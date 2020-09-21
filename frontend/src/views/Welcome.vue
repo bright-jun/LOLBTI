@@ -3,7 +3,7 @@
     <v-container>
       <v-img
         class="ma-auto"
-        src="../assets/images/lolbti_logo_greenblack.png"
+        src="../assets/images/lolbti_logo_2.png"
         height="180"
         width="310"
       />

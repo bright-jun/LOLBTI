@@ -11,6 +11,24 @@ git remote add origin https://lab.ssafy.com/s03-bigdata-sub3/s03p23a109.git
 git push origin develop
 ```
 
+JIRA 연동
+Jira - mattermost 연동 방법입니다
+`/jira connect`
+`/jira subscribe`
+
+GitLab - MM
+`통합기능`
+incoming webhook 주소 복사
+mm notification -> 입력
+
+Jira
+filtering view 설정
+board -> configure -> quick filters
+
+저장 및 로딩속도
+
+https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221250772912&proxyReferer=https:%2F%2Fwww.google.com%2F
+
 ## 목차
 - [개요](#개요)
 - [기능](#기능)
