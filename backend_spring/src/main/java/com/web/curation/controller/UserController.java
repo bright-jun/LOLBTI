@@ -54,7 +54,6 @@ public class UserController {
         if (userOpt.isPresent()) {
             result.status = true;
             result.object = userOpt.get();
-            
             // 성공하면 토큰 생성
             String token = jwtService.create(user);
             res.setHeader("jwt-auth-token", token);
