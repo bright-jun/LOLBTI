@@ -2,6 +2,15 @@
 
 > 리드미 양식입니다. 꼭 따라야 할 필요는 없지만 뭘 넣을 지 고민된다면 참고해주세요.
 
+```
+git remote -v
+git remote remove origin
+# remote 가 올리는 경로를 설정하는 명령어
+# remote 를 Sub3로 변경해서 기존의 저장소를 Sub3로 옮겨버림
+git remote add origin https://lab.ssafy.com/s03-bigdata-sub3/s03p23a109.git
+git push origin develop
+```
+
 ## 목차
 - [개요](#개요)
 - [기능](#기능)
