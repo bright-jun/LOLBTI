@@ -66,19 +66,7 @@ export default {
     Banner,
     NavBar,
   },
-  created() {
-    axios
-      .get(`http://localhost:8080/recommend/champion`, {
-        params: {
-          summonerName: this.$store.state.summoner.name,
-          type: this.$store.state.summoner.searchType,
-        },
-      })
-      .then((res) => {})
-      .catch((err) => {
-        console.log(err);
-      });
-  },
+  created() {},
 };
 </script>
 

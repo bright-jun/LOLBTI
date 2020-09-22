@@ -24,9 +24,9 @@
       <v-tab-item v-for="i in tabs" :key="i" :value="'tab-' + i">
         <v-card flat tile>
           <v-card-text>
-            <ChampRecom v-if="i==='챔프추천'" />
-            <MbtiRecom v-if="i==='MBTI추천'" />
-            <DuoRecom v-if="i==='듀오추천'" />
+            <ChampRecom v-if="i === '챔프추천'" />
+            <MbtiRecom v-if="i === 'MBTI추천'" />
+            <DuoRecom v-if="i === '듀오추천'" />
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -38,7 +38,7 @@
 import DuoRecom from "../../components/home/DuoRecom.vue";
 import ChampRecom from "../../components/home/ChampRecom.vue";
 import MbtiRecom from "../../components/home/MbtiRecom";
-
+import axios from "axios";
 export default {
   components: {
     DuoRecom,
@@ -59,6 +59,19 @@ export default {
       right: false,
       tabs: ["챔프추천", "MBTI추천", "듀오추천"],
     };
+  },
+  created() {
+    axios
+      .get(`http://localhost:8080/recommend/champion`, {
+        params: {
+          summonerName: this.$store.state.summoner.name,
+          type: this.$store.state.summoner.searchType,
+        },
+      })
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>
