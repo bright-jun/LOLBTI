@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 public class RecommendController {
     
+    @Autowired
     RecommendDao testDao;
 
     @GetMapping("/recommend/champion")
