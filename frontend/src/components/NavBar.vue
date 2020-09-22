@@ -7,15 +7,15 @@
 
         <v-img
           class="mt-2 mb-2"
-          src="../assets/images/lolbti_logo_2.png"
+          src="../assets/images/lolbti_logo_green.png"
           height="55"
           width="100"
         />
       </v-toolbar-title>
       <v-spacer></v-spacer>
-
       <v-form class="mr-4 mt-5">
         <v-text-field
+          v-if="viewType"
           rounded
           background-color="btncolor"
           color="btncolor"
@@ -46,6 +46,7 @@ export default {
   data() {
     return {};
   },
+  props: ["viewType"],
 };
 </script>
 

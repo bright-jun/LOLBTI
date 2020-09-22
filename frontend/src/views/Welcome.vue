@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <v-main>
+    <nav-bar :viewType="navbarType" />
     <v-container>
       <v-img
         class="ma-auto"
-        src="../assets/images/lolbti_logo_2.png"
+        src="../assets/images/lolbti_logo_greenblack.png"
         height="180"
         width="310"
       />
@@ -20,11 +21,22 @@
         <v-col md="3"></v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-main>
 </template>
 
 <script>
-export default {};
+import NavBar from "../components/NavBar.vue";
+
+export default {
+  data() {
+    return {
+      navbarType: false,
+    };
+  },
+  components: {
+    NavBar,
+  },
+};
 </script>
 
 <style lang=""></style>
