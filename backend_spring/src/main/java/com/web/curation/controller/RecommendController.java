@@ -1,13 +1,16 @@
 package com.web.curation.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.web.curation.dao.user.RecommendDao;
 import com.web.curation.model.BasicResponse;
 import com.web.curation.model.lol.Champion;
 import com.web.curation.model.lol.Item;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,6 +32,9 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 public class RecommendController {
     
+    @Autowired
+    RecommendDao testDao;
+
     @GetMapping("/recommend/champion")
     @ApiOperation(value = "user가 플레이한 챔피언 성향에 따른 추천")
     public Object recommendChampion(@RequestParam String summonerName, @RequestParam int type) {
@@ -67,4 +73,13 @@ public class RecommendController {
         return new ResponseEntity<> (result, HttpStatus.OK);
     }
 
+    @GetMapping("/test")
+    @ApiOperation(value = "test")
+    public Object test() throws IOException {
+        String res = testDao.test();
+        BasicResponse result = new BasicResponse();
+        result.data = res;
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
+    }
 }
