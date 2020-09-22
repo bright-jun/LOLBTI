@@ -5,13 +5,6 @@
       <v-container>
         <v-row>
           <v-card class="mx-auto">
-            <!-- <v-img
-            class="white--text align-end"
-            height="200px"
-            src="https://c.wallhere.com/photos/32/6e/League_of_Legends_Ashe_League_of_Legends_mountains_sky-1894075.jpg!d"
-          >
-            <v-card-title>lolBTI 어서와</v-card-title>
-            </v-img>-->
             <Banner />
           </v-card>
         </v-row>
@@ -48,6 +41,7 @@ import UserGameInfo from "../components/home/UserGameInfo.vue";
 import RecentChampList from "../components/home/RecentChampList.vue";
 import Banner from "../components/Banner.vue";
 import NavBar from "../components/NavBar.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -71,6 +65,19 @@ export default {
     RecentChampList,
     Banner,
     NavBar,
+  },
+  created() {
+    axios
+      .get(`http://localhost:8080/recommend/champion`, {
+        params: {
+          summonerName: this.$store.state.summoner.name,
+          type: this.$store.state.summoner.searchType,
+        },
+      })
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

@@ -13,7 +13,7 @@
         />
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-form class="mr-4 mt-5">
+      <v-form class="mr-4 mt-5" onSubmit="return false;">
         <v-text-field
           v-if="viewType"
           rounded
@@ -22,6 +22,8 @@
           outline
           label="닉네임 검색"
           append-icon="search"
+          v-model="summonerName"
+          @keydown.enter="searchSummoner"
         ></v-text-field>
       </v-form>
 
@@ -44,9 +46,20 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      summonerName: "",
+      searchType: 1,
+    };
   },
   props: ["viewType"],
+  methods: {
+    searchSummoner() {
+      this.$store.state.summoner = {
+        name: this.summonerName,
+        searchType: this.searchType,
+      };
+    },
+  },
 };
 </script>
 
