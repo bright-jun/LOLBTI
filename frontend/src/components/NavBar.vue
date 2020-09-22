@@ -7,7 +7,7 @@
 
         <v-img
           class="mt-2 mb-2"
-          src="../assets/images/lolbti_logo_green.png"
+          src="../assets/images/lolbti_logo_2.png"
           height="55"
           width="100"
         />
