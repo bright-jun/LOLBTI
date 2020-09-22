@@ -1,6 +1,7 @@
 <template>
   <nav>
     <v-toolbar flat app class="maincolor">
+
       <v-toolbar-title class="grey--text">
         <!-- <span class="font-weight-light">lol</span>
         <span>BTI</span>-->
@@ -12,6 +13,7 @@
           width="100"
         />
       </v-toolbar-title>
+
       <v-spacer></v-spacer>
 
       <v-form class="mr-4 mt-5">
@@ -44,7 +46,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+
+    };
   },
 };
 </script>
