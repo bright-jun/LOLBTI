@@ -11,6 +11,24 @@ git remote add origin https://lab.ssafy.com/s03-bigdata-sub3/s03p23a109.git
 git push origin develop
 ```
 
+JIRA 연동
+Jira - mattermost 연동 방법입니다
+`/jira connect`
+`/jira subscribe`
+
+GitLab - MM
+`통합기능`
+incoming webhook 주소 복사
+mm notification -> 입력
+
+Jira
+filtering view 설정
+board -> configure -> quick filters
+
+저장 및 로딩속도
+
+https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221250772912&proxyReferer=https:%2F%2Fwww.google.com%2F
+
 ## 목차
 - [개요](#개요)
 - [기능](#기능)
@@ -68,6 +86,16 @@ git push origin develop
 > 프로젝트를 구현 할 때 사용한 기술들을 적어주세요
 
 ## 기술 설명
+> 한계점: 코사인 유사도를 사용했을 때
+```
+5 5 0 0 0
+
+5 5 0 0 0 --- 1000
+5 5 0 1 0 ---
+5 5 4 0 5 --- 1
+```
+`5 5 0 0 0`은 `5 5 0 1 0` `5 5 4 0 5`골고루 영향을 받아야하는데 `5 5 0 1 0`에 영향을 더 많이 받는다.
+극단적으로 `5 5 0 0 0`이 1000개 있으면 추천못받음
 
 ### ERD
 > DB 및 백엔드를 구현할 때 ERD를 그려보고 리드미에 남겨주세요
