@@ -5,15 +5,10 @@
         <!-- <span class="font-weight-light">lol</span>
         <span>BTI</span>-->
 
-        <v-img
-          class="mt-2 mb-2"
-          src="../assets/images/lolbti_logo_green.png"
-          height="55"
-          width="100"
-        />
+        <v-img class="mt-2 mb-2" src="../assets/images/lolbti_logo_2.png" height="55" width="100" />
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-form class="mr-4 mt-5" onSubmit="return false;">
+      <v-form class="mr-4 mt-5" onsubmit="return false;">
         <v-text-field
           v-if="viewType"
           rounded
@@ -27,7 +22,7 @@
         ></v-text-field>
       </v-form>
 
-      <v-btn flat class="btncolor mr-4">
+      <v-btn flat class="btncolor mr-4" @click="$router.push('/login').catch(() => {})">
         <span>로그인</span>
         <v-icon right>login</v-icon>
       </v-btn>
@@ -35,7 +30,7 @@
         <span>로그아웃</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>-->
-      <v-btn flat class="btncolor">
+      <v-btn flat class="btncolor" @click="$router.push('/join').catch(() => {})">
         <span>회원가입</span>
         <!-- <v-icon right></v-icon> -->
       </v-btn>
@@ -58,6 +53,7 @@ export default {
         name: this.summonerName,
         searchType: this.searchType,
       };
+      this.$router.push("/home");
     },
   },
 };
