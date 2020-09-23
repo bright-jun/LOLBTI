@@ -84,9 +84,19 @@ public class UserController {
     
     @PostMapping("/user/insert")
     @ApiOperation(value = "회원 가입")
-    public ResponseEntity<User> save(User user){
-    	//BasicResponse result = new BasicResponse(); 
-    	return new ResponseEntity<User>(userService.save(user), HttpStatus.OK);
+    public Object save(User user){
+    	BasicResponse result = new BasicResponse();
+    	Optional<User> userOpt = userService.findById(user.getId());
+    	
+    	// ID가 이미 존재하지 않을때만 회원가입 가능?
+    	if (!userOpt.isPresent()) {
+    		result.status = true;
+            result.object = userOpt.get();
+    		return new ResponseEntity<>(result, HttpStatus.OK);
+    	}else {
+    		result.status = false;
+    		return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    	}
     }
     
  	@PutMapping("/user/update/{id}")
