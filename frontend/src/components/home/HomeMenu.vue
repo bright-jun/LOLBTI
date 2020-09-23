@@ -26,7 +26,7 @@
           <v-card-text>
             <ChampRecom v-if="i === '챔프추천'" />
             <MbtiRecom v-if="i === 'MBTI추천'" />
-            <DuoRecom v-if="i === '듀오추천'" />
+            <DuoRecom v-if="i === '아이템추천'" />
           </v-card-text>
         </v-card>
       </v-tab-item>
