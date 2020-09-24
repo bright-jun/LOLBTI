@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.http.response import JsonResponse, HttpResponse
 from . import defs
+from . import recommend
 
 @api_view(['GET'])
 def test(request):
@@ -18,5 +19,12 @@ def userInfo(request, summonerName):
         'recentMatches' : recent_matches
     })
 
+@api_view(['GET'])
+def recommendByMastery(request, summonerName):
+    recomm = recommend.recommend_champ_by_mastery(summonerName)
+    return JsonResponse({
+        'champList' : recomm.index,
+        'pointList' : recomm.value
+    })
 
     
