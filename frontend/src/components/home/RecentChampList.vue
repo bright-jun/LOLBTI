@@ -2,17 +2,9 @@
   <v-card max-width="450" class="mx-auto">
     <v-list three-line>
       <template v-for="(item, index) in items">
-        <v-subheader
-          v-if="item.header"
-          :key="item.header"
-          v-text="item.header"
-        ></v-subheader>
+        <v-subheader v-if="item.header" :key="item.header" v-text="item.header"></v-subheader>
 
-        <v-divider
-          v-else-if="item.divider"
-          :key="index"
-          :inset="item.inset"
-        ></v-divider>
+        <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
 
         <v-list-item v-else :key="item.title">
           <!-- 위에 빠짐 @click  -->
@@ -47,20 +39,20 @@ export default {
   }),
   created() {
     //sohwan_chal="https://kr.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/" +'RANKED_SOLO_5x5' +'?api_key=' + api_key
-    axios
-      .get(`http://localhost:8080/summoner/recentchamp`)
-      .then((res) => {
-        this.items = {
-          avartar: res.data.imageurl,
-          role: res.data.role,
-          lane: res.data.lane,
-          time: res.data.timestamp,
-        };
-        console.log(this.items);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios
+    //   .get(`http://localhost:8080/summoner/recentchamp`)
+    //   .then((res) => {
+    //     this.items = {
+    //       avartar: res.data.imageurl,
+    //       role: res.data.role,
+    //       lane: res.data.lane,
+    //       time: res.data.timestamp,
+    //     };
+    //     console.log(this.items);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   },
 };
 </script>

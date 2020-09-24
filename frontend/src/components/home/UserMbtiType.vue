@@ -8,14 +8,31 @@
 </template>
 
 <script>
+import UserApi from "../../api/UserApi.js";
+
 export default {
   data() {
-    return {};
+    return {
+      mtype: "",
+    };
   },
-  props: {
-    mtype: {
-      type: String,
-    },
+  // props: {
+  //   mtype: {
+  //     type: String,
+  //   },
+  // },
+  created() {
+    UserApi.requestMbtiInfo(
+      this.$route.params.summonername,
+      (res) => {
+        // console.log(res.data);
+        this.mtype = res.data.mbti;
+        console.log(this.mtype);
+      },
+      (error) => {
+        this.mtype = "정보가 없습니다.";
+      }
+    );
   },
 };
 </script>
