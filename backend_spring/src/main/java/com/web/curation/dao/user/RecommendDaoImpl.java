@@ -70,7 +70,7 @@ public class RecommendDaoImpl implements RecommendDao {
 
     @Override
     public String test() throws IOException {
-        String request = "/userGameData/test";
+        String request = "/userGameData/test/";
         String requestUrl = root + request;
         URL url = new URL(requestUrl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
