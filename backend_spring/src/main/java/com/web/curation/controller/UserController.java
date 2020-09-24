@@ -36,7 +36,7 @@ import io.swagger.annotations.ApiResponses;
 
 // @CrossOrigin(origins = { "https://i3a310.p.ssafy.io:80", "http://localhost:3000" })
 @CrossOrigin(origins = { "*" })
-@RequestMapping("account")
+@RequestMapping("api/account")
 @RestController
 public class UserController {
 
