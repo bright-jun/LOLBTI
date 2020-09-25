@@ -2,9 +2,17 @@
   <v-card max-width="450" class="mx-auto">
     <v-list three-line>
       <template v-for="(item, index) in items">
-        <v-subheader v-if="item.header" :key="item.header" v-text="item.header"></v-subheader>
+        <v-subheader
+          v-if="item.header"
+          :key="item.header"
+          v-text="item.header"
+        ></v-subheader>
 
-        <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
+        <v-divider
+          v-else-if="item.divider"
+          :key="index"
+          :inset="item.inset"
+        ></v-divider>
 
         <v-list-item v-else :key="item.role">
           <!-- 위에 빠짐 @click  -->
@@ -13,7 +21,10 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>역할: {{item.role}} 라인: {{item.lane}}</v-list-item-title>
+            <v-list-item-title>
+              {{ item.champion }} {{ item.role }}
+              {{ item.lane }}</v-list-item-title
+            >
             <!-- <v-list-item-subtitle v-html="item.lane"></v-list-item-subtitle> -->
           </v-list-item-content>
         </v-list-item>
@@ -44,6 +55,9 @@ export default {
         // console.log(res.data);
         for (let index = 0; index < res.data.length; index++) {
           this.items.push({
+            champion: this.$store.getters.getChampNameByNo(
+              res.data[index].champion
+            ),
             avatar:
               "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
               this.$store.getters.getChampNameByNo(res.data[index].champion) +
