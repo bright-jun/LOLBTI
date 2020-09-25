@@ -27,7 +27,7 @@ export default {
       (res) => {
         // console.log(res.data);
         this.mtype = res.data.mbti;
-        console.log(this.mtype);
+        // console.log(this.mtype);
       },
       (error) => {
         this.mtype = "정보가 없습니다.";

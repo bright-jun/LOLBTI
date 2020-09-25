@@ -34,12 +34,52 @@ const requestMbtiInfo = (summonerName, callback, errorCallback) => {
     });
 };
 
+const requestUserGameInfo = (summonerName, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/summoner/leagueinfo",
+    params: {
+      summonerName: summonerName,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      errorCallback(error);
+    });
+};
+
+const requestUserRecentChamp = (summonerName, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/summoner/recentchamp",
+    params: {
+      summonerName: summonerName,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      errorCallback(error);
+    });
+};
+
 const UserApi = {
   requestLogin: (data, callback, errorCallback) =>
     requestLogin(data, callback, errorCallback),
 
   requestMbtiInfo: (summonerName, callback, errorCallback) =>
     requestMbtiInfo(summonerName, callback, errorCallback),
+
+  requestUserGameInfo: (summonerName, callback, errorCallback) =>
+    requestUserGameInfo(summonerName, callback, errorCallback),
+
+  requestUserRecentChamp: (summonerName, callback, errorCallback) =>
+    requestUserRecentChamp(summonerName, callback, errorCallback),
 };
 
 export default UserApi;
