@@ -93,7 +93,7 @@ public class UserController {
     	if (!userOpt.isPresent()) {
     		result.status = true;
     		// 소환사 명을 입력한 경우에만 소환사,mbti 추가한다(일단 공백으로 했음 , null이면 바꿀 예정)
-    		if(user.getSummoner_name().equals("")) {
+    		if(user.getSummonerName().equals("")) {
     			// Mbti 추가 로직 구현해주세요
     			/*
     			 * 
@@ -109,7 +109,7 @@ public class UserController {
     
  	@PutMapping("/user/update/{id}")
  	@ApiOperation(value = "회원 수정 (바꿀 아이디 값과 , 바꿀 값 User 값)")
- 	public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User user){
+ 	public ResponseEntity<User> updateUser(@RequestBody User user,@PathVariable String id){
  		userService.updateById(id, user);
  		// Mbti 수정 로직 구현해주세요
 		/*
