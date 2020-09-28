@@ -1,7 +1,7 @@
-﻿# 🌏 AWS
-- server : ubuntu 18.04 
-	- 서버가 하나의 노트북이라고 생각하면 됩니다. 
-- hostname : j3a109.p.ssafy.io
+# 🌏 AWS
+- server : ubuntu 18.04
+	- 서버가 하나의 노트북이라고 생각하면 됩니다.
+- hostname : j3a109.p.ssafy.io 
 - 서버 접속
 	- [윈도우 10 에서 pem 파일을 사용하기 – 아마존 라이트세일 리눅스 서버에 접속하는 방법(SSH)](https://swiftcoding.org/lightsail-from-window10)
 	- [OpenSSH 클라이언트 설치 확인](https://m.blog.naver.com/PostView.nhn?blogId=alice_k106&logNo=220882708567&proxyReferer=https:%2F%2Fwww.google.com%2F)
