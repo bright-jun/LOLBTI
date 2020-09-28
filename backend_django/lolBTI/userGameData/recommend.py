@@ -31,6 +31,15 @@ from numpy.linalg import norm
 def cosine_sim(A,B):
     return dot(A, B)/(norm(A)*norm(B))
 
+def sim_sohwan(sohwan):
+    df = pd.DataFrame()
+    
+    user_mastery_compressed = user_mastery.loc[:,user_mastery.loc[sohwan,:]>0]
+    for i in user_mastery.index:
+        df.loc[sohwan,i] = cosine_sim(user_mastery_compressed.loc[sohwan,:],user_mastery_compressed.loc[i,:])
+    
+    return df
+
 def recommend_champ_by_mastery(sohwan,n=5, k=10,threshold=0, include=True):
     global user_mastery
     
