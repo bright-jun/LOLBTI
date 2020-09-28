@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.curation.model.BasicResponse;
@@ -47,14 +47,17 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation(value = "로그인")
-    public Object login(@RequestBody User user, HttpServletResponse res) {
-            Optional<User> userOpt = userService.findByIdAndPassword(user);
+    public Object login(@RequestParam("id") String id, @RequestParam("password")  String password, HttpServletResponse res) {
+            Optional<User> userOpt = userService.findByIdAndPassword(id, password);
+            
             BasicResponse result = new BasicResponse(); 
         if (userOpt.isPresent()) {
             result.status = true;
             result.object = userOpt.get();
+      
+            System.out.println(userOpt.get());
             // 성공하면 토큰 생성
-            String token = jwtService.create(user);
+            String token = jwtService.create(userOpt.get());
             res.setHeader("jwt-auth-token", token);
             
             return new ResponseEntity<> (result, HttpStatus.OK);
@@ -81,16 +84,29 @@ public class UserController {
             return new ResponseEntity<User>(user.get(), HttpStatus.OK);
     }
     
-    @PostMapping("/user/insert")
+    @PostMapping("/user/join")
     @ApiOperation(value = "회원 가입")
-    public Object save(User user){
+    public Object save(@RequestParam("id") String id, @RequestParam("password") String password,
+    		@RequestParam("summoner_name") String summoner_name,
+    		@RequestParam("mbti") String mbti){
     	BasicResponse result = new BasicResponse();
-    	Optional<User> userOpt = userService.findById(user.getId());
+    	Optional<User> userOpt = userService.findById(id);
     	
-    	// ID가 이미 존재하지 않을때만 회원가입 가능?
+    	// ID가 이미 존재하지 않을때만 회원가입 가능하다
     	if (!userOpt.isPresent()) {
     		result.status = true;
-            result.object = userOpt.get();
+    		
+    		// 소환사 명을 입력한 경우에만 소환사,mbti 추가한다(일단 공백으로 했음 , null이면 바꿀 예정)
+    		if(summoner_name.equals("")) {
+    			User user = userService.save(new User(id,password,summoner_name));
+    			// Mbti 추가 로직 구현해주세요
+    			/*
+    			 * 
+    			 */
+    		}else {
+    			User user = userService.save(new User(id,password,null));
+    		}
+    		
     		return new ResponseEntity<>(result, HttpStatus.OK);
     	}else {
     		result.status = false;
@@ -102,6 +118,10 @@ public class UserController {
  	@ApiOperation(value = "회원 수정 (바꿀 아이디 값과 , 바꿀 값 User 값)")
  	public ResponseEntity<User> updateUser(@PathVariable String id, User user){
  		userService.updateById(id, user);
+ 	   // Mbti 수정 로직 구현해주세요
+		/*
+		 * 
+		 */
  		return new ResponseEntity<User>(user, HttpStatus.OK);
  	}
  	

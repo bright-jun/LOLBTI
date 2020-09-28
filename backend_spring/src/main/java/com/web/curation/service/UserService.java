@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.web.curation.dao.user.UserDao;
 import com.web.curation.model.user.User;
 
@@ -17,11 +16,13 @@ public class UserService {
 	@Autowired
     UserDao userDao;
 	
+	
 	// Id, Password 확인
-	public Optional<User> findByIdAndPassword(User user){
-		Optional<User> userOpt = userDao.findByIdAndPassword(user.getId(), user.getPassword());
+	public Optional<User> findByIdAndPassword(String id, String password){
+		Optional<User> userOpt = userDao.findByIdAndPassword(id, password);
 		return userOpt;
 	}
+	
 	
 	// 전체 회원 조회
 	public List<User> findAll(){
@@ -46,8 +47,7 @@ public class UserService {
 		if(u.isPresent()) {
 			u.get().setId(user.getId());
 			u.get().setPassword(user.getPassword());
-			u.get().setSummoner_id(user.getSummoner_id());
-			u.get().setMbti(user.getMbti());
+			//u.get().setSummoner_name(user.getSummoner_name());
 			userDao.save(u.get());
 		}
 	}
@@ -56,6 +56,8 @@ public class UserService {
 	public void deleteById(String id){
 		userDao.deleteById(id);
 	}
+
+	
 
 
 

@@ -2,6 +2,7 @@ package com.web.curation.model.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -17,6 +18,6 @@ public class User {
     @Id
     private String id;
     private String password;
-    private String summoner_id;
-    private String mbti;
+    private String summoner_name;
+    
 }

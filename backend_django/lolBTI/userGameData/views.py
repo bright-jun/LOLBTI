@@ -5,10 +5,6 @@ from rest_framework.permissions import IsAuthenticated
 from django.http.response import JsonResponse, HttpResponse
 from . import defs
 
-<<<<<<< HEAD
-# Create your views here.
-    
-=======
 @api_view(['GET'])
 def test(request):
     testData = {1 : "testtesttesttest"}
@@ -24,4 +20,3 @@ def userInfo(request, summonerName):
 
 
     
->>>>>>> 28493202f883700905889c754fefe40799c2cbc4
