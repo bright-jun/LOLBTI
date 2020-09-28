@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -113,7 +114,7 @@ public class UserController {
     
  	@PutMapping("/user/update")
  	@ApiOperation(value = "회원 수정 (바꿀 아이디 값과 , 바꿀 값 User 값)")
- 	public ResponseEntity<User> updateUser(User user){
+ 	public ResponseEntity<User> updateUser(@RequestBody User user){
  		userService.updateById(user.getId(), user);
  	   // Mbti 수정 로직 구현해주세요
 		/*
