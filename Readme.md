@@ -74,8 +74,9 @@
 > 프로젝트를 배포한 url과 테스트하기 위한 계정 ID/PW를 적어주세요
 
 ## 데이터 정제
+
 0.전처리용 테이블
-최상위유저 테이블 /lol/league/v4/challengerleagues/by-queue/{queue}
+> 최상위유저 테이블 /lol/league/v4/challengerleagues/by-queue/{queue}
 /lol/league/v4/grandmasterleagues/by-queue/{queue}
 
 1. Django
@@ -119,4 +120,40 @@ matchlists -> championID == match -> championID
 type
 participantId -> 몇번째 유저
 itemId -> 아이템 아이디
+
+user가 플레이한 챔피언 성향에 따른 추천  - 명준
+
+user MBTI 성향에 따른 챔피언 추천 - 명준
+
+챔피언 매치에 따른 아이템 템트리 추천 - 효준
+
+mbti 궁합(간단), mbti + 챔프 ->듀오 추천 -나
+예) ENTP(나랑 궁합이 잘맞는 mbti)가 많이쓰는 챔프들
+     중에 나의 모스트와? 승률이 높은 챔프 추천?
+    
+    나의 모스트와 승률이 가장 높은 챔피언을 많이쓰는 mbti유저를 추천
+
+    INFP(나)와 다른 mbti와 듀오했을때 승률이 가장 높은 mbti를 추천(데이터가 적음)
+
+    나의 mbti의 모스트 5개에서 승률이 높은 챔피언 각 2개씩 뽑아서 이 챔프를 플레이를 많이하는 mbti를 추천
+    (mbti궁합추천 및 챔프 추천)
+    챔프 10개를 띄워줌 이 10개에 각각 mbti 출력?
+
+	이즈	레오나(승률) - mbti
+		쓰레쉬(승률) - mbti
+	케틀
+	모데
+	아트
+	아칼리
+
+통계(ex mbti 별 티어, 라인 ) 차트 등
+예) mbti별 모스트1(판수)
+     mbti와 티어의 상관관계
+     
+
+
+라인추천 주, 부 (생각좀 ㄱㄱ)
+챔피언 역할군 (암살자, 전사, 마법사 등)
 itemId -> 아이템 아이디
+
+
