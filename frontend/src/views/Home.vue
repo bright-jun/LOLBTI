@@ -12,10 +12,10 @@
           <v-col xs="12" sm="12" md="4">
             <v-col>
               <!-- <v-card class="pa-2" outlined tile>mbti 유형</v-card> -->
-              <UserMbtiType :mtype="mbtitype" />
+              <UserMbtiType />
             </v-col>
             <v-col>
-              <UserGameInfo :gameinfo="userGameInfo" />
+              <UserGameInfo />
             </v-col>
             <v-col>
               <RecentChampList />
@@ -46,15 +46,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      mbtitype: "ENTJ",
-      userGameInfo: {
-        tier: "bronze",
-        score: "600",
-        rate: "50",
-        win: "100",
-        lose: "100",
-        summonerName: "임시아이디",
-      },
       navbarType: true,
     };
   },
