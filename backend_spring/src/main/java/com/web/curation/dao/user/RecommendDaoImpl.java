@@ -10,6 +10,9 @@ import java.util.List;
 
 import com.web.curation.model.lol.Champion;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class RecommendDaoImpl implements RecommendDao {
     static String root = "http://localhost:8081";
     // static String root = "http://j3a109.p.ssafy.io:8081";
@@ -64,5 +67,26 @@ public class RecommendDaoImpl implements RecommendDao {
 
         return null;
     }
+
+    @Override
+    public String test() throws IOException {
+        String request = "/userGameData/test/";
+        String requestUrl = root + request;
+        URL url = new URL(requestUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+        String returnLine;
+        StringBuffer result = new StringBuffer();
+        while ((returnLine = br.readLine()) != null) {
+            result.append(returnLine + "\n");
+        }
+        conn.disconnect();
+
+        return result.toString();
+    }
+    
     
 }

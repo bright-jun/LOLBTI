@@ -1,12 +1,14 @@
 <template>
   <nav>
     <v-toolbar flat app class="maincolor">
+
       <v-toolbar-title class="grey--text">
         <!-- <span class="font-weight-light">lol</span>
         <span>BTI</span>-->
 
         <v-img class="mt-2 mb-2" src="../assets/images/lolbti_logo_2.png" height="55" width="100" />
       </v-toolbar-title>
+
       <v-spacer></v-spacer>
       <v-form class="mr-4 mt-5" onsubmit="return false;">
         <v-text-field
