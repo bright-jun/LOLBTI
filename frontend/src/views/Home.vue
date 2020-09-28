@@ -15,10 +15,10 @@
               <UserMbtiType />
             </v-col>
             <v-col>
-              <UserGameInfo />
+              <UserGameInfo :gameInfo="gameInfo" :imgURL="imgURL" />
             </v-col>
             <v-col>
-              <RecentChampList />
+              <RecentChampList :items="items" />
             </v-col>
           </v-col>
           <v-col xs="12" sm="12" md="8" class="pt-6">
@@ -42,11 +42,25 @@ import RecentChampList from "../components/home/RecentChampList.vue";
 import Banner from "../components/Banner.vue";
 import NavBar from "../components/NavBar.vue";
 import axios from "axios";
+import UserApi from "../api/UserApi.js";
 
 export default {
   data() {
     return {
       navbarType: true,
+      gameInfo: {},
+      // recentGames: [],
+      imgURL: "",
+      items: [
+        { header: "최근 챔프 기록" },
+        // {
+        //   avatar: "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/Lux.png",
+        //   title: "Brunch this weekend?",
+        //   subtitle:
+        //     "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+        // },
+        // { divider: true, inset: true },
+      ],
     };
   },
   components: {
@@ -57,7 +71,50 @@ export default {
     Banner,
     NavBar,
   },
-  created() {},
+  created() {
+    UserApi.requestUserGameInfo(
+      this.$route.params.summonername,
+      (res) => {
+        // console.log(res.data);
+        var idx = res.data.rankInfo.length;
+        this.gameInfo = res.data.rankInfo[idx - 1];
+        // this.recentGames = res.data.recentMatches.matches;
+        this.imgURL =
+          "emblem_" + res.data.rankInfo[idx - 1].tier.toLowerCase() + ".png";
+        // console.log(this.gameInfo);
+        // console.log(this.recentGames);
+        this.getRecentMatch(res.data.recentMatches.matches);
+      },
+      (error) => {}
+    );
+  },
+  methods: {
+    getRecentMatch(res) {
+      var self = this;
+      // console.log(res);
+      for (var index = 0; index < res.length; index++) {
+        // console.log(res[index].champion);
+        this.items.push({
+          champion: self.$store.getters.getChampNameByNo(
+            String(res[index].champion)
+          ),
+          avatar:
+            "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
+            self.$store.getters.getChampIdByNo(String(res[index].champion)) +
+            ".png",
+          role: res[index].role,
+          lane: res[index].lane,
+        });
+        if (index != res.length - 1) {
+          this.items.push({
+            divider: true,
+            inset: true,
+          });
+        }
+      }
+      // console.log(this.items);
+    },
+  },
 };
 </script>
 

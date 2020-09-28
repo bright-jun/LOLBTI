@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
-public class User {
-    @Id
-    private String id;
-    private String password;
-    private String summonerName;
+@Table(name = "mbti")
+public class Mbti {
+	@Id
+	private String summonerName;
+	private String mbti;
+
 }
