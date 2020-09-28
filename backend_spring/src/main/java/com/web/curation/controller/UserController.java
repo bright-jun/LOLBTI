@@ -49,7 +49,6 @@ public class UserController {
     @ApiOperation(value = "로그인")
     public Object login(@RequestParam("id") String id, @RequestParam("password")  String password, HttpServletResponse res) {
             Optional<User> userOpt = userService.findByIdAndPassword(id, password);
-            
             BasicResponse result = new BasicResponse(); 
         if (userOpt.isPresent()) {
             result.status = true;
@@ -95,7 +94,6 @@ public class UserController {
     	// ID가 이미 존재하지 않을때만 회원가입 가능하다
     	if (!userOpt.isPresent()) {
     		result.status = true;
-    		
     		// 소환사 명을 입력한 경우에만 소환사,mbti 추가한다(일단 공백으로 했음 , null이면 바꿀 예정)
     		if(summoner_name.equals("")) {
     			User user = userService.save(new User(id,password,summoner_name));
@@ -106,7 +104,6 @@ public class UserController {
     		}else {
     			User user = userService.save(new User(id,password,null));
     		}
-    		
     		return new ResponseEntity<>(result, HttpStatus.OK);
     	}else {
     		result.status = false;
@@ -114,10 +111,10 @@ public class UserController {
     	}
     }
     
- 	@PutMapping("/user/update/{id}")
+ 	@PutMapping("/user/update")
  	@ApiOperation(value = "회원 수정 (바꿀 아이디 값과 , 바꿀 값 User 값)")
- 	public ResponseEntity<User> updateUser(@PathVariable String id, User user){
- 		userService.updateById(id, user);
+ 	public ResponseEntity<User> updateUser(User user){
+ 		userService.updateById(user.getId(), user);
  	   // Mbti 수정 로직 구현해주세요
 		/*
 		 * 

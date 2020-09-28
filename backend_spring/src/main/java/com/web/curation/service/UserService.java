@@ -47,7 +47,7 @@ public class UserService {
 		if(u.isPresent()) {
 			u.get().setId(user.getId());
 			u.get().setPassword(user.getPassword());
-			//u.get().setSummoner_name(user.getSummoner_name());
+			u.get().setSummoner_name(user.getSummoner_name());
 			userDao.save(u.get());
 		}
 	}
