@@ -5,7 +5,7 @@ import Join from "./views/user/Join.vue";
 
 export default [
   {
-    path: "/home",
+    path: "/home/:summonername",
     name: "Home",
     component: Home,
   },
