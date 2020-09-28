@@ -60,7 +60,7 @@ export default {
             ),
             avatar:
               "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
-              this.$store.getters.getChampNameByNo(res.data[index].champion) +
+              this.$store.getters.getChampIdByNo(res.data[index].champion) +
               ".png",
             role: res.data[index].role,
             lane: res.data[index].lane,

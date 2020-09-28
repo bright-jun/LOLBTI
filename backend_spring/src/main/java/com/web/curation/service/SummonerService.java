@@ -17,7 +17,7 @@ import com.google.gson.JsonParser;
 
 @Service
 public class SummonerService {
-	final static String API_KEY = "RGAPI-edb14acb-ee11-41bb-ad2e-54928499d506";
+	final static String API_KEY = "RGAPI-3cfc6308-c239-46c3-b1a5-f0aacc4fe2e8";
 
 	// 소환사 이름으로 소환사 id 찾기 (리그정보, 최근 챔프 조회용)
 	public String[] findRiotIdBySummonerName(String summonerName) {
