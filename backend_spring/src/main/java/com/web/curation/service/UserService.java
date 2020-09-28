@@ -34,6 +34,11 @@ public class UserService {
 			Optional<User> user = userDao.findById(id);
 			return user;
 	}
+	// 소환사 이름으로 단일 회원 조회
+		public Optional<User> findBySummonerName(String summonerName){
+			Optional<User> user = userDao.findBySummonerName(summonerName);;
+			return user;
+		}
 	// 회원 가입
 	public User save(User user){
 		userDao.save(user);
