@@ -191,3 +191,5 @@
         - `sudo apt install python3-pip`
     - django 설치
         - `pip install django~=2.2.7`
+	- requirements.txt
+		- `pip install -r requirements.txt --user`

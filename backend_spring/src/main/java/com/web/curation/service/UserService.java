@@ -12,7 +12,7 @@ import com.web.curation.model.user.User;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
     UserDao userDao;
 	
@@ -25,40 +25,41 @@ public class UserService {
 	
 	
 	// 전체 회원 조회
-	public List<User> findAll(){
+	public List<User> findAll() {
 		List<User> userList = new ArrayList<>();
 		userDao.findAll().forEach(e -> userList.add(e));
 		return userList;
 	}
+
 	// 단일 회원 조회
-		public Optional<User> findById(String id){
-			Optional<User> user = userDao.findById(id);
-			return user;
+	public Optional<User> findById(String id) {
+		Optional<User> user = userDao.findById(id);
+		return user;
 	}
+
 	// 회원 가입
-	public User save(User user){
+	public User save(User user) {
 		userDao.save(user);
 		return user;
 	}
-	
+
 	// 회원 수정
-	public void updateById(String id, User user){
+	public void updateById(String id, User user) {
 		Optional<User> u = userDao.findById(id);
-		if(u.isPresent()) {
+		if (u.isPresent()) {
 			u.get().setId(user.getId());
 			u.get().setPassword(user.getPassword());
 			u.get().setSummonerName(user.getSummonerName());
 			userDao.save(u.get());
 		}
 	}
-	
+
 	// 회원 삭제
-	public void deleteById(String id){
+	public void deleteById(String id) {
 		userDao.deleteById(id);
 	}
 
 	
-
 
 
 }

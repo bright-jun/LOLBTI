@@ -1,6 +1,6 @@
 <template>
   <v-app class="grey lighten-4">
-    <router-view></router-view>
+    <router-view :key="$route.fullPath"></router-view>
     <Footer></Footer>
   </v-app>
 </template>
