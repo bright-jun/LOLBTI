@@ -3,24 +3,25 @@ package com.web.curation.controller;
 import java.util.List;
 import java.util.Optional;
 
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.curation.dao.user.MbtiDao;
 import com.web.curation.model.BasicResponse;
+import com.web.curation.model.user.Mbti;
 import com.web.curation.model.user.User;
 import com.web.curation.service.JwtService;
 import com.web.curation.service.UserService;
@@ -40,7 +41,10 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("account")
 @RestController
 public class UserController {
-
+	
+	@Autowired
+	MbtiDao mbtiDao;
+	
     @Autowired
     UserService userService;
     
@@ -83,21 +87,22 @@ public class UserController {
             return new ResponseEntity<User>(user.get(), HttpStatus.OK);
     }
     
-    @GetMapping("/user/searchmbti")
-    @ApiOperation(value = "소환사명으로 단일 회원 조회")
-    public ResponseEntity<User> getUserBySummonerName(@RequestParam String summonerName){
-    	
-    		Optional<User> user = userService.findBySummonerName(summonerName);
-            //BasicResponse result = new BasicResponse(); 
-    		System.out.println(user);
-            return new ResponseEntity<User>(user.get(), HttpStatus.OK);
-    }
     
     @PostMapping("/user/insert")
     @ApiOperation(value = "회원 가입")
-    public ResponseEntity<User> save(User user){
-    	//BasicResponse result = new BasicResponse(); 
-    	return new ResponseEntity<User>(userService.save(user), HttpStatus.OK);
+    public Object save(User user){
+    	BasicResponse result = new BasicResponse();
+    	Optional<User> userOpt = userService.findById(user.getId());
+    	
+    	// ID가 이미 존재하지 않을때만 회원가입 가능?
+    	if (!userOpt.isPresent()) {
+    		result.status = true;
+            result.object = userOpt.get();
+    		return new ResponseEntity<>(result, HttpStatus.OK);
+    	}else {
+    		result.status = false;
+    		return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    	}
     }
     
  	@PutMapping("/user/update/{id}")
@@ -115,6 +120,14 @@ public class UserController {
  	}
 
  	
-
+    @GetMapping("/user/searchmbti")
+    @ApiOperation(value = "소환사명으로 mbti 조회")
+    public ResponseEntity<Mbti> getMbtiBySummonerName(@RequestParam String summonerName){
+    	
+    		Optional<Mbti> mbti = mbtiDao.findById(summonerName);
+            //BasicResponse result = new BasicResponse(); 
+//    		System.out.println(mbti);
+            return new ResponseEntity<Mbti>(mbti.get(), HttpStatus.OK);
+    }
     
 }
