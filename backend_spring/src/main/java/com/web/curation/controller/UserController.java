@@ -129,7 +129,7 @@ public class UserController {
  		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
  	}
  	
- 	@GetMapping("user/token")
+ 	@GetMapping("/token")
  	@ApiOperation(value = "인터셉트로 유효성 확인 후 토큰 재갱신")
 	public Object getInfo(HttpServletRequest req, @RequestParam("id") String id, HttpServletResponse res){
 		
