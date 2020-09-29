@@ -60,9 +60,11 @@ https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221250772912&proxyRe
 > 스크린샷이나 gif등으로 한눈에 볼 수 있게 하면 더 좋습니다
 
 1. 소환사 - 챔피언 추천 by 플레이한 챔피언 숙련도 기준
-	- 숙련도
+	- 숙련도 기준
+		-	실시간으로 업데이트 가능(request 2번)
 2. 소환사 - 챔피언 추천 by 플레이한 챔피언 판수 기준
 	- matching data 모아야함.
+		-	실시간으로 업데이트 힘듬(request 200번)
 	- 트롤픽처리해야할수도
 3. 챔피언 매칭에 따른 아이템트리 추천
 	+ 승률까지 따질수도?

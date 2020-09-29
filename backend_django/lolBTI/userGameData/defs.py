@@ -9,14 +9,14 @@ import copy
 from multiprocessing import Pool
 
 api_key_list = [
-    'RGAPI-33d92cc8-bc95-4aee-9bb4-ae4da434acce',
-    'RGAPI-c6391a4f-5eb6-43da-bec3-7cb6b6189475',
-    'RGAPI-3cfc6308-c239-46c3-b1a5-f0aacc4fe2e8',
-    'RGAPI-301a98e2-c967-41ef-9c95-544f7600e730',
-    'RGAPI-52b8775a-3e31-4f52-b59c-eabd6f243056',
-    'RGAPI-5c645018-e4f9-4c9a-b7dc-bf8e2d4b68c2',
-    'RGAPI-e341ffac-2074-40e4-b85c-4c8182d77f1b',
-    'RGAPI-2e1560ca-6f50-455f-9aba-d8175be5acac'
+    'RGAPI-48ef7d74-1d87-404b-a573-988faca98f6d',
+    'RGAPI-3c4c2908-cf96-42c5-b8c5-8d5713d8fab4',
+    'RGAPI-74277b35-7876-4b02-8112-6b8224379b62',
+    'RGAPI-8794d187-5541-471c-8242-96ec482e4229',
+    'RGAPI-1fa822af-b25c-4d0e-8eb9-bef149d24791',
+    'RGAPI-c20efacb-5819-4517-89c0-0069734a11d2',
+    'RGAPI-69d8c662-938b-4231-a0b1-7358871a0a8f',
+    'RGAPI-64a9f06a-d9eb-4c45-8666-c4f5c132b4a6'
 ]
 def rank_info(sohwan_r, key_idx):
     # 소환사 랭크 정보 수집
