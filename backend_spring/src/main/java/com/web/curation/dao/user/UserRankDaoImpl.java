@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +17,8 @@ public class UserRankDaoImpl implements UserRankDao {
     @Override
     public String userRank(String summonerName) throws IOException {
         String request = "/userGameData/userinfo/";
-        String requestUrl = root + request + summonerName;
+        String summon =URLEncoder.encode(summonerName,"UTF-8");
+        String requestUrl = root + request + summon;
         URL url = new URL(requestUrl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");

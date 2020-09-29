@@ -39,6 +39,7 @@ public class RecommendController {
     @ApiOperation(value = "user가 플레이한 챔피언 성향에 따른 추천")
     public Object recommendChampion(@RequestParam String summonerName, @RequestParam int type) throws IOException {
         String recommend = null;
+    	summonerName = summonerName.replaceAll(" ","%20");
         if(type == 0){  // 숙련도
             recommend = recommendDao.recommendPoint(summonerName);
         } else if(type == 1){   // 챔피언 매치기록

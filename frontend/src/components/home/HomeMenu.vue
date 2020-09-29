@@ -60,20 +60,6 @@ export default {
       tabs: ["챔프추천", "MBTI추천", "아이템추천"],
     };
   },
-  created() {
-    // axios
-    //   .get(`http://localhost:8080/recommend/champion`, {
-    //     params: {
-    //       summonerName: this.$store.state.summoner.name,
-    //       type: this.$store.state.summoner.searchType,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log("")
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  },
+  created() {},
 };
 </script>
