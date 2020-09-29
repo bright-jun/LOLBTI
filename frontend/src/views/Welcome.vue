@@ -2,16 +2,11 @@
   <v-main>
     <nav-bar :viewType="navbarType" />
     <v-container>
-      <v-img
-        class="ma-auto"
-        src="../assets/images/lolbti_logo_2.png"
-        height="180"
-        width="310"
-      />
+      <v-img class="ma-auto" src="../assets/images/lolbti_logo_2.png" height="180" width="310" />
       <v-row class="pt-5">
         <v-col md="3"></v-col>
         <v-col xs="11" md="5">
-          <v-form onSubmit="return false;">
+          <v-form onsubmit="return false;">
             <v-text-field
               outline
               label="닉네임 검색"
@@ -41,6 +36,7 @@ export default {
       summonerName: "",
       searchType: 1,
       navbarType: false,
+      mtype: "",
     };
   },
   components: {
@@ -51,16 +47,9 @@ export default {
       this.$store.state.summoner = {
         name: this.summonerName,
         searchType: this.searchType,
+        mtype: this.mtype,
       };
-      userApi.requestTest(
-        null,
-        res => {
-          console.log(res.data);
-        },
-        error => {}
-      )
-
-      this.$router.push("/home");
+      this.$router.push("/home/" + this.$store.state.summoner.name);
     },
   },
 };
