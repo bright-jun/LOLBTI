@@ -1,8 +1,11 @@
 package com.web.curation.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,4 +128,26 @@ public class UserController {
  		userService.deleteById(id);
  		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
  	}
+ 	
+ 	@GetMapping("user/token")
+ 	@ApiOperation(value = "인터셉트로 유효성 확인 후 토큰 재갱신")
+	public Object getInfo(HttpServletRequest req, @RequestParam("id") String id, HttpServletResponse res){
+		
+ 		BasicResponse result = new BasicResponse();
+		HttpStatus status = null;
+		try {
+			Optional<User> user = userService.findById(id);
+			String token = jwtService.create(user.get());
+			
+			// 토큰 정보는 request의 헤더로 보내고 나머지는 result에 담아주자
+			res.setHeader("jwt-auth-token", token);
+			result.status = true;
+			result.object = user.get();
+			status = HttpStatus.OK;
+		}catch(RuntimeException e) {
+			result.status = false;
+			status = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<>(result, status);
+	}
 }
