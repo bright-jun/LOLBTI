@@ -51,6 +51,23 @@ const requestUserGameInfo = (summonerName, callback, errorCallback) => {
     });
 };
 
+const requestTest = (data,callback,errorCallback) => {
+  axios({
+      method: 'get',
+      url: BASE_URL + '/summoner',
+      params:{
+        summonerName: '바이오어'
+      }
+      })
+      .then(function(response){
+        callback(response);
+      })
+      .catch(function(error){
+        errorCallback();
+      });
+
+}
+
 const UserApi = {
   requestLogin: (data, callback, errorCallback) =>
     requestLogin(data, callback, errorCallback),

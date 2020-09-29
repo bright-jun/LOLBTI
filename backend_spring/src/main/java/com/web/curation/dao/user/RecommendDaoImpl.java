@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-
-import com.web.curation.model.lol.Champion;
 
 import org.springframework.stereotype.Repository;
 
@@ -41,8 +38,8 @@ public class RecommendDaoImpl implements RecommendDao {
     }
 
     @Override
-    public List<Champion> recommendPoint(String summonerName) throws IOException {
-        String request = "/recommend/point?summonerName=" + summonerName;
+    public String recommendPoint(String summonerName) throws IOException {
+        String request = "/userGameData/recommend/mastery/" + summonerName;
         String requestUrl = root + request;
         URL url = new URL(requestUrl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -57,15 +54,7 @@ public class RecommendDaoImpl implements RecommendDao {
         }
         conn.disconnect();
 
-        String[] champions = result.toString().split(" ");
-        List<Champion> champList = new ArrayList<>();
-        for(int i = 0; i < champions.length; i++){
-            Champion champ = new Champion();
-            champ.setChapionName(champions[i]);
-            champList.add(champ);
-        }
-
-        return null;
+        return result.toString();
     }
 
     @Override
