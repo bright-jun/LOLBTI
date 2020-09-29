@@ -60,9 +60,11 @@ https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221250772912&proxyRe
 > 스크린샷이나 gif등으로 한눈에 볼 수 있게 하면 더 좋습니다
 
 1. 소환사 - 챔피언 추천 by 플레이한 챔피언 숙련도 기준
-	- 숙련도
+	- 숙련도 기준
+		-	실시간으로 업데이트 가능(request 2번)
 2. 소환사 - 챔피언 추천 by 플레이한 챔피언 판수 기준
 	- matching data 모아야함.
+		-	실시간으로 업데이트 힘듬(request 200번)
 	- 트롤픽처리해야할수도
 3. 챔피언 매칭에 따른 아이템트리 추천
 	+ 승률까지 따질수도?
@@ -88,11 +90,17 @@ https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221250772912&proxyRe
 ## 기술 설명
 > 한계점: 코사인 유사도를 사용했을 때
 ```
+
+유사도(a,b) = 유사도(b,a)
+굳이 같을필요는 없다.
+	target에 대해서 -> 유사도를 알기만 하면 된다.
 5 5 0 0 0
 
 5 5 0 0 0 --- 1000
 5 5 0 1 0 ---
 5 5 4 0 5 --- 1
+
+
 ```
 `5 5 0 0 0`은 `5 5 0 1 0` `5 5 4 0 5`골고루 영향을 받아야하는데 `5 5 0 1 0`에 영향을 더 많이 받는다.
 극단적으로 `5 5 0 0 0`이 1000개 있으면 추천못받음
@@ -111,8 +119,9 @@ https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221250772912&proxyRe
 > 프로젝트를 배포한 url과 테스트하기 위한 계정 ID/PW를 적어주세요
 
 ## 데이터 정제
+
 0.전처리용 테이블
-최상위유저 테이블 /lol/league/v4/challengerleagues/by-queue/{queue}
+> 최상위유저 테이블 /lol/league/v4/challengerleagues/by-queue/{queue}
 /lol/league/v4/grandmasterleagues/by-queue/{queue}
 
 1. Django
@@ -191,3 +200,5 @@ mbti 궁합(간단), mbti + 챔프 ->듀오 추천 -나
 라인추천 주, 부 (생각좀 ㄱㄱ)
 챔피언 역할군 (암살자, 전사, 마법사 등)
 itemId -> 아이템 아이디
+
+

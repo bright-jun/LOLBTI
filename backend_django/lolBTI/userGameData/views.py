@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.http.response import JsonResponse, HttpResponse
 from . import defs
 from . import recommend
+# from . import update
 
 @api_view(['GET'])
 def test(request):
@@ -21,10 +22,14 @@ def userInfo(request, summonerName):
 
 @api_view(['GET'])
 def recommendByMastery(request, summonerName):
-    recomm = recommend.recommend_champ_by_mastery(summonerName)
+    recomm = recommend.recommend_champ_by_mastery(summonerName, include=False)
     return JsonResponse({
-        'champList' : recomm.index,
-        'pointList' : recomm.value
+        'champList' : list(recomm.index),
+        'pointList' : list(recomm.values)
     })
 
-    
+
+# @api_view(['PUT'])
+# def updateMastery(request, summonerName):
+#     update.update_mastery(summonerName)
+#     if a.is_valid():

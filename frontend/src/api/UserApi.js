@@ -1,6 +1,7 @@
 const axios = require("axios");
-const hostname = "localhost";
-const BASE_URL = "http://" + hostname + ":8080";
+//const hostname = "localhost:8080/api";
+const hostname = "j3a109.p.ssafy.io/api";
+const BASE_URL = "http://" + hostname;
 
 const requestLogin = (data, callback, errorCallback) => {
   axios({
@@ -55,7 +56,7 @@ const requestMbtiInfo = (summonerName, callback, errorCallback) => {
 const requestUserGameInfo = (summonerName, callback, errorCallback) => {
   axios({
     method: "get",
-    url: BASE_URL + "/summoner/leagueinfo",
+    url: BASE_URL + "/summoner",
     params: {
       summonerName: summonerName,
     },
@@ -69,22 +70,22 @@ const requestUserGameInfo = (summonerName, callback, errorCallback) => {
     });
 };
 
-const requestUserRecentChamp = (summonerName, callback, errorCallback) => {
+const requestTest = (data,callback,errorCallback) => {
   axios({
-    method: "get",
-    url: BASE_URL + "/summoner/recentchamp",
-    params: {
-      summonerName: summonerName,
-    },
-  })
-    .then(function(response) {
-      // console.log(response);
-      callback(response);
-    })
-    .catch(function(error) {
-      errorCallback(error);
-    });
-};
+      method: 'get',
+      url: BASE_URL + '/summoner',
+      params:{
+        summonerName: '바이오어'
+      }
+      })
+      .then(function(response){
+        callback(response);
+      })
+      .catch(function(error){
+        errorCallback();
+      });
+
+}
 
 const UserApi = {
   requestLogin: (data, callback, errorCallback) =>
@@ -98,9 +99,6 @@ const UserApi = {
 
   requestUserGameInfo: (summonerName, callback, errorCallback) =>
     requestUserGameInfo(summonerName, callback, errorCallback),
-
-  requestUserRecentChamp: (summonerName, callback, errorCallback) =>
-    requestUserRecentChamp(summonerName, callback, errorCallback),
 };
 
 export default UserApi;

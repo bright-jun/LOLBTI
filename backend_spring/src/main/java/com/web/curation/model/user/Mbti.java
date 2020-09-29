@@ -1,6 +1,5 @@
 package com.web.curation.model.user;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,12 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
-public class User {
-    @Id
-    private String id;
-    private String password;
-    @Column(name ="summoner_name")
-    private String summonerName;
-    
+@Table(name = "mbti")
+public class Mbti {
+	@Id
+	private String summonerName;
+	private String mbti;
+
 }

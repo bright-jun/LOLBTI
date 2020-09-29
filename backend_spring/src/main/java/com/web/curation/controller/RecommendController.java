@@ -33,22 +33,20 @@ import io.swagger.annotations.ApiResponses;
 public class RecommendController {
     
     @Autowired
-    RecommendDao testDao;
+    RecommendDao recommendDao;
 
     @GetMapping("/recommend/champion")
     @ApiOperation(value = "user가 플레이한 챔피언 성향에 따른 추천")
-    public Object recommendChampion(@RequestParam String summonerName, @RequestParam int type) {
-        List<Champion> champList = new ArrayList<>();
-        BasicResponse result = new BasicResponse();
+    public Object recommendChampion(@RequestParam String summonerName, @RequestParam int type) throws IOException {
+        String recommend = null;
         if(type == 0){  // 숙련도
-
+            recommend = recommendDao.recommendPoint(summonerName);
         } else if(type == 1){   // 챔피언 매치기록
 
         }
-
-        result.status = true;
-        result.object = champList;
-        return new ResponseEntity<> (result, HttpStatus.OK);
+        if(recommend!=null)
+            return new ResponseEntity<>(recommend, HttpStatus.OK);
+        return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
     }
     @GetMapping("/recommend/mbti")
     @ApiOperation(value = "user MBTI 성향에 따른 챔피언 추천")
@@ -76,7 +74,7 @@ public class RecommendController {
     @GetMapping("/test")
     @ApiOperation(value = "test")
     public Object test() throws IOException {
-        String res = testDao.test();
+        String res = recommendDao.test();
         BasicResponse result = new BasicResponse();
         result.data = res;
         return new ResponseEntity<>(result, HttpStatus.OK);
