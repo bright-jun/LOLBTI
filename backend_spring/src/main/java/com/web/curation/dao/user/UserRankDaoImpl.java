@@ -16,8 +16,9 @@ public class UserRankDaoImpl implements UserRankDao {
     @Override
     public String userRank(String summonerName) throws IOException {
         String request = "/userGameData/userinfo/";
-        String requestUrl = root + request + summonerName;
-        URL url = new URL(requestUrl);
+        String requestUrl = root + request;
+        String summon= URLEncoder.encode(summonerName, "UTF-8");
+        URL url = new URL(requestUrl+summon);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
