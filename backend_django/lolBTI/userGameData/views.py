@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.http.response import JsonResponse, HttpResponse
 from . import defs
 from . import recommend
+# from . import update
 
 @api_view(['GET'])
 def test(request):
@@ -27,4 +28,8 @@ def recommendByMastery(request, summonerName):
         'pointList' : list(recomm.values)
     })
 
-    
+
+# @api_view(['PUT'])
+# def updateMastery(request, summonerName):
+#     update.update_mastery(summonerName)
+#     if a.is_valid():

@@ -27,6 +27,8 @@
 
 <script>
 import NavBar from "../components/NavBar.vue";
+import { EventBus } from "../main.js";
+import userApi from "../api/UserApi.js";
 
 export default {
   data() {
