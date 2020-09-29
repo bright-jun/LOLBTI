@@ -33,6 +33,7 @@
 <script>
 import NavBar from "../components/NavBar.vue";
 import { EventBus } from "../main.js";
+import userApi from "../api/UserApi.js";
 
 export default {
   data() {
@@ -51,6 +52,13 @@ export default {
         name: this.summonerName,
         searchType: this.searchType,
       };
+      userApi.requestTest(
+        null,
+        res => {
+          console.log(res.data);
+        },
+        error => {}
+      )
 
       this.$router.push("/home");
     },

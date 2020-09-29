@@ -7,6 +7,6 @@ import com.web.curation.model.lol.Champion;
 
 public interface RecommendDao {
     boolean renewalPoint(String summonerName) throws IOException;
-    List<Champion> recommendPoint(String summonerName) throws IOException;
+    String recommendPoint(String summonerName) throws IOException;
     String test() throws IOException;
 }
