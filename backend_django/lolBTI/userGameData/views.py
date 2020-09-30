@@ -21,10 +21,13 @@ def userInfo(request, summonerName):
 
 @api_view(['GET'])
 def recommendByMastery(request, summonerName):
-    recomm = recommend.recommend_champ_by_mastery(summonerName)
+    best = recommend.recommend_champ_by_mastery(summonerName, ascending=False, include=False)
+    worst = recommend.recommend_champ_by_mastery(summonerName, ascending=True, include=False)
     return JsonResponse({
-        'champList' : recomm.index,
-        'pointList' : recomm.value
+        'bestChampList' : list(best.index),
+        'bestPointList' : list(best.values),
+        'worstChampList' : list(worst.index),
+        'worstPointList' : list(worst.values),
     })
 
     
