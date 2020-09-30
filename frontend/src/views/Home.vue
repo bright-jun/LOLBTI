@@ -84,7 +84,7 @@ export default {
               "emblem_" + res.data.rankInfo[index].tier.toLowerCase() + ".png";
           }
         }
-        console.log(this.gameInfo);
+        // console.log(this.gameInfo);
         // console.log(this.recentGames);
         this.getRecentMatch(res.data.recentMatches.matches);
       },

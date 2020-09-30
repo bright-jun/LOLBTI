@@ -49,37 +49,6 @@ export default {
     // ],
   }),
   props: ["items"],
-  created() {
-    // UserApi.requestUserRecentChamp(
-    //   this.$route.params.summonername,
-    //   (res) => {
-    //     // console.log(res.data);
-    //     for (let index = 0; index < res.data.length; index++) {
-    //       this.items.push({
-    //         champion: this.$store.getters.getChampNameByNo(
-    //           res.data[index].champion
-    //         ),
-    //         avatar:
-    //           "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
-    //           this.$store.getters.getChampIdByNo(res.data[index].champion) +
-    //           ".png",
-    //         role: res.data[index].role,
-    //         lane: res.data[index].lane,
-    //       });
-    //       if (index != res.data.length - 1) {
-    //         this.items.push({
-    //           divider: true,
-    //           inset: true,
-    //         });
-    //       }
-    //       console.log(this.items.avatar);
-    //       // console.log(info);
-    //       // console.log(divide);
-    //     }
-    //     console.log(this.items);
-    //   },
-    //   (error) => {}
-    // );
-  },
+  created() {},
 };
 </script>
