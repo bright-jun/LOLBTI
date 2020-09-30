@@ -45,17 +45,18 @@ export default {
       items: [{ header: "숙련도 기반 챔프 추천" }],
     };
   },
+
   created() {
     UserApi.requestRecommendChampList(
       this.$route.params.summonername,
       this.type,
       (res) => {
-        console.log(res.data);
+        // console.log(res.data);
         var self = this;
         for (var index = 0; index < res.data.bestChampList.length; index++) {
-          console.log(res.data.bestPointList[index]);
-          var bestPoint = Math.round(res.data.bestPointList[index] * 100);
-          var worstPoint = Math.round(res.data.worstPointList[index] * 100);
+          // console.log(res.data.bestPointList[index]);
+          var bestPoint = (res.data.bestPointList[index] * 100).toFixed(2);
+          var worstPoint = (res.data.worstPointList[index] * 1000).toFixed(2);
           this.items.push({
             bestChampion: self.$store.getters.getChampNameByNo(
               String(res.data.bestChampList[index])
@@ -85,7 +86,7 @@ export default {
             });
           }
         }
-        console.log(this.items);
+        // console.log(this.items);
       },
       (error) => {}
     );

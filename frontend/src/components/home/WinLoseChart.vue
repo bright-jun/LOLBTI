@@ -18,17 +18,26 @@ export default {
       chartData: null,
     };
   },
+
   async mounted() {
-    this.chartData = {
-      labels: ["승", "패"],
-      datasets: [
-        {
-          backgroundColor: ["#41B883", "#E46651"],
-          data: [40, 60],
+    this.$store.watch(this.$store.getters.getSummonerWinLose, (n) => {
+      // console.log(n);
+      this.chartData = {
+        labels: ["승", "패"],
+        datasets: [
+          {
+            backgroundColor: ["#41B883", "#E46651"],
+            data: [n.wins, n.losses],
+          },
+        ],
+      };
+      this.options = {
+        animation: {
+          animateScale: true,
         },
-      ],
-    };
-    this.loaded = true;
+      };
+      this.loaded = true;
+    });
   },
 };
 </script>
