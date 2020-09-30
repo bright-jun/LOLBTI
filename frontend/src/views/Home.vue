@@ -76,11 +76,14 @@ export default {
       this.$route.params.summonername,
       (res) => {
         // console.log(res.data);
-        var idx = res.data.rankInfo.length;
-        this.gameInfo = res.data.rankInfo[idx - 1];
-        // this.recentGames = res.data.recentMatches.matches;
-        this.imgURL =
-          "emblem_" + res.data.rankInfo[idx - 1].tier.toLowerCase() + ".png";
+        for (var index = 0; index < res.data.rankInfo.length; index++) {
+          if (res.data.rankInfo[index].queueType == "RANKED_SOLO_5x5") {
+            this.gameInfo = res.data.rankInfo[index];
+            // this.recentGames = res.data.recentMatches.matches;
+            this.imgURL =
+              "emblem_" + res.data.rankInfo[index].tier.toLowerCase() + ".png";
+          }
+        }
         // console.log(this.gameInfo);
         // console.log(this.recentGames);
         this.getRecentMatch(res.data.recentMatches.matches);

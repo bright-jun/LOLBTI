@@ -20,11 +20,10 @@ public class UserRankDaoImpl implements UserRankDao {
         String requestUrl = root + request;
         String summon= URLEncoder.encode(summonerName, "UTF-8");
         URL url = new URL(requestUrl+summon);
-        
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
 
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+        System.out.println("하이");
 
         String returnLine;
         StringBuffer result = new StringBuffer();

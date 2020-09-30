@@ -3,9 +3,7 @@
     <v-row>
       <v-col md="4">
         <v-card>
-          <v-card-text>
-            승패 기록
-          </v-card-text>
+          <v-card-text> 승패 기록 </v-card-text>
           <win-lose-chart />
         </v-card>
       </v-col>
@@ -14,15 +12,15 @@
       </v-col>
       <v-col md="4">
         <v-card>
-          <v-card-text>
-            선호 라인
-          </v-card-text>
+          <v-card-text> 선호 라인 </v-card-text>
           <fre-line-chart />
         </v-card>
       </v-col>
     </v-row>
     <v-row>
-      <recommend-champ-list />
+      <v-col md="12">
+        <recommend-champ-list :items="items" />
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -32,6 +30,7 @@ import RecommendChampList from "./RecommendChampList.vue";
 import FreChampList from "./FreChampList.vue";
 import WinLoseChart from "./WinLoseChart.vue";
 import FreLineChart from "./FreLineChart.vue";
+import UserApi from "../../api/UserApi.js";
 
 export default {
   components: {
@@ -39,6 +38,44 @@ export default {
     FreChampList,
     WinLoseChart,
     FreLineChart,
+  },
+  data() {
+    return {
+      type: 0,
+      items: [{ header: "숙련도 기반 챔프 추천" }],
+    };
+  },
+  created() {
+    UserApi.requestRecommendChampList(
+      this.$route.params.summonername,
+      this.type,
+      (res) => {
+        var self = this;
+        for (var index = 0; index < res.data.pointList.length; index++) {
+          console.log(res.data.pointList[index]);
+          var point = Math.round(res.data.pointList[index] * 100);
+          this.items.push({
+            champion: self.$store.getters.getChampNameByNo(
+              String(res.data.champList[index])
+            ),
+            avatar:
+              "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
+              self.$store.getters.getChampIdByNo(
+                String(res.data.champList[index])
+              ) +
+              ".png",
+            point: point,
+          });
+          if (index != res.length - 1) {
+            this.items.push({
+              divider: true,
+              inset: true,
+            });
+          }
+        }
+      },
+      (error) => {}
+    );
   },
 };
 </script>

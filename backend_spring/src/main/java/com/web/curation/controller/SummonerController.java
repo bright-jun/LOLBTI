@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,8 +49,9 @@ public class SummonerController {
     @GetMapping("/summoner")
     @ApiOperation(value = "summoner 정보 가져오기 ")
     public Object summonerInfo(@RequestParam String summonerName) throws IOException {
-    	summonerName = summonerName.replaceAll(" ","%20");
+        summonerName = summonerName.replaceAll(" ","%20");
         String userInfo = userRankDao.userRank(summonerName);
+        System.out.println(userInfo);
         if(userInfo != null){
             return new ResponseEntity<>(userInfo, HttpStatus.OK);
         }
