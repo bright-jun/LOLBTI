@@ -13,6 +13,7 @@ const requestLogin = (data, callback, errorCallback) => {
     },
   })
     .then(function(response) {
+      callback(response);
       
     })
     .catch(function(error) {
