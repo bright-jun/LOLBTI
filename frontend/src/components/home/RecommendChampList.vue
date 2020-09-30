@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto ml-2 mr-2" md="12">
+  <v-card class="mx-auto ml-2 mr-2">
     <v-list three-line>
       <template v-for="(item, index) in items">
         <v-subheader

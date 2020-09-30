@@ -20,7 +20,7 @@
         {{ i }}
         <v-icon v-if="icons">mdi-phone</v-icon>
       </v-tab>
-
+      <v-btn class="btncolor my-2 black--text" absolute right>갱신하기</v-btn>
       <v-tab-item v-for="i in tabs" :key="i" :value="'tab-' + i">
         <v-card flat tile>
           <v-card-text>
