@@ -46,6 +46,7 @@ export default {
     return {
       summonerName: "",
       searchType: 1,
+      mtype: "",
     };
   },
   props: ["viewType"],
@@ -54,8 +55,10 @@ export default {
       this.$store.state.summoner = {
         name: this.summonerName,
         searchType: this.searchType,
+        mtype: this.mtype,
       };
-      this.$router.push("/home");
+
+      this.$router.push("/home/" + this.$store.state.summoner.name);
     },
   },
 };

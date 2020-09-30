@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.curation.model.BasicResponse;
@@ -77,6 +78,16 @@ public class UserController {
     @ApiOperation(value = "단일 회원 조회")
     public ResponseEntity<User> getUser(@PathVariable String id){
     		Optional<User> user = userService.findById(id);
+            //BasicResponse result = new BasicResponse(); 
+    		System.out.println(user);
+            return new ResponseEntity<User>(user.get(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/user/searchmbti")
+    @ApiOperation(value = "소환사명으로 단일 회원 조회")
+    public ResponseEntity<User> getUserBySummonerName(@RequestParam String summonerName){
+    	
+    		Optional<User> user = userService.findBySummonerName(summonerName);
             //BasicResponse result = new BasicResponse(); 
     		System.out.println(user);
             return new ResponseEntity<User>(user.get(), HttpStatus.OK);
