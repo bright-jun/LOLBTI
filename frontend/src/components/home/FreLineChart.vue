@@ -6,6 +6,7 @@
 
 <script>
 import RadarChart from "../home/RadarChart.js";
+import UserApi from "../../api/UserApi.js";
 
 export default {
   components: {
@@ -20,18 +21,22 @@ export default {
     };
   },
   async mounted() {
-    this.chartData = {
-      labels: ["탑", "정글", "미드", "바텀", "서폿"],
-
-      datasets: [
-        {
+    UserApi.requestFreqLane(
+      this.$route.params.summonername,
+      (res) => {
+        this.chartData = {
+          labels: ["탑", "정글", "미드", "바텀", "서폿"],
+          datasets: [],
+        };
+        this.chartData.datasets.push({
           label: this.$route.params.summonername,
           backgroundColor: this.color(),
-          data: [1, 2, 3, 4, 5],
-        },
-      ],
-    };
-    this.loaded = true;
+          data: res.data.laneFreq,
+        });
+        this.loaded = true;
+      },
+      (error) => {}
+    );
   },
   methods: {
     color() {

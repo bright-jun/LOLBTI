@@ -39,6 +39,13 @@ def showFreqChamp(request, summonerName):
         'freqChampScore' : list(freq_champ_list.values),
     })
 
+@api_view(['GET'])
+def showFreqLane(request, summonerName):
+    freq_lane = defs.freq_lane_info(summonerName)
+    return JsonResponse({
+        'lane': list(freq_lane.index),
+        'laneFreq' : list(freq_lane),
+    })
 
 # @api_view(['PUT'])
 # def updateMastery(request, summonerName):

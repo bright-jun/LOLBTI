@@ -110,6 +110,24 @@ const requestFreqChampList = (summonerName, callback, errorCallback) => {
     });
 };
 
+const requestFreqLane = (summonerName, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/summoner/freqlane",
+    params: {
+      summonerName: summonerName,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
+
 const requestTest = (data, callback, errorCallback) => {
   axios({
     method: "get",
@@ -144,6 +162,9 @@ const UserApi = {
 
   requestFreqChampList: (summonerName, callback, errorCallback) =>
     requestFreqChampList(summonerName, callback, errorCallback),
+
+  requestFreqLane: (summonerName, callback, errorCallback) =>
+    requestFreqLane(summonerName, callback, errorCallback),
 };
 
 export default UserApi;

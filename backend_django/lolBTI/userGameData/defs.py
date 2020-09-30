@@ -64,7 +64,36 @@ def sohwan_info(sohwan, n=5):
         return '소환사가 존재하지 않습니다.'
   
     return r_info.json(), r_match.json()
+
+def sohwan_info_lane(sohwan, n=100):
+    # api_key setting
+    key_idx = 0
+    # id(=summonerid),accountid 수집
+    url = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + sohwan
+    r , key_idx = getRequests(url,key_idx)
+    while True:
+      if r.status_code == 200:
+        r_match = recent_match(r, key_idx, n)
+        if r_match.status_code == 200:
+          break
+        elif r_match.status_code == 403: # api갱신이 필요
+          print('you need renewal key no.{}'.format(key_idx))
+          return '키갱신필요'
+        else:
+          key_idx = renewKeyIdx(key_idx)
+          r , key_idx = getRequests(url,key_idx)
+      elif r.status_code == 404:
+        return '소환사가 존재하지 않습니다.'
   
+    return r_match.json()
+
+def freq_lane_info(sohwan):
+    temp = sohwan_info_lane(sohwan)
+    temp = temp['matches']
+    temp = pd.DataFrame(temp)
+    temp = temp.groupby('lane').count()['role']
+    return temp
+
 def getRequests(root,key_idx):
   api_key = getApiKey(key_idx)
   url = root + '?api_key=' + api_key
