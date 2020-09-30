@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <template>
   <v-card class="mx-auto ml-2 mr-2">
     <v-list three-line>
@@ -33,28 +32,10 @@
   </v-card>
 </template>
 
-=======
->>>>>>> be825aa26a3cc0799deb125e82b24303aa8c7099
 <script>
 import { HorizontalBar } from 'vue-chartjs'
 
 export default {
-<<<<<<< HEAD
-  data: () => ({
-    // items: [
-    // { header: "추천 챔프리스트" },
-    // {
-    //   avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-    //   title: "Brunch this weekend?",
-    //   subtitle:
-    //     "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
-    // },
-    // { divider: true, inset: true },
-    // ],
-  }),
-  props: ["items"],
-};
-=======
   extends: HorizontalBar,
   data() {
     return {
@@ -101,5 +82,4 @@ export default {
     this.renderChart(this.datacollection, this.options)
   }
 }
->>>>>>> be825aa26a3cc0799deb125e82b24303aa8c7099
 </script>

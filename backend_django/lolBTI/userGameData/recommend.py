@@ -39,13 +39,8 @@ def sim_sohwan(sohwan):
         df.loc[sohwan,i] = cosine_sim(user_mastery_compressed.loc[sohwan,:],user_mastery_compressed.loc[i,:])
     
     return df
-<<<<<<< HEAD
-
-def recommend_champ_by_mastery(sohwan,n=5, k=10,threshold=0, include=True):
-=======
     
 def recommend_champ_by_mastery(sohwan, ascending, n=5, k=10,threshold=0, include=True):
->>>>>>> be825aa26a3cc0799deb125e82b24303aa8c7099
     global user_mastery
     
     # 유사도 상위 k개의 유저 리스트
