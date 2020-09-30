@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
   <v-card class="mx-auto ml-2 mr-2">
     <v-list three-line>
@@ -32,8 +33,13 @@
   </v-card>
 </template>
 
+=======
+>>>>>>> be825aa26a3cc0799deb125e82b24303aa8c7099
 <script>
+import { HorizontalBar } from 'vue-chartjs'
+
 export default {
+<<<<<<< HEAD
   data: () => ({
     // items: [
     // { header: "추천 챔프리스트" },
@@ -48,4 +54,52 @@ export default {
   }),
   props: ["items"],
 };
+=======
+  extends: HorizontalBar,
+  data() {
+    return {
+      datacollection: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+          {
+            label: 'Data One',
+            barThickness: 6,
+            backgroundColor: '#f87979',
+            pointBackgroundColor: 'white',
+            borderWidth: 1,
+            pointBorderColor: '#249EBF',
+            data: [40, 20, 30, 50, 90, 10, 20, 40, 50, 70, 90, 100]
+          }
+        ]
+      },
+      options: {
+
+        // scales: {
+        //   yAxes: [{
+        //     ticks: {
+        //       beginAtZero: true
+        //     },
+        //     gridLines: {
+        //       display: true
+        //     }
+        //   }],
+        //   xAxes: [ {
+        //     gridLines: {
+        //       display: false
+        //     }
+        //   }]
+        // },
+        // legend: {
+        //     display: true
+        //   },
+        // responsive: true,
+        // maintainAspectRatio: false
+      }
+    }
+  },
+  mounted() {
+    this.renderChart(this.datacollection, this.options)
+  }
+}
+>>>>>>> be825aa26a3cc0799deb125e82b24303aa8c7099
 </script>
