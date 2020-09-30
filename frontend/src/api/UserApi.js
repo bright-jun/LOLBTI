@@ -12,6 +12,25 @@ const requestLogin = (data, callback, errorCallback) => {
       password: data.password,
     },
   })
+    .then(function(response) {
+      
+    })
+    .catch(function(error) {
+      errorCallback();
+    });
+};
+
+const requestJoin = (data, callback, errorCallback) => {
+  axios({
+    method: "post",
+    url: BASE_URL + "/account/join",
+    data: {
+      email: data.email,
+      password: data.password,
+      userId: data.userId,
+      userMbti: data.userMbti
+    },
+  })
     .then(function(response) {})
     .catch(function(error) {
       errorCallback();
@@ -27,7 +46,6 @@ const requestMbtiInfo = (summonerName, callback, errorCallback) => {
     },
   })
     .then(function(response) {
-      // console.log(response);
       callback(response);
     })
     .catch(function(error) {
@@ -95,6 +113,9 @@ const requestTest = (data, callback, errorCallback) => {
 const UserApi = {
   requestLogin: (data, callback, errorCallback) =>
     requestLogin(data, callback, errorCallback),
+
+  requestJoin: (data, callback, errorCallback) =>
+    requestJoin(data, callback, errorCallback),
 
   requestMbtiInfo: (summonerName, callback, errorCallback) =>
     requestMbtiInfo(summonerName, callback, errorCallback),

@@ -2,7 +2,7 @@
   <div>
     <nav-bar :viewType="navbarType" />
     <v-col align="center" md="4" offset-md="4" class="my-10">
-      <v-img class="white--text align-end" width="400" height="300" src="../../assets/logo.png"></v-img>
+      <v-img class="white--text align-end" width="600" height="300" src="../../assets/images/lolbti_logo_2.png"></v-img>
 
       <v-card class="mx-auto my-5" max-width="500">
         <v-card-text class="display-1 text--primary">Member Login</v-card-text>
@@ -99,7 +99,9 @@ export default {
         this.isSubmit = false;
         UserApi.requestLogin(
           data,
-          (res) => {},
+          (res) => {
+            this.$router.push({path : "/home/hideonbush" });
+          },
           (error) => {}
         );
       }
