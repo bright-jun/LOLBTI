@@ -50,9 +50,10 @@ export default {
       this.$route.params.summonername,
       this.type,
       (res) => {
+        console.log(res.data);
         var self = this;
-        for (var index = 0; index < res.data.pointList.length; index++) {
-          // console.log(res.data.bestPointList[index]);
+        for (var index = 0; index < res.data.bestChampList.length; index++) {
+          console.log(res.data.bestPointList[index]);
           var bestPoint = Math.round(res.data.bestPointList[index] * 100);
           var worstPoint = Math.round(res.data.worstPointList[index] * 100);
           this.items.push({
@@ -84,6 +85,7 @@ export default {
             });
           }
         }
+        console.log(this.items);
       },
       (error) => {}
     );
