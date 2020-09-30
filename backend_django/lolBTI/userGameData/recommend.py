@@ -25,6 +25,10 @@ def load_dataframes():
 
 user_mastery = load_dataframes()
 
+def load_freq_champ(sohwan):
+    temp = user_mastery.transpose()
+    return temp[sohwan].sort_values(axis=0,ascending=False)[:4]
+
 from numpy import dot
 from numpy.linalg import norm
 

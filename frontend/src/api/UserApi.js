@@ -12,9 +12,7 @@ const requestLogin = (data, callback, errorCallback) => {
       password: data.password,
     },
   })
-    .then(function(response) {
-      
-    })
+    .then(function(response) {})
     .catch(function(error) {
       errorCallback();
     });
@@ -28,7 +26,7 @@ const requestJoin = (data, callback, errorCallback) => {
       email: data.email,
       password: data.password,
       userId: data.userId,
-      userMbti: data.userMbti
+      userMbti: data.userMbti,
     },
   })
     .then(function(response) {})
@@ -94,6 +92,24 @@ const requestRecommendChampList = (
     });
 };
 
+const requestFreqChampList = (summonerName, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/summoner/freqchamp",
+    params: {
+      summonerName: summonerName,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
+
 const requestTest = (data, callback, errorCallback) => {
   axios({
     method: "get",
@@ -125,6 +141,9 @@ const UserApi = {
 
   requestRecommendChampList: (summonerName, callback, errorCallback) =>
     requestRecommendChampList(summonerName, callback, errorCallback),
+
+  requestFreqChampList: (summonerName, callback, errorCallback) =>
+    requestFreqChampList(summonerName, callback, errorCallback),
 };
 
 export default UserApi;

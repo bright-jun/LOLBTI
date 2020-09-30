@@ -31,6 +31,14 @@ def recommendByMastery(request, summonerName):
         'worstPointList' : list(worst.values),
     })
 
+@api_view(['GET'])
+def showFreqChamp(request, summonerName):
+    freq_champ_list = recommend.load_freq_champ(summonerName)
+    return JsonResponse({
+        'freqChampAvartar' : list(freq_champ_list.index),
+        'freqChampScore' : list(freq_champ_list.values),
+    })
+
 
 # @api_view(['PUT'])
 # def updateMastery(request, summonerName):
