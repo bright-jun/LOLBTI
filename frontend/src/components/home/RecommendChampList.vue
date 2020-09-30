@@ -17,12 +17,12 @@
         <v-list-item v-else :key="item.title">
           <!-- 위에 빠짐 @click  -->
           <v-list-item-avatar>
-            <v-img :src="item.avatar"></v-img>
+            <v-img :src="item.bestAvatar"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
             <v-list-item-title>
-              {{ item.champion }} {{ item.point }}
+              {{ item.bestChampion }} {{ item.bestPoint }}
             </v-list-item-title>
             <!-- <v-list-item-subtitle v-html="item.lane"></v-list-item-subtitle> -->
           </v-list-item-content>
