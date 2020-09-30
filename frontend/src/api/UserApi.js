@@ -1,6 +1,6 @@
 const axios = require("axios");
-//const hostname = "localhost:8080/api";
-const hostname = "j3a109.p.ssafy.io/api";
+const hostname = "localhost:8080/api";
+// const hostname = "j3a109.p.ssafy.io/api";
 const BASE_URL = "http://" + hostname;
 
 const requestLogin = (data, callback, errorCallback) => {
@@ -8,7 +8,7 @@ const requestLogin = (data, callback, errorCallback) => {
     method: "post",
     url: BASE_URL + "/account/login",
     data: {
-      email: data.email,
+      id: data.email,
       password: data.password,
     },
   })

@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       datacollection: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        labels: ['January', 'February', 'March', 'April', 'May'],
         datasets: [
           {
             label: 'Data One',
@@ -14,14 +14,15 @@ export default {
             backgroundColor: '#f87979',
             pointBackgroundColor: 'white',
             borderWidth: 1,
+            // borderSkipped: right,
             pointBorderColor: '#249EBF',
-            data: [40, 20, 30, 50, 90, 10, 20, 40, 50, 70, 90, 100]
+            data: [-40, 20, 30, 50, 90]
           }
         ]
       },
       options: {
 
-        // scales: {
+        scales: {
         //   yAxes: [{
         //     ticks: {
         //       beginAtZero: true
@@ -30,17 +31,17 @@ export default {
         //       display: true
         //     }
         //   }],
-        //   xAxes: [ {
-        //     gridLines: {
-        //       display: false
-        //     }
-        //   }]
-        // },
+          xAxes: [{
+            gridLines: {
+                offsetGridLines: false
+            }
+          }]
         // legend: {
         //     display: true
         //   },
         // responsive: true,
         // maintainAspectRatio: false
+        }
       }
     }
   },

@@ -100,6 +100,7 @@ export default {
         UserApi.requestLogin(
           data,
           (res) => {
+            console.log("완료")
             this.$router.push({path : "/home/hideonbush" });
           },
           (error) => {}
