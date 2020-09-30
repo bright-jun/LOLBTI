@@ -3,8 +3,6 @@
     <v-toolbar flat app class="maincolor">
 
       <v-toolbar-title class="grey--text">
-        <!-- <span class="font-weight-light">lol</span>
-        <span>BTI</span>-->
 
         <v-img class="mt-2 mb-2" src="../assets/images/lolbti_logo_2.png" height="55" width="100" />
       </v-toolbar-title>
@@ -24,19 +22,20 @@
         ></v-text-field>
       </v-form>
 
-      <v-btn flat class="btncolor mr-4" @click="$router.push('/login').catch(() => {})">
+      <v-btn v-if="!isLog" flat class="btncolor mr-4" @click="$router.push('/login').catch(() => {})">
         <span>로그인</span>
         <v-icon right>login</v-icon>
       </v-btn>
-      <!-- <v-btn flat color="grey">
-        <span>로그아웃</span>
-        <v-icon right>exit_to_app</v-icon>
-      </v-btn>-->
-      <v-btn flat class="btncolor" @click="$router.push('/join').catch(() => {})">
+      
+      <v-btn v-if="!isLog" flat class="btncolor" @click="$router.push('/join').catch(() => {})">
         <span>회원가입</span>
-        <!-- <v-icon right></v-icon> -->
+      </v-btn>
+
+      <v-btn v-if="isLog" flat class="btncolor" @click="logout()">
+        <span>{{userName}}로그아웃</span>
       </v-btn>
     </v-toolbar>
+
   </nav>
 </template>
 
@@ -44,12 +43,20 @@
 export default {
   data() {
     return {
+      isLog: false,
+      userName: "",
       summonerName: "",
       searchType: 1,
       mtype: "",
     };
   },
   props: ["viewType"],
+  created() {
+    if(this.$session.get('userinfo')){
+      this.isLog = true
+      this.userName = this.$session.get('userinfo')['summonerName']
+    }
+  },
   methods: {
     searchSummoner() {
       this.$store.state.summoner = {
@@ -60,6 +67,11 @@ export default {
 
       this.$router.push("/home/" + this.$store.state.summoner.name);
     },
+    logout(){
+            this.$session.remove("userinfo")
+            this.$store.dispatch("logout")
+            this.$router.push('/').catch(()=>{});
+    }, 
   },
 };
 </script>

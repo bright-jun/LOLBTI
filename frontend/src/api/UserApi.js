@@ -1,3 +1,5 @@
+import store from '../vuex/store'
+
 const axios = require("axios");
 const hostname = "localhost:8080/api";
 // const hostname = "j3a109.p.ssafy.io/api";
@@ -13,8 +15,15 @@ const requestLogin = (data, callback, errorCallback) => {
     },
   })
     .then(function(response) {
-      callback(response);
-      
+      if(response.data.status){
+        store.commit('login',{
+          email: response.data.object.id,
+          summonerName: response.data.object.summonerName,
+        });
+        callback();
+      } else {
+        errorCallback();
+      }
     })
     .catch(function(error) {
       errorCallback();

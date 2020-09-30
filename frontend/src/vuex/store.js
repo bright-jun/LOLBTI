@@ -7,6 +7,9 @@ import mutations from "./mutations";
 Vue.use(Vuex);
 
 const state = {
+  isUser: false,
+  email: "",
+  summonerName : "",
   summoner: {},
   champ: [
     { id: "Aatrox", key: "266", name: "아트록스" },
