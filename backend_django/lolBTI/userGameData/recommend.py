@@ -39,8 +39,8 @@ def sim_sohwan(sohwan):
         df.loc[sohwan,i] = cosine_sim(user_mastery_compressed.loc[sohwan,:],user_mastery_compressed.loc[i,:])
     
     return df
-
-def recommend_champ_by_mastery(sohwan,n=5, k=10,threshold=0, include=True):
+    
+def recommend_champ_by_mastery(sohwan, ascending, n=5, k=10,threshold=0, include=True):
     global user_mastery
     
     # 유사도 상위 k개의 유저 리스트
@@ -64,6 +64,6 @@ def recommend_champ_by_mastery(sohwan,n=5, k=10,threshold=0, include=True):
         recommend_user_mastery[champ]=temp_val/temp_sim
     
     if include:
-        return recommend_user_mastery.sort_values(ascending=False)[:n]
+        return recommend_user_mastery.sort_values(ascending=ascending)[:n]
     else:
-        return recommend_user_mastery[unplayed].sort_values(ascending=False)[:n]
+        return recommend_user_mastery[unplayed].sort_values(ascending=ascending)[:n]
