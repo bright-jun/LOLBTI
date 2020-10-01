@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.http.response import JsonResponse, HttpResponse
 from . import defs
 from . import recommend
-# from . import update
+from . import update
 
 @api_view(['GET'])
 def test(request):
@@ -22,14 +22,34 @@ def userInfo(request, summonerName):
 
 @api_view(['GET'])
 def recommendByMastery(request, summonerName):
-    recomm = recommend.recommend_champ_by_mastery(summonerName, include=False)
+    best = recommend.recommend_champ_by_mastery(summonerName, ascending=False, include=False)
+    worst = recommend.recommend_champ_by_mastery(summonerName, ascending=True, include=False)
     return JsonResponse({
-        'champList' : list(recomm.index),
-        'pointList' : list(recomm.values)
+        'bestChampList' : list(best.index),
+        'bestPointList' : list(best.values),
+        'worstChampList' : list(worst.index),
+        'worstPointList' : list(worst.values),
     })
 
+@api_view(['GET'])
+def showFreqChamp(request, summonerName):
+    freq_champ_list = recommend.load_freq_champ(summonerName)
+    return JsonResponse({
+        'freqChampAvartar' : list(freq_champ_list.index),
+        'freqChampScore' : list(freq_champ_list.values),
+    })
 
-# @api_view(['PUT'])
-# def updateMastery(request, summonerName):
-#     update.update_mastery(summonerName)
-#     if a.is_valid():
+@api_view(['GET'])
+def showFreqLane(request, summonerName):
+    freq_lane = defs.freq_lane_info(summonerName)
+    return JsonResponse({
+        'lane': list(freq_lane.index),
+        'laneFreq' : list(freq_lane),
+    })
+
+@api_view(['GET'])
+def updateMastery(request, summonerName):
+    result = update.update_sohwan_mastery(summonerName)
+    return JsonResponse({
+        'result' : result
+    })

@@ -25,8 +25,7 @@ public class WebCurationApplication implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(jwtInterceptor).addPathPatterns("/account/**") // 기본 적용 경로
-				.excludePathPatterns(Arrays.asList("/account/signup/**")) // 적용 제외 경로 
-				.excludePathPatterns(Arrays.asList("/account/login/**"))
+				.excludePathPatterns(Arrays.asList("/account/login/**")) // 적용 제외 경로 
 				.excludePathPatterns(Arrays.asList("/account/user/**"));
 	}
 

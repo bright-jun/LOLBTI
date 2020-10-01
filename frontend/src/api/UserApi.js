@@ -18,6 +18,23 @@ const requestLogin = (data, callback, errorCallback) => {
     });
 };
 
+const requestJoin = (data, callback, errorCallback) => {
+  axios({
+    method: "post",
+    url: BASE_URL + "/account/join",
+    data: {
+      email: data.email,
+      password: data.password,
+      userId: data.userId,
+      userMbti: data.userMbti,
+    },
+  })
+    .then(function(response) {})
+    .catch(function(error) {
+      errorCallback();
+    });
+};
+
 const requestMbtiInfo = (summonerName, callback, errorCallback) => {
   axios({
     method: "get",
@@ -27,7 +44,6 @@ const requestMbtiInfo = (summonerName, callback, errorCallback) => {
     },
   })
     .then(function(response) {
-      // console.log(response);
       callback(response);
     })
     .catch(function(error) {
@@ -76,6 +92,42 @@ const requestRecommendChampList = (
     });
 };
 
+const requestFreqChampList = (summonerName, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/summoner/freqchamp",
+    params: {
+      summonerName: summonerName,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
+
+const requestFreqLane = (summonerName, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/summoner/freqlane",
+    params: {
+      summonerName: summonerName,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
+
 const requestTest = (data, callback, errorCallback) => {
   axios({
     method: "get",
@@ -96,6 +148,9 @@ const UserApi = {
   requestLogin: (data, callback, errorCallback) =>
     requestLogin(data, callback, errorCallback),
 
+  requestJoin: (data, callback, errorCallback) =>
+    requestJoin(data, callback, errorCallback),
+
   requestMbtiInfo: (summonerName, callback, errorCallback) =>
     requestMbtiInfo(summonerName, callback, errorCallback),
 
@@ -104,6 +159,12 @@ const UserApi = {
 
   requestRecommendChampList: (summonerName, callback, errorCallback) =>
     requestRecommendChampList(summonerName, callback, errorCallback),
+
+  requestFreqChampList: (summonerName, callback, errorCallback) =>
+    requestFreqChampList(summonerName, callback, errorCallback),
+
+  requestFreqLane: (summonerName, callback, errorCallback) =>
+    requestFreqLane(summonerName, callback, errorCallback),
 };
 
 export default UserApi;
