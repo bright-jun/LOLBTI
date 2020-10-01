@@ -1,3 +1,5 @@
+import store from '../vuex/store'
+
 const axios = require("axios");
 const hostname = "localhost:8080/api";
 // const hostname = "j3a109.p.ssafy.io/api";
@@ -8,11 +10,21 @@ const requestLogin = (data, callback, errorCallback) => {
     method: "post",
     url: BASE_URL + "/account/login",
     data: {
-      email: data.email,
+      id: data.email,
       password: data.password,
     },
   })
-    .then(function(response) {})
+    .then(function(response) {
+      if(response.data.status){
+        store.commit('login',{
+          email: response.data.object.id,
+          summonerName: response.data.object.summonerName,
+        });
+        callback();
+      } else {
+        errorCallback();
+      }
+    })
     .catch(function(error) {
       errorCallback();
     });
@@ -21,13 +33,15 @@ const requestLogin = (data, callback, errorCallback) => {
 const requestJoin = (data, callback, errorCallback) => {
   axios({
     method: "post",
-    url: BASE_URL + "/account/join",
+    url: BASE_URL + "/account/user/join",
     data: {
-      email: data.email,
+      id: data.email,
       password: data.password,
-      userId: data.userId,
-      userMbti: data.userMbti,
+      summonerName: data.userId,
     },
+    params: {
+      mbti: data.userMbti
+    }
   })
     .then(function(response) {})
     .catch(function(error) {
