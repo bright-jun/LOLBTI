@@ -31,7 +31,7 @@ export default {
         };
         this.chartData.datasets.push({
           label: this.$route.params.summonername,
-          backgroundColor: this.color(),
+          backgroundColor: "#0DA970",
           data: res.data.laneFreq,
         });
         this.loaded = true;
