@@ -92,7 +92,8 @@ public class UserController {
     @PostMapping("/user/join")
     @ApiOperation(value = "회원 가입")
     public Object save(@RequestBody User user, @RequestParam("mbti") String mbti){
-    	BasicResponse result = new BasicResponse();
+		System.out.println("들어왔니?????????");
+		BasicResponse result = new BasicResponse();
     	Optional<User> userOpt = userService.findById(user.getId());
     	
     	// ID가 이미 존재하지 않을때만 회원가입 가능하다

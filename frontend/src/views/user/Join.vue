@@ -40,7 +40,7 @@
 
           <v-text-field class="mt-5" v-model="userMbti" label="소환사 MBTI" outlined hide-details></v-text-field>
 
-          <v-btn class="my-10" block color="orange">Join</v-btn>
+          <v-btn class="my-10" block color="orange" @click="onJoin">Join</v-btn>
           <v-divider></v-divider>
         </div>
       </v-card>
@@ -115,8 +115,10 @@ export default {
         this.isSubmit = false;
         UserApi.requestJoin(
           data,
-          (res) => {},
-          (error) => {}
+          (res) => {
+          },
+          (error) => {
+          }
         );
       }
     },

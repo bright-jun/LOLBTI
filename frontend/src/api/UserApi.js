@@ -33,13 +33,15 @@ const requestLogin = (data, callback, errorCallback) => {
 const requestJoin = (data, callback, errorCallback) => {
   axios({
     method: "post",
-    url: BASE_URL + "/account/join",
+    url: BASE_URL + "/account/user/join",
     data: {
-      email: data.email,
+      id: data.email,
       password: data.password,
-      userId: data.userId,
-      userMbti: data.userMbti
+      summonerName: data.userId,
     },
+    params: {
+      mbti: data.userMbti
+    }
   })
     .then(function(response) {})
     .catch(function(error) {
