@@ -16,11 +16,11 @@ public class RecommendDaoImpl implements RecommendDao {
 
     @Override
     public boolean renewalPoint(String summonerName) throws IOException {
-        String request = "/update/point?summonerName=" + summonerName;
+        String request = "/userGameData/update/mastery/" + summonerName;
         String requestUrl = root + request;
         URL url = new URL(requestUrl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
+        conn.setRequestMethod("GET");
 
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 
@@ -30,8 +30,8 @@ public class RecommendDaoImpl implements RecommendDao {
             result.append(returnLine + "\n");
         }
         conn.disconnect();
-
-        if (result.toString().equals("success"))
+//        System.out.println(result.substring(11,result.length()-1));
+        if (result.substring(11,result.length()-2).toString().equals("true"))
             return true;
 
         return false;
