@@ -24,8 +24,9 @@ export default {
     UserApi.requestFreqLane(
       this.$route.params.summonername,
       (res) => {
+        // console.log(res.data);
         this.chartData = {
-          labels: ["탑", "정글", "미드", "바텀", "서폿"],
+          labels: res.data.lane,
           datasets: [],
         };
         this.chartData.datasets.push({
