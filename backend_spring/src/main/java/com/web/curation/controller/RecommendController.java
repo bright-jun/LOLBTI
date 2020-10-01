@@ -49,6 +49,7 @@ public class RecommendController {
             return new ResponseEntity<>(recommend, HttpStatus.OK);
         return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
     }
+    
     @GetMapping("/recommend/mbti")
     @ApiOperation(value = "user MBTI 성향에 따른 챔피언 추천")
     public Object recommendChampionByMBTI(@RequestParam String summonerName, @RequestParam String mbti) {

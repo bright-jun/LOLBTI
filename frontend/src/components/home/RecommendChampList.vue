@@ -17,12 +17,22 @@
         <v-list-item v-else :key="item.title">
           <!-- 위에 빠짐 @click  -->
           <v-list-item-avatar>
-            <v-img :src="item.avatar"></v-img>
+            <v-img :src="item.bestAvatar"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
             <v-list-item-title>
-              {{ item.champion }} {{ item.point }}
+              {{ item.bestChampion }} {{ item.bestPoint }}
+            </v-list-item-title>
+            <!-- <v-list-item-subtitle v-html="item.lane"></v-list-item-subtitle> -->
+          </v-list-item-content>
+          <v-list-item-avatar>
+            <v-img :src="item.worstAvatar"></v-img>
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ item.worstChampion }} {{ item.worstPoint }}
             </v-list-item-title>
             <!-- <v-list-item-subtitle v-html="item.lane"></v-list-item-subtitle> -->
           </v-list-item-content>
@@ -33,53 +43,19 @@
 </template>
 
 <script>
-import { HorizontalBar } from 'vue-chartjs'
-
 export default {
-  extends: HorizontalBar,
-  data() {
-    return {
-      datacollection: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [
-          {
-            label: 'Data One',
-            barThickness: 6,
-            backgroundColor: '#f87979',
-            pointBackgroundColor: 'white',
-            borderWidth: 1,
-            pointBorderColor: '#249EBF',
-            data: [40, 20, 30, 50, 90, 10, 20, 40, 50, 70, 90, 100]
-          }
-        ]
-      },
-      options: {
-
-        // scales: {
-        //   yAxes: [{
-        //     ticks: {
-        //       beginAtZero: true
-        //     },
-        //     gridLines: {
-        //       display: true
-        //     }
-        //   }],
-        //   xAxes: [ {
-        //     gridLines: {
-        //       display: false
-        //     }
-        //   }]
-        // },
-        // legend: {
-        //     display: true
-        //   },
-        // responsive: true,
-        // maintainAspectRatio: false
-      }
-    }
-  },
-  mounted() {
-    this.renderChart(this.datacollection, this.options)
-  }
-}
+  data: () => ({
+    // items: [
+    // { header: "추천 챔프리스트" },
+    // {
+    //   avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+    //   title: "Brunch this weekend?",
+    //   subtitle:
+    //     "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+    // },
+    // { divider: true, inset: true },
+    // ],
+  }),
+  props: ["items"],
+};
 </script>

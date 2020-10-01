@@ -60,6 +60,7 @@ export default {
       tabs: ["챔프추천", "MBTI추천", "아이템추천"],
     };
   },
+
   created() {},
 };
 </script>

@@ -49,7 +49,7 @@ public class SummonerController {
     @GetMapping("/summoner")
     @ApiOperation(value = "summoner 정보 가져오기 ")
     public Object summonerInfo(@RequestParam String summonerName) throws IOException {
-        summonerName = summonerName.replaceAll(" ","%20");
+//        summonerName = summonerName.replaceAll(" ","%20");
         String userInfo = userRankDao.userRank(summonerName);
         System.out.println(userInfo);
         if(userInfo != null){
@@ -57,4 +57,30 @@ public class SummonerController {
         }
     	return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
     }
+    
+    @GetMapping("/summoner/freqchamp")
+    @ApiOperation(value = "summoner 챔프 선호도 가져오기 ")
+    public Object summonerFreqChampList(@RequestParam String summonerName) throws IOException {
+    	summonerName = summonerName.replaceAll(" ","%20");
+        String champList = userRankDao.userFreqChamp(summonerName);
+//        System.out.println(champList);
+        if(champList != null){
+            return new ResponseEntity<>(champList, HttpStatus.OK);
+        }
+    	return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
+    }
+    
+    
+    @GetMapping("/summoner/freqlane")
+    @ApiOperation(value = "summoner 라인 선호도 가져오기 ")
+    public Object summonerFreqLane(@RequestParam String summonerName) throws IOException {
+    	summonerName = summonerName.replaceAll(" ","%20");
+        String laneFreq = userRankDao.userFreqLane(summonerName);
+//        System.out.println(laneFreq);
+        if(laneFreq != null){
+            return new ResponseEntity<>(laneFreq, HttpStatus.OK);
+        }
+    	return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
+    }
+    
 }

@@ -35,5 +35,43 @@ public class UserRankDaoImpl implements UserRankDao {
         return result.toString();
     }
     
+    @Override
+    public String userFreqChamp(String summonerName) throws IOException {
+        String request = "/userGameData/recommend/mastery/freqchamp/";
+        String requestUrl = root + request + summonerName;
+//        String summon= URLEncoder.encode(summonerName, "UTF-8");
+        URL url = new URL(requestUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+        String returnLine;
+        StringBuffer result = new StringBuffer();
+        while ((returnLine = br.readLine()) != null) {
+            result.append(returnLine + "\n");
+        }
+        conn.disconnect();
+
+        return result.toString();
+    }
+    @Override
+    public String userFreqLane(String summonerName) throws IOException {
+    	String request = "/userGameData/recommend/freqlane/";
+    	String requestUrl = root + request + summonerName;
+//        String summon= URLEncoder.encode(summonerName, "UTF-8");
+    	URL url = new URL(requestUrl);
+    	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    	
+    	BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+    	
+    	String returnLine;
+    	StringBuffer result = new StringBuffer();
+    	while ((returnLine = br.readLine()) != null) {
+    		result.append(returnLine + "\n");
+    	}
+    	conn.disconnect();
+    	
+    	return result.toString();
+    }
     
 }
