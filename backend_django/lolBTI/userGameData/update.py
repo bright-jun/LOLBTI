@@ -13,27 +13,26 @@ import copy
 
 from multiprocessing import Pool # Pool import하기
 
-api_key_list = [
-    'RGAPI-d3a53c22-f940-40b8-9e4c-089ad160d8f2',
-    'RGAPI-2866c236-5976-4cac-8955-49fccb487e8b',
-    'RGAPI-1389cd81-c02e-4fa1-9654-80579633a8ff',
-    'RGAPI-24091344-7123-4eac-8ebc-9f9c6e75311a',
-    'RGAPI-754d8513-daaf-4192-831f-a6953405e338'
-]
+from . import setting
+
+api_key_list = setting.api_key_list
 
 min_max_scaler = preprocessing.MinMaxScaler()
 
 import os
 
-def dump_dataframes(dataframes, path):
-    pd.to_pickle(dataframes, path)
+def read_pkl(path, file):
+    global sohwan_mastery
+    print("{} read by update".format(file))
+    return pd.read_pickle(os.path.join(path, file))
 
-def load_dataframes(path):
-    print("update 에서로드했음")
-    return pd.read_pickle(path)
+def dump_pkl(data,path, file):
+    global sohwan_mastery
+    print("{} dumped by update".format(file))
+    return pd.to_pickle(data, os.path.join(path, file))
 
-champ_dict = load_dataframes(os.path.join("./userGameData","champ_dict.pkl"))
-sohwan_mastery = load_dataframes(os.path.join("./userGameData","dummy.pkl"))
+champ_dict = read_pkl("./userGameData","champ_dict.pkl")
+sohwan_mastery = read_pkl("./userGameData","dummy.pkl")
 
 def mastery_info(sohwan_r, key_idx):
     # 소환사 챔피언 숙련도 정보 수집
@@ -96,7 +95,7 @@ def update_sohwan_mastery(sohwan):
 
     champ_mastery = sohwan_mastery_info(sohwan)
     if type(champ_mastery)==list:
-        # user_mastery행렬 업데이트
+        # sohwan_mastery행렬 업데이트
         t_champ_dict = copy.deepcopy(champ_dict)
 
         for champ_info in champ_mastery:
@@ -114,7 +113,10 @@ def update_sohwan_mastery(sohwan):
 
         #   concat이 아니라 중복되면 갱신해야함.
         sohwan_mastery.loc[sohwan] = t_champ_df_scaled.loc[sohwan]
-        dump_dataframes(sohwan_mastery,os.path.join("./userGameData","dummy.pkl"))
+        dump_pkl(sohwan_mastery,"./userGameData","dummy.pkl")
+        
+        #   recommend가 update 된 sohwan_mastery 불러올 수 있도록 해 주어야 함.
+        setting.update_sohwan_mastery()
         return True
     else:
         print(r)
