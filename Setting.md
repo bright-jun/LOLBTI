@@ -193,3 +193,135 @@
         - `pip install django~=2.2.7`
 	- requirements.txt
 		- `pip install -r requirements.txt --user`
+
+- 백엔드(Django)  
+	- ❌ `python manage.py runserver 0:8081`
+		- local 에서 test server 용이지, 배포용은 아니다. django 내장 server를 사용해서 배포하면 안된다
+	- Gunicorn 설치
+		- requirement.txt에 gunicorn==19.7.1 추가
+		- `pip install -r requirements.txt --user`
+	- 실행
+		- ⭕️ `gunicorn lolBTI.wsgi:application --bind=0:8081 --reload`  
+		✍️ --reload: 소스코드가 바뀌면 재기동
+		
+
+- 젠킨스(CI/CD) 관리  
+  
+	✅ 참고 자료: Jenkins를 이용한 CI_CD.pdf( 실습코치 이수영,김윤재 )
+
+	- Docker로 jenkins 설치하고 실행하기
+		- `sudo docker pull jenkins/jenkins:lts`
+	- jenkins 컨테이너 실행
+		- `sudo docker run -d -p 7070:8080 -v /app/swim:/var/jenkins_home --name swim_jenkins -u root jenkins/jenkins:lts`  
+		-d 백그라운드로 실행  
+		-p 호스트 7070포트와 도커 네트워크 상의 8080포트를 연결(이미 8080 사용중이라 임의 변경)  
+		-v 호스트의 파일 시스템과 도커 컨테이터 파일 시스템 연결(/app/swim 디렉터리에/var/jekins_home을 마운트시킨다)  
+		--name 도커 컨테이너 이름 지정 (여기서는 swim_jenkins)  
+		-u 사용자를 root로 지정  
+	- jenkins컨테이너 작동 확인
+		- `sudo docker ps -a`  
+	  
+	- jenkins 웹 페이지 초기 세팅
+		- `http://j3a109.p.ssafy.io:7070` 으로 접근한다  
+			- 비밀번호를 알아낸다
+		- `sudo docker exec -it swim_jenkins bash`
+		- `cat /var/lib/secrets/initialAdminPassword`  
+			- 나온 비밀번호를 입력한다
+		- `exit`  
+	  
+	- CI/CD를 적용할 아이템 등록
+		- 새로운 Item 생성 :lolbti  
+	
+	- Gitlab과 연결을 위한 플러그인 설치
+		- jenkins 관리 > 플러그인 관리 > 설치가능 들어가서 Publish Over SSH 설치
+	
+		- Key 파일 지정
+			- 주어진 pem key(J3A109T)를 메모장으로 키면 Key값 확인 가능
+			```
+			-----BEGIN RSA PRIVATE KEY-----
+			....
+			-----END RSA PRIVATE KEY-----
+			```
+		- ssh server 설정
+			- hostname과 username 등록
+			- `hostname: j3a109.p.ssafy.io, Username: ubuntu`
+		
+		- Gitlab 플러그인 설치 및 설정
+			- jenkins 관리 > 플러그인 관리 > 설치가능 에 들어가서 GitLab Plugin 설치
+		- Gitlab 지정
+			- `Connection name, Connection host Url, Credentials` 작성
+			- url은 연결하고 싶은 Git(ex `https://lab.ssafy.com`)
+			- Credentials를 Add 해준다
+		
+		- Add Credentials
+			- `Kind: GitLab API token`
+			- `API token: Gitlab API`는 로그인한 다음에 User Settings > Access Tokens에 들어가서
+			발급받은 토큰 작성
+			- Id, Description은 각자 알아서
+			- 완료 후, 깃랩과 연동 확인(Test) --> Success
+
+		- 소스 코드 관리 설정하기  
+			✍️ pull 땡겨 올 Repository를 등록 
+			- lolbti > 구성 > 소스 코드 관리
+			- `Repository URL: https://lab.ssafy.com/s03-bigdata-sub3/s03p23a109.git`
+			- Credentials는 위의 방식과 동일하게 작성
+			- `Branch Specifier: develop` (원하는 branch설정 가능)
+		- 빌드 유발 설정하기  
+			✍️ webhook 시그널을 받고 빌드할 수 있도록 트리거 설정
+			- `Build when a change is pushed to GitLab webhook URL : .....` 을 체크
+		- Gitlab 시크릿 토큰값 설정하기  
+			✍️ 빌드 유발에서 고급 설정에서 시크릿 토큰값을 생성( GitLab webhook 설정에 필요)
+			- Secret token -> Generate
+
+	- Webhook 지정하기    
+		✍️ gitlab에 push event가 생기면 jenkins로 시그널을 보내줘야한다  
+		자동으로 push 이벤트를 감지하고 신호를 보낼 수 있도록 gitlab webhook을 지정  
+		- gitlab 로그인 후 >> setting > integrations
+		- 위에서 만든 `URL, Secret Token` 입력하여 웹훅 지정
+	  
+	- 빌드 플러그인 설정
+		- 빌드를 위한 플러그인 설치
+			- NodeJS 플러그인을 설치(현 프로젝트에서는 안쓰는 듯 하다)
+			- maven 플러그인을 설치
+			- jenkins 관리 > Global Tool Configuration 에 들어가서 nodejs와 maven 버전을 설치
+			- nodejs는 LTS 버전인 12.18.3, maven은 3.6.3
+		- 빌드 환경 설정하기
+			- lolbti > 구성 에서 빌드환경을 추가(설치한 것을 등록)
+
+		- Pull 받아오기 테스트
+			- Build Now 를 클릭하여 빌드가 되는지 확인
+			- 원하는 브랜치가 잘있는지 확인
+			- Docker volume 설정한 /app/swim/workspace를 확인한다
+		
+	- 빌드하기  
+		✍️ 이전까지는 pull만 받아온 것, 이제는 빌드할 차례  
+		- lolbti > 구성 > 빌드 에서 Execute Shell 항목 추가
+			- Frontend Build
+				- `cd frontend` (해당 frontend 위치는 다를 수 있음)  
+				`npm install -g yarn`  
+				`yarn install`  
+				`yarn build `  
+
+			- Backend Build (mvn 백엔드 배포)
+				- invoke top-Level Maven targets 항목 추가  
+				`Maven Version: mvn 3.6.3`  
+				`Goals: clean package`
+				- invoke top-Level Maven targets > 고급  
+				- `POM:backend_spring/pom.xml`(해당 pom 위치는 다를 수 있음)  
+	- 빌드 후 조치하기  
+		✍️ 빌드하고 나서 실행할 명령어를 설정  
+		SSH로 AWS EC2에 접근해서 빌드된 파일을 지정한 곳으로 이동하고 배포
+		- 빌드 후 조치 > send build artifacts over SSH
+			- `Source files: backend_spring/target/webcuration-0.0.1-SNAPSHOT.jar`  
+			Soucre files: 배포할 파일
+			- `Remove prefix: backend_spring/target/`  
+			Remove prefix: 제거할 접두사
+			- `Remote directory: dist/server`  
+			Remote directory: 배포할 파일이 저장될 디렉토리를 지정 (없으면 새로 생성 X, 미리 만들기)
+			- `Exec command: sudo pm2 restart /home/ubuntu/dist/server/app.json`  
+			Exec command : 배포 후 실행 할 명령어를 입력 (pm2 실행)
+	
+
+
+
+	

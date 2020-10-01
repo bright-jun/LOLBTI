@@ -1,20 +1,24 @@
 <template>
   <nav>
     <v-toolbar flat app class="maincolor">
-
       <v-toolbar-title class="grey--text">
 
-        <v-img class="mt-2 mb-2" src="../assets/images/lolbti_logo_2.png" height="55" width="100" />
+        <v-img
+          class="mt-2 mb-2"
+          src="../assets/images/lolbti_logo_2.png"
+          height="55"
+          width="100"
+          @click="$router.push('/').catch(() => {})"
+        />
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-form class="mr-4 mt-5" onsubmit="return false;">
+      <v-form class="mr-4 mt-7" onsubmit="return false;">
         <v-text-field
           v-if="viewType"
           rounded
-          background-color="btncolor"
-          color="btncolor"
-          outline
+          solo
+          dense
           label="닉네임 검색"
           append-icon="search"
           v-model="summonerName"
@@ -65,7 +69,9 @@ export default {
         mtype: this.mtype,
       };
 
-      this.$router.push("/home/" + this.$store.state.summoner.name);
+      this.$router
+        .push("/home/" + this.$store.state.summoner.name)
+        .catch(() => {});
     },
     logout(){
             this.$session.remove("userinfo")

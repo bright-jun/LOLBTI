@@ -9,14 +9,14 @@ import copy
 from multiprocessing import Pool
 
 api_key_list = [
-    'RGAPI-48ef7d74-1d87-404b-a573-988faca98f6d',
-    'RGAPI-3c4c2908-cf96-42c5-b8c5-8d5713d8fab4',
-    'RGAPI-74277b35-7876-4b02-8112-6b8224379b62',
-    'RGAPI-8794d187-5541-471c-8242-96ec482e4229',
-    'RGAPI-1fa822af-b25c-4d0e-8eb9-bef149d24791',
-    'RGAPI-c20efacb-5819-4517-89c0-0069734a11d2',
-    'RGAPI-69d8c662-938b-4231-a0b1-7358871a0a8f',
-    'RGAPI-64a9f06a-d9eb-4c45-8666-c4f5c132b4a6'
+    'RGAPI-24091344-7123-4eac-8ebc-9f9c6e75311a',
+    'RGAPI-754d8513-daaf-4192-831f-a6953405e338',
+    'RGAPI-1389cd81-c02e-4fa1-9654-80579633a8ff',
+    'RGAPI-2866c236-5976-4cac-8955-49fccb487e8b',
+    'RGAPI-d3a53c22-f940-40b8-9e4c-089ad160d8f2',
+    # 'RGAPI-262abd8e-e69a-4c97-9c21-bd8bbb4fdf7d',
+    # 'RGAPI-754f597b-6618-450f-85c6-318eb0846c2a',
+    # 'RGAPI-8002ed33-6f19-44d8-bed0-61671a6efcfa'
 ]
 def rank_info(sohwan_r, key_idx):
     # 소환사 랭크 정보 수집
@@ -64,7 +64,37 @@ def sohwan_info(sohwan, n=5):
         return '소환사가 존재하지 않습니다.'
   
     return r_info.json(), r_match.json()
+
+def sohwan_info_lane(sohwan, n=100):
+    # api_key setting
+    key_idx = 0
+    # id(=summonerid),accountid 수집
+    url = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + sohwan
+    r , key_idx = getRequests(url,key_idx)
+    while True:
+      if r.status_code == 200:
+        r_match = recent_match(r, key_idx, n)
+        if r_match.status_code == 200:
+          break
+        elif r_match.status_code == 403: # api갱신이 필요
+          print('you need renewal key no.{}'.format(key_idx))
+          return '키갱신필요'
+        else:
+          key_idx = renewKeyIdx(key_idx)
+          r , key_idx = getRequests(url,key_idx)
+      elif r.status_code == 404:
+        return '소환사가 존재하지 않습니다.'
   
+    return r_match.json()
+
+def freq_lane_info(sohwan):
+    temp = sohwan_info_lane(sohwan)
+    temp = temp['matches']
+    temp = pd.DataFrame(temp)
+    temp = temp.groupby('lane').count()['role']
+    temp = temp.rename(index={"NONE":"서폿","BOTTOM":"바텀","JUNGLE":"정글","MID":"미드","TOP":"탑"}) 
+    return temp
+
 def getRequests(root,key_idx):
   api_key = getApiKey(key_idx)
   url = root + '?api_key=' + api_key

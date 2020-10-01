@@ -10,6 +10,7 @@ const state = {
   isUser: false,
   email: "",
   summonerName : "",
+  summonerWinLose: {},
   summoner: {},
   champ: [
     { id: "Aatrox", key: "266", name: "아트록스" },

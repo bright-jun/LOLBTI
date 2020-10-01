@@ -82,22 +82,81 @@ const requestUserGameInfo = (summonerName, callback, errorCallback) => {
     });
 };
 
-const requestTest = (data,callback,errorCallback) => {
+const requestRecommendChampList = (
+  summonerName,
+  type,
+  callback,
+  errorCallback
+) => {
   axios({
-      method: 'get',
-      url: BASE_URL + '/summoner',
-      params:{
-        summonerName: '바이오어'
-      }
-      })
-      .then(function(response){
-        callback(response);
-      })
-      .catch(function(error){
-        errorCallback();
-      });
+    method: "get",
+    url: BASE_URL + "/recommend/champion",
+    params: {
+      summonerName: summonerName,
+      type: type,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
 
-}
+const requestFreqChampList = (summonerName, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/summoner/freqchamp",
+    params: {
+      summonerName: summonerName,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
+
+const requestFreqLane = (summonerName, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/summoner/freqlane",
+    params: {
+      summonerName: summonerName,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
+
+const requestTest = (data, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/summoner",
+    params: {
+      summonerName: "바이오어",
+    },
+  })
+    .then(function(response) {
+      callback(response);
+    })
+    .catch(function(error) {
+      errorCallback();
+    });
+};
 
 const UserApi = {
   requestLogin: (data, callback, errorCallback) =>
@@ -111,6 +170,15 @@ const UserApi = {
 
   requestUserGameInfo: (summonerName, callback, errorCallback) =>
     requestUserGameInfo(summonerName, callback, errorCallback),
+
+  requestRecommendChampList: (summonerName, callback, errorCallback) =>
+    requestRecommendChampList(summonerName, callback, errorCallback),
+
+  requestFreqChampList: (summonerName, callback, errorCallback) =>
+    requestFreqChampList(summonerName, callback, errorCallback),
+
+  requestFreqLane: (summonerName, callback, errorCallback) =>
+    requestFreqLane(summonerName, callback, errorCallback),
 };
 
 export default UserApi;

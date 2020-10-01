@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RecommendDaoImpl implements RecommendDao {
     static String root = "http://localhost:8081";
-    // static String root = "http://j3a109.p.ssafy.io:8081";
+    //static String root = "http://j3a109.p.ssafy.io:8081";
 
     @Override
     public boolean renewalPoint(String summonerName) throws IOException {
@@ -44,7 +44,7 @@ public class RecommendDaoImpl implements RecommendDao {
         URL url = new URL(requestUrl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
-
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 
         String returnLine;
