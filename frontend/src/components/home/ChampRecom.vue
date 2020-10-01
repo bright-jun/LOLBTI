@@ -45,26 +45,39 @@ export default {
       items: [{ header: "숙련도 기반 챔프 추천" }],
     };
   },
+
   created() {
     UserApi.requestRecommendChampList(
       this.$route.params.summonername,
       this.type,
       (res) => {
+        // console.log(res.data);
         var self = this;
-        for (var index = 0; index < res.data.pointList.length; index++) {
-          console.log(res.data.pointList[index]);
-          var point = Math.round(res.data.pointList[index] * 100);
+        for (var index = 0; index < res.data.bestChampList.length; index++) {
+          // console.log(res.data.bestPointList[index]);
+          var bestPoint = (res.data.bestPointList[index] * 100).toFixed(2);
+          var worstPoint = (res.data.worstPointList[index] * 1000).toFixed(2);
           this.items.push({
-            champion: self.$store.getters.getChampNameByNo(
-              String(res.data.champList[index])
+            bestChampion: self.$store.getters.getChampNameByNo(
+              String(res.data.bestChampList[index])
             ),
-            avatar:
+            bestAvatar:
               "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
               self.$store.getters.getChampIdByNo(
-                String(res.data.champList[index])
+                String(res.data.bestChampList[index])
               ) +
               ".png",
-            point: point,
+            bestPoint: bestPoint,
+            worstChampion: self.$store.getters.getChampNameByNo(
+              String(res.data.worstChampList[index])
+            ),
+            worstAvatar:
+              "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
+              self.$store.getters.getChampIdByNo(
+                String(res.data.worstChampList[index])
+              ) +
+              ".png",
+            worstPoint: worstPoint,
           });
           if (index != res.length - 1) {
             this.items.push({
@@ -73,6 +86,7 @@ export default {
             });
           }
         }
+        // console.log(this.items);
       },
       (error) => {}
     );

@@ -31,6 +31,21 @@ def recommendByMastery(request, summonerName):
         'worstPointList' : list(worst.values),
     })
 
+@api_view(['GET'])
+def showFreqChamp(request, summonerName):
+    freq_champ_list = recommend.load_freq_champ(summonerName)
+    return JsonResponse({
+        'freqChampAvartar' : list(freq_champ_list.index),
+        'freqChampScore' : list(freq_champ_list.values),
+    })
+
+@api_view(['GET'])
+def showFreqLane(request, summonerName):
+    freq_lane = defs.freq_lane_info(summonerName)
+    return JsonResponse({
+        'lane': list(freq_lane.index),
+        'laneFreq' : list(freq_lane),
+    })
 
 @api_view(['GET'])
 def updateMastery(request, summonerName):
