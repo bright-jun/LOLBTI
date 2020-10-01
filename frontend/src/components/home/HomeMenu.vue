@@ -20,7 +20,13 @@
         {{ i }}
         <v-icon v-if="icons">mdi-phone</v-icon>
       </v-tab>
-      <v-btn class="btncolor my-2 black--text" absolute right>갱신하기</v-btn>
+      <v-btn
+        class="btncolor my-2 black--text"
+        absolute
+        right
+        @click="updateGameInfo()"
+        >갱신하기</v-btn
+      >
       <v-tab-item v-for="i in tabs" :key="i" :value="'tab-' + i">
         <v-card flat tile>
           <v-card-text>
@@ -38,7 +44,8 @@
 import DuoRecom from "../../components/home/DuoRecom.vue";
 import ChampRecom from "../../components/home/ChampRecom.vue";
 import MbtiRecom from "../../components/home/MbtiRecom";
-import axios from "axios";
+import UserApi from "../../api/UserApi.js";
+
 export default {
   components: {
     DuoRecom,
@@ -62,5 +69,20 @@ export default {
   },
 
   created() {},
+  methods: {
+    updateGameInfo() {
+      console.log("업데이트 버튼 클릭됨");
+      UserApi.updateUserGameInfo(
+        this.$route.params.summonername,
+        (res) => {
+          console.log(res.data);
+          alert("갱신 성공");
+        },
+        (error) => {
+          alert("갱신 실패");
+        }
+      );
+    },
+  },
 };
 </script>

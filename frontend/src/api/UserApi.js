@@ -1,4 +1,4 @@
-import store from '../vuex/store'
+import store from "../vuex/store";
 
 const axios = require("axios");
 const hostname = "localhost:8080/api";
@@ -15,8 +15,8 @@ const requestLogin = (data, callback, errorCallback) => {
     },
   })
     .then(function(response) {
-      if(response.data.status){
-        store.commit('login',{
+      if (response.data.status) {
+        store.commit("login", {
           email: response.data.object.id,
           summonerName: response.data.object.summonerName,
         });
@@ -40,8 +40,8 @@ const requestJoin = (data, callback, errorCallback) => {
       summonerName: data.userId,
     },
     params: {
-      mbti: data.userMbti
-    }
+      mbti: data.userMbti,
+    },
   })
     .then(function(response) {})
     .catch(function(error) {
@@ -142,6 +142,24 @@ const requestFreqLane = (summonerName, callback, errorCallback) => {
     });
 };
 
+const updateUserGameInfo = (summonerName, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/update/gamedata",
+    params: {
+      summonerName: summonerName,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
+
 const requestTest = (data, callback, errorCallback) => {
   axios({
     method: "get",
@@ -179,6 +197,9 @@ const UserApi = {
 
   requestFreqLane: (summonerName, callback, errorCallback) =>
     requestFreqLane(summonerName, callback, errorCallback),
+
+  updateUserGameInfo: (summonerName, callback, errorCallback) =>
+    updateUserGameInfo(summonerName, callback, errorCallback),
 };
 
 export default UserApi;
