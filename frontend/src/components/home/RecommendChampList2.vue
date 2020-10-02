@@ -6,28 +6,29 @@ export default {
   methods: {
     gogo(items){
       var datacollection = {
-        labels: [items[1]['worstChampion'], items[3]['worstChampion'], items[5]['worstChampion'], items[7]['worstChampion'], items[9]['worstChampion']],
+        labels: [items[1]['bestChampion'], items[3]['bestChampion'], items[5]['bestChampion'], items[7]['bestChampion'], items[9]['bestChampion']],
         datasets: [
           {
-            label: '비추천 챔피언',
+            label: '추천 챔피언',
             barThickness: 30,
-            backgroundColor: 'rgba(255, 99, 132, 1)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 1)',
+            borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
-            data: [Math.round(items[1]['worstPoint']*10)-100, Math.round(items[3]['worstPoint']*10)-100, Math.round(items[5]['worstPoint']*10)-100, Math.round(items[7]['worstPoint']*10)-100, Math.round(items[9]['worstPoint']*10)-100]
+            data: [Math.round(items[1]['bestPoint']*10), Math.round(items[3]['bestPoint']*10), Math.round(items[5]['bestPoint']*10), Math.round(items[7]['bestPoint']*10), Math.round(items[9]['bestPoint']*10)]
           }
         ]
       };
-      var options= {
+      var options = {
         scales: {
           yAxes: [{
+            position: 'right',  
             gridLines: {
               display: true
             },
             ticks: {
               fontStyle: 'bold',
               fontSize: 18,
-            },
+            }
           }],
           xAxes: [{
             display: false,
@@ -36,20 +37,20 @@ export default {
                 offsetGridLines: false,
             },
             ticks: {
-                min: Math.ceil(10-items[1]['worstPoint'])*-10,
-                max: Math.floor(10-items[9]['worstPoint'])*-10
+                min: Math.floor((items[9]['bestPoint']*10)/10)*10,
+                max: Math.ceil((items[1]['bestPoint']*10)/10)*10
             }
 
           }],
         legend: {
-            display: true,
+            display: true
           },
-        responsive: true,
-        maintainAspectRatio: false
+        // responsive: true,
+        // maintainAspectRatio: false
         }
       };
       this.renderChart(datacollection, options)
     }
-  }
+  },
 }
 </script>

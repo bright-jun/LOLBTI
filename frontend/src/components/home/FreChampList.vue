@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card class="mx-auto"  height="450">
     <v-card-text>선호챔피언</v-card-text>
     <v-list>
       <v-list-item v-for="item in items" :key="item.title">
