@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.net.URL;
+import java.net.URLEncoder;
+
+
 import com.web.curation.dao.user.RecommendDao;
 import com.web.curation.model.BasicResponse;
 import com.web.curation.model.lol.Champion;
@@ -38,7 +42,9 @@ public class RecommendController {
 	@ApiOperation(value = "user가 플레이한 챔피언 성향에 따른 추천")
 	public Object recommendChampion(@RequestParam String summonerName, @RequestParam int type) throws IOException {
 		String recommend = null;
-		summonerName = summonerName.replaceAll(" ", "%20");
+		summonerName = summonerName.replaceAll(" ","");
+		summonerName = URLEncoder.encode(summonerName, "UTF-8");
+		System.out.println(summonerName);
 		if (type == 0) { // 숙련도
 			recommend = recommendDao.recommendPoint(summonerName);
 		} else if (type == 1) { // 챔피언 매치기록
@@ -75,7 +81,8 @@ public class RecommendController {
 	@ApiOperation(value = "갱신하기 버튼 클릭 이벤트")
 	public Object renewalGameData(@RequestParam String summonerName) throws IOException {
 		boolean recommend = false;
-		summonerName = summonerName.replaceAll(" ", "%20");
+		summonerName = summonerName.replaceAll(" ","");
+		summonerName = URLEncoder.encode(summonerName, "UTF-8");
 		recommend = recommendDao.renewalPoint(summonerName);
 
 		if (recommend != false)

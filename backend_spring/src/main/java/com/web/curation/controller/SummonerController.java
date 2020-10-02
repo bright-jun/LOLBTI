@@ -12,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 import java.util.Map;
 
+import java.net.URL;
+import java.net.URLEncoder;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +53,8 @@ public class SummonerController {
     @GetMapping("/summoner")
     @ApiOperation(value = "summoner 정보 가져오기 ")
     public Object summonerInfo(@RequestParam String summonerName) throws IOException {
-//        summonerName = summonerName.replaceAll(" ","%20");
+        summonerName = summonerName.replaceAll(" ","");
+        summonerName = URLEncoder.encode(summonerName, "UTF-8");
         String userInfo = userRankDao.userRank(summonerName);
         System.out.println(userInfo);
         if(userInfo != null){
@@ -61,7 +66,8 @@ public class SummonerController {
     @GetMapping("/summoner/freqchamp")
     @ApiOperation(value = "summoner 챔프 선호도 가져오기 ")
     public Object summonerFreqChampList(@RequestParam String summonerName) throws IOException {
-    	summonerName = summonerName.replaceAll(" ","%20");
+        summonerName = summonerName.replaceAll(" ","");
+        summonerName = URLEncoder.encode(summonerName, "UTF-8");
         String champList = userRankDao.userFreqChamp(summonerName);
 //        System.out.println(champList);
         if(champList != null){
@@ -74,7 +80,8 @@ public class SummonerController {
     @GetMapping("/summoner/freqlane")
     @ApiOperation(value = "summoner 라인 선호도 가져오기 ")
     public Object summonerFreqLane(@RequestParam String summonerName) throws IOException {
-    	summonerName = summonerName.replaceAll(" ","%20");
+        summonerName = summonerName.replaceAll(" ","");
+        summonerName = URLEncoder.encode(summonerName, "UTF-8");
         String laneFreq = userRankDao.userFreqLane(summonerName);
 //        System.out.println(laneFreq);
         if(laneFreq != null){

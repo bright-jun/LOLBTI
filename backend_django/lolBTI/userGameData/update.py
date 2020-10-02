@@ -26,7 +26,7 @@ def read_pkl(path, file):
     print("{} read by update".format(file))
     return pd.read_pickle(os.path.join(path, file))
 
-def dump_pkl(data,path, file):
+def dump_pkl(data, path, file):
     global sohwan_mastery
     print("{} dumped by update".format(file))
     return pd.to_pickle(data, os.path.join(path, file))
