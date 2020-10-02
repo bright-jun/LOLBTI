@@ -16,7 +16,7 @@
           <p class="mb-0 text-md-h6">{{ gameInfo.tier }}</p>
           <p class="mb-0">{{ gameInfo.leaguePoints }}LP</p>
           <p class="mb-0">{{ gameInfo.wins }}승 {{ gameInfo.losses }}패</p>
-          <p class="mb-0">{{ $route.params.summonername }}</p>
+          <p class="mb-0">{{ gameInfo.summonerName }}</p>
           <!-- <v-btn @click="check"></v-btn> -->
         </v-col>
       </v-row>

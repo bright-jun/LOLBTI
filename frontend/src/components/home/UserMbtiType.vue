@@ -3,7 +3,7 @@
     <v-container>
       <v-row class="mb-3">
         <div class="ml-3">MBTI 유형</div>
-        <user-info-dialog />
+        
       </v-row>
       <v-row>
         <v-card-text>
@@ -18,11 +18,11 @@
 
 <script>
 import UserApi from "../../api/UserApi.js";
-import UserInfoDialog from "../home/userInfoDialog.vue";
+
 
 export default {
   components: {
-    UserInfoDialog,
+    
   },
   data() {
     return {

@@ -176,6 +176,46 @@ const requestTest = (data, callback, errorCallback) => {
     });
 };
 
+const requestSummonerNameAndMbtiTypeById = (
+  userid,
+  callback,
+  errorCallback
+) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/account/user/search",
+    params: {
+      id: userid,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      errorCallback(error);
+    });
+};
+
+const updateUserInfo = (summonerName, email, mbti, callback, errorCallback) => {
+  axios({
+    method: "put",
+    url: BASE_URL + "/account/user/update",
+    params: {
+      id: email,
+      summonerName: summonerName,
+      mbti: mbti,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      errorCallback(error);
+    });
+};
+
 const UserApi = {
   requestLogin: (data, callback, errorCallback) =>
     requestLogin(data, callback, errorCallback),
@@ -189,8 +229,8 @@ const UserApi = {
   requestUserGameInfo: (summonerName, callback, errorCallback) =>
     requestUserGameInfo(summonerName, callback, errorCallback),
 
-  requestRecommendChampList: (summonerName, callback, errorCallback) =>
-    requestRecommendChampList(summonerName, callback, errorCallback),
+  requestRecommendChampList: (summonerName, type, callback, errorCallback) =>
+    requestRecommendChampList(summonerName, type, callback, errorCallback),
 
   requestFreqChampList: (summonerName, callback, errorCallback) =>
     requestFreqChampList(summonerName, callback, errorCallback),
@@ -200,6 +240,12 @@ const UserApi = {
 
   updateUserGameInfo: (summonerName, callback, errorCallback) =>
     updateUserGameInfo(summonerName, callback, errorCallback),
+
+  requestSummonerNameAndMbtiTypeById: (userid, callback, errorCallback) =>
+    requestSummonerNameAndMbtiTypeById(userid, callback, errorCallback),
+
+  updateUserInfo: (summonerName, email, mbti, callback, errorCallback) =>
+    updateUserInfo(summonerName, email, mbti, callback, errorCallback),
 };
 
 export default UserApi;
