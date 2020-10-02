@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -16,9 +17,10 @@ public class RecommendDaoImpl implements RecommendDao {
 
     @Override
     public boolean renewalPoint(String summonerName) throws IOException {
-        String request = "/userGameData/update/mastery/" + summonerName;
+        String request = "/userGameData/update/mastery/";
         String requestUrl = root + request;
-        URL url = new URL(requestUrl);
+        String summon= URLEncoder.encode(summonerName, "UTF-8");
+        URL url = new URL(requestUrl+summon);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
@@ -39,9 +41,10 @@ public class RecommendDaoImpl implements RecommendDao {
 
     @Override
     public String recommendPoint(String summonerName) throws IOException {
-        String request = "/userGameData/recommend/mastery/" + summonerName;
+        String request = "/userGameData/recommend/mastery/";
         String requestUrl = root + request;
-        URL url = new URL(requestUrl);
+        String summon= URLEncoder.encode(summonerName, "UTF-8");
+        URL url = new URL(requestUrl+summon);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         
