@@ -48,9 +48,9 @@ export default {
     UserApi.requestFreqChampList(
       this.$route.params.summonername,
       (res) => {
-        console.log(res.data);
+        // console.log(res.data);
         for (var index = 0; index < res.data.freqChampAvartar.length; index++) {
-          console.log(res.data.freqChampAvartar[index]);
+          // console.log(res.data.freqChampAvartar[index]);
           this.items.push({
             champion: self.$store.getters.getChampNameByNo(
               res.data.freqChampAvartar[index]
