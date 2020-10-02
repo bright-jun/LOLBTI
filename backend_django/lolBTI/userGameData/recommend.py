@@ -28,6 +28,11 @@ def dump_pkl(data, path, file):
 sohwan_mastery = read_pkl("./userGameData","dummy.pkl")
 
 def load_freq_champ(sohwan):
+    global sohwan_mastery
+
+    if(setting.updated):
+        sohwan_mastery = read_pkl("./userGameData", "dummy.pkl")
+
     return sohwan_mastery.loc[sohwan].sort_values(axis=0,ascending=False)[:4]
 
 from numpy import dot
