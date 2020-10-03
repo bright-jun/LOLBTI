@@ -192,17 +192,27 @@
     - django 설치
         - `pip install django~=2.2.7`
 	- requirements.txt
-		- `pip install -r requirements.txt --user`
+		- `sudo pip install -r requirements.txt --user`
+	- ❗ `ImportError: cannot import name 'main'` 에러 시  
+		✍️ pip를 업데이트 한 후에 문제가 계속 발생, 일단 pip를 지우고 다시 설치하면 해결  
+		-`sudo python3 -m pip uninstall pip && sudo apt-get install python3-pip --reinstall`
 
 - 백엔드(Django)  
 	- ❌ `python manage.py runserver 0:8081`
 		- local 에서 test server 용이지, 배포용은 아니다. django 내장 server를 사용해서 배포하면 안된다
 	- Gunicorn 설치
-		- requirement.txt에 gunicorn==19.7.1 추가
+		- requirement.txt에 `gunicorn==19.7.1` 추가
 		- `pip install -r requirements.txt --user`
 	- 실행
+		- `screen`입력 후 enter  
+		✍️ screen 은 서버 연결을 꺼도, 실행 중이던 프로그램을 그대로 유지, screen에서 실행한다
 		- ⭕️ `gunicorn lolBTI.wsgi:application --bind=0:8081 --reload`  
 		✍️ --reload: 소스코드가 바뀌면 재기동
+	- stop
+		- `pgrep -f gunicorn`로 gunicorn 포트번호 확인
+		- `sudo kill -9 포트번호`
+		- `screen -ls`
+
 		
 
 - 젠킨스(CI/CD) 관리  
@@ -217,7 +227,7 @@
 		-p 호스트 7070포트와 도커 네트워크 상의 8080포트를 연결(이미 8080 사용중이라 임의 변경)  
 		-v 호스트의 파일 시스템과 도커 컨테이터 파일 시스템 연결(/app/swim 디렉터리에/var/jekins_home을 마운트시킨다)  
 		--name 도커 컨테이너 이름 지정 (여기서는 swim_jenkins)  
-		-u 사용자를 root로 지정  
+		-u 사용자를 root로 지정
 	- jenkins컨테이너 작동 확인
 		- `sudo docker ps -a`  
 	  

@@ -91,7 +91,7 @@ public class UserController {
     
     @PostMapping("/user/join")
     @ApiOperation(value = "회원 가입")
-    public Object save(@RequestBody User user, @RequestParam("mbti") String mbti){
+    public Object save(@RequestBody User user, @RequestParam(required = false) String mbti){
     	BasicResponse result = new BasicResponse();
     	Optional<User> userOpt = userService.findById(user.getId());
     	
