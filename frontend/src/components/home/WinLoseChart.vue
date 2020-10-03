@@ -26,7 +26,7 @@ export default {
         labels: ["승", "패"],
         datasets: [
           {
-            backgroundColor: ["#41B883", "#E46651"],
+            backgroundColor: ["#0DA970", "#E46651"],
             data: [n.wins, n.losses],
           },
         ],
@@ -35,6 +35,7 @@ export default {
         animation: {
           animateScale: true,
         },
+        maintainAspectRatio: false,
       };
       this.loaded = true;
     });
@@ -42,4 +43,3 @@ export default {
 };
 </script>
 
-<style lang=""></style>
