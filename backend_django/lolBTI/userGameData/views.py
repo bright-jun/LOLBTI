@@ -6,6 +6,7 @@ from django.http.response import JsonResponse, HttpResponse
 from . import defs
 from . import recommend
 from . import update
+from . import recommendItem as rI
 
 @api_view(['GET'])
 def test(request):
@@ -57,4 +58,11 @@ def updateMastery(request, summonerName):
     result = update.update_sohwan_mastery(summonerName)
     return JsonResponse({
         'result' : result
+    })
+@api_view(['GET'])
+def recommendItem(request, myChamp, opponentChamp):
+    key,value = rI.getItems(int(myChamp), int(opponentChamp))
+    return JsonResponse({
+        'key' : key,
+        'value' : value
     })

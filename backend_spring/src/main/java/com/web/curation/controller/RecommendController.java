@@ -67,15 +67,14 @@ public class RecommendController {
 	}
 
 	@GetMapping("/recommend/item")
-	@ApiOperation(value = "챔피언 매치에 따른 아이템 템트리 추천")
-	public Object recommendItem(@RequestParam String myChampion, @RequestParam String opponentChampion) {
-		List<Item> itemList = new ArrayList<>();
-		BasicResponse result = new BasicResponse();
-
-		result.status = true;
-		result.object = itemList;
-		return new ResponseEntity<>(result, HttpStatus.OK);
-	}
+    @ApiOperation(value = "챔피언 매치에 따른 아이템 템트리 추천")
+    public Object recommendItem(@RequestParam String myChamp, @RequestParam String opponentChamp ) throws IOException {
+        String recommend = null;
+        recommend = recommendDao.recommendItem(myChamp, opponentChamp);
+        if(recommend != null)
+            return new ResponseEntity<>(recommend,HttpStatus.OK);
+        return new ResponseEntity<> ("fail", HttpStatus.NOT_FOUND);
+    }
 
 	@GetMapping("/update/gamedata")
 	@ApiOperation(value = "갱신하기 버튼 클릭 이벤트")
