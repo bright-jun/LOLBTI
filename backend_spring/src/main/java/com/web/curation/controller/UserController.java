@@ -83,16 +83,17 @@ public class UserController {
 
 	@GetMapping("/user/search")
 	@ApiOperation(value = "단일 회원 조회")
-	public Map<String, String> getUser(@RequestParam("id") String id) {
+	public Object getUser(@RequestParam("id") String id) {
 		Optional<User> user = userService.findById(id);
-		// BasicResponse result = new BasicResponse();
-		Optional<Mbti> userMbti = mbtiDao.findById(user.get().getSummonerName());
-		Map<String, String> summonerInfo = new HashMap<String, String>();
-
-		summonerInfo.put("summonername", user.get().getSummonerName());
-		summonerInfo.put("mbti", userMbti.get().getMbti());
-
-		return summonerInfo;
+		BasicResponse result = new BasicResponse();
+		if(user.isPresent()){
+			result.status = true;
+			result.object = user.get();
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		}else{
+			result.status = false;
+			return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@PostMapping("/user/join")
