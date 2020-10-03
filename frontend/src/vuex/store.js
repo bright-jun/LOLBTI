@@ -4,9 +4,14 @@ import getters from "./getters";
 import actions from "./actions";
 import mutations from "./mutations";
 
+
 Vue.use(Vuex);
 
 const state = {
+  isUser: false,
+  email: "",
+  summonerName : "",
+  summonerWinLose: {},
   summoner: {},
   champ: [
     { id: "Aatrox", key: "266", name: "아트록스" },

@@ -1,16 +1,29 @@
 <template>
   <v-card>
-    <v-card-text>
-      <div>MBTI 유형</div>
-      <p class="text-sm-center text-md-center text-sm-h3 text-md-h2">{{mtype}}</p>
-    </v-card-text>
+    <v-container>
+      <v-row class="mb-3">
+        <div class="ml-3">MBTI 유형</div>
+        
+      </v-row>
+      <v-row>
+        <v-card-text>
+          <p class="text-sm-center text-md-center text-sm-h3 text-md-h2">
+            {{ mtype }}
+          </p>
+        </v-card-text>
+      </v-row>
+    </v-container>
   </v-card>
 </template>
 
 <script>
 import UserApi from "../../api/UserApi.js";
 
+
 export default {
+  components: {
+    
+  },
   data() {
     return {
       mtype: "",

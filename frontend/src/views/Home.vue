@@ -82,9 +82,15 @@ export default {
             // this.recentGames = res.data.recentMatches.matches;
             this.imgURL =
               "emblem_" + res.data.rankInfo[index].tier.toLowerCase() + ".png";
+            this.$store.state.summonerWinLose = {
+              wins: res.data.rankInfo[index].wins,
+              losses: res.data.rankInfo[index].losses,
+              summonerName: res.data.rankInfo[index].summonerName,
+            };
           }
         }
         // console.log(this.gameInfo);
+        // console.log(this.$store.state.summonerWinLose);
         // console.log(this.recentGames);
         this.getRecentMatch(res.data.recentMatches.matches);
       },
