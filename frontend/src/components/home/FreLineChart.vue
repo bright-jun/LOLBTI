@@ -17,7 +17,9 @@ export default {
     return {
       loaded: false,
       chartData: null,
-      options: null,
+      options: {
+        maintainAspectRatio: false,
+      },
     };
   },
   async mounted() {

@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="450" class="mx-auto">
+  <v-card class="mx-auto">
     <v-list three-line>
       <template v-for="(item, index) in items">
         <v-subheader
@@ -21,10 +21,15 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>
-              {{ item.champion }} {{ item.role }}
-              {{ item.lane }}</v-list-item-title
-            >
+            {{ item.champion }}
+          </v-list-item-content>
+          <v-sapcer></v-sapcer>
+          <v-list-item-content>
+            {{ item.lane }}
+          </v-list-item-content>
+          <v-sapcer></v-sapcer>
+          <v-list-item-content>
+            {{ item.time }}
             <!-- <v-list-item-subtitle v-html="item.lane"></v-list-item-subtitle> -->
           </v-list-item-content>
         </v-list-item>

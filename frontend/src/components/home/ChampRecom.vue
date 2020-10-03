@@ -19,8 +19,8 @@
     </v-row>
     <v-row>
       <v-col md="12">
-        <v-card style="display: flex;">
-          <div style="width: 10%;">
+        <v-card style="display: flex">
+          <div style="width: 10%">
             <!-- qq qqqqqqqqqqq -->
             <!-- <img :src="items[1].worstAvatar" width="80px"> -->
             <!-- <v-img :src="items[1].worstAvatar"></v-img>
@@ -29,14 +29,12 @@
             <v-img :src="items[7].worstAvatar"></v-img>
             <v-img :src="items[9].worstAvatar"></v-img> -->
           </div>
-          <div style="width: 80%; display: flex;">
-            <recommend-champ-list ref="list1"/>
-            <recommend-champ-list2 ref="list2"/>
+          <div style="width: 80%; display: flex">
+            <recommend-champ-list ref="list1" />
+            <recommend-champ-list2 ref="list2" />
           </div>
-
         </v-card>
       </v-col>
-
     </v-row>
   </div>
 </template>
@@ -63,11 +61,11 @@ export default {
       items: [{ header: "숙련도 기반 챔프 추천" }],
     };
   },
-  methods:{
-    gogo(items){
+  methods: {
+    gogo(items) {
       this.$refs.list1.gogo(items);
       this.$refs.list2.gogo(items);
-    }
+    },
   },
 
   created() {
