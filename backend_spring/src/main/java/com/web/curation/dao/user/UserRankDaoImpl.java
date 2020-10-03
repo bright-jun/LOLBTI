@@ -18,8 +18,9 @@ public class UserRankDaoImpl implements UserRankDao {
     public String userRank(String summonerName) throws IOException {
         String request = "/userGameData/userinfo/";
         String requestUrl = root + request;
-        String summon= URLEncoder.encode(summonerName, "UTF-8");
-        URL url = new URL(requestUrl+summon);
+        // String summon= URLEncoder.encode(summonerName, "UTF-8");
+        // URL url = new URL(requestUrl+summon);
+        URL url = new URL(requestUrl+summonerName);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
@@ -38,9 +39,10 @@ public class UserRankDaoImpl implements UserRankDao {
     @Override
     public String userFreqChamp(String summonerName) throws IOException {
         String request = "/userGameData/recommend/mastery/freqchamp/";
-        String requestUrl = root + request + summonerName;
-//        String summon= URLEncoder.encode(summonerName, "UTF-8");
-        URL url = new URL(requestUrl);
+        String requestUrl = root + request;
+        // String summon= URLEncoder.encode(summonerName, "UTF-8");
+        // URL url = new URL(requestUrl+summon);
+        URL url = new URL(requestUrl+summonerName);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
@@ -57,9 +59,10 @@ public class UserRankDaoImpl implements UserRankDao {
     @Override
     public String userFreqLane(String summonerName) throws IOException {
     	String request = "/userGameData/recommend/freqlane/";
-    	String requestUrl = root + request + summonerName;
-//        String summon= URLEncoder.encode(summonerName, "UTF-8");
-    	URL url = new URL(requestUrl);
+    	String requestUrl = root + request;
+        // String summon= URLEncoder.encode(summonerName, "UTF-8");
+        // URL url = new URL(requestUrl+summon);
+        URL url = new URL(requestUrl+summonerName);
     	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     	
     	BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));

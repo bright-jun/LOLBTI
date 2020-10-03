@@ -16,18 +16,23 @@ import os
 from . import setting
 
 def read_pkl(path, file):
-    global sohwan_mastery
     print("{} read by recommend".format(file))
     return pd.read_pickle(os.path.join(path, file))
 
 def dump_pkl(data, path, file):
-    global sohwan_mastery
     print("{} dumped by recommend".format(file))
     return pd.to_pickle(data, os.path.join(path, file))
 
-sohwan_mastery = read_pkl("./userGameData","dummy.pkl")
+sohwan_mastery = pd.read_pickle(os.path.join(("./userGameData/dummy.pkl")))
+print(type(sohwan_mastery))
+print(len(sohwan_mastery))
+
 
 def load_freq_champ(sohwan):
+    global sohwan_mastery
+
+    if(setting.updated):
+        sohwan_mastery = read_pkl("./userGameData", "dummy.pkl")
     return sohwan_mastery.loc[sohwan].sort_values(axis=0,ascending=False)[:4]
 
 from numpy import dot
