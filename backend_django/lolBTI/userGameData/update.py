@@ -22,17 +22,15 @@ min_max_scaler = preprocessing.MinMaxScaler()
 import os
 
 def read_pkl(path, file):
-    global sohwan_mastery
     print("{} read by update".format(file))
     return pd.read_pickle(os.path.join(path, file))
 
 def dump_pkl(data, path, file):
-    global sohwan_mastery
     print("{} dumped by update".format(file))
     return pd.to_pickle(data, os.path.join(path, file))
 
 champ_dict = read_pkl("./userGameData","champ_dict.pkl")
-sohwan_mastery = read_pkl("./userGameData","dummy.pkl")
+sohwan_mastery = read_pkl("./userGameData","sohwan_mastery.pkl")
 
 def mastery_info(sohwan_r, key_idx):
     # 소환사 챔피언 숙련도 정보 수집
@@ -113,7 +111,7 @@ def update_sohwan_mastery(sohwan):
 
         #   concat이 아니라 중복되면 갱신해야함.
         sohwan_mastery.loc[sohwan] = t_champ_df_scaled.loc[sohwan]
-        dump_pkl(sohwan_mastery,"./userGameData","dummy.pkl")
+        dump_pkl(sohwan_mastery,"./userGameData","sohwan_mastery.pkl")
         
         #   recommend가 update 된 sohwan_mastery 불러올 수 있도록 해 주어야 함.
         setting.update_sohwan_mastery()
