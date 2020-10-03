@@ -1,9 +1,12 @@
 api_key_list = [
-    'RGAPI-e2156167-c88a-4fd4-8012-83aad126c933',
-    'RGAPI-c1a1f277-1c25-4b8b-b803-9755439763d9',
-    'RGAPI-b1272ff0-5a2c-4819-81c9-96e3e8417963',
-    'RGAPI-911ed4a1-b7b7-466d-8ffa-3dd532c5ee4b',
-    'RGAPI-edc57be5-357d-40dd-8a5a-c01966c180d9',
+    'RGAPI-8a4bff97-1355-49ac-9c84-92c6fbb6b796',
+    'RGAPI-dad7dc1c-0a54-4026-9283-f1bd120dd7a4',
+    'RGAPI-bf2b1232-7cb0-4143-b58d-223aa29fe0e5',
+    'RGAPI-635f48bb-bf12-495b-928c-963f7b6d7c87',
+    'RGAPI-37dce2dd-2b4a-4a82-bc0c-e045616db918',
+    'RGAPI-8523df6b-f3a1-472e-a064-038300e113a0',
+    'RGAPI-c447bc44-934e-4fd5-950c-101f999d065b',
+    'RGAPI-b6822d6f-04fd-4d98-8f41-705d9d038491'
 ]
 
 sohwan_mastery = None

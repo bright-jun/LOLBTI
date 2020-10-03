@@ -20,13 +20,16 @@
         {{ i }}
         <v-icon v-if="icons">mdi-phone</v-icon>
       </v-tab>
-      <v-btn
-        class="btncolor my-2 black--text"
-        absolute
-        right
-        @click="updateGameInfo()"
-        >갱신하기</v-btn
-      >
+      <user-info-dialog v-if="isLog" />
+      <div>
+        <v-btn
+          class="btncolor my-2 black--text"
+          absolute
+          right
+          @click="updateGameInfo()"
+          >갱신하기</v-btn
+        >
+      </div>
       <v-tab-item v-for="i in tabs" :key="i" :value="'tab-' + i">
         <v-card flat tile>
           <v-card-text>
@@ -44,6 +47,7 @@
 import DuoRecom from "../../components/home/DuoRecom.vue";
 import ChampRecom from "../../components/home/ChampRecom.vue";
 import MbtiRecom from "../../components/home/MbtiRecom";
+import UserInfoDialog from "../home/userInfoDialog.vue";
 import UserApi from "../../api/UserApi.js";
 
 export default {
@@ -51,9 +55,11 @@ export default {
     DuoRecom,
     ChampRecom,
     MbtiRecom,
+    UserInfoDialog,
   },
   data() {
     return {
+      isLog: false,
       tab: null,
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -68,7 +74,11 @@ export default {
     };
   },
 
-  created() {},
+  created() {
+    if (this.$session.get("userinfo")) {
+      this.isLog = true;
+    }
+  },
   methods: {
     updateGameInfo() {
       console.log("업데이트 버튼 클릭됨");
