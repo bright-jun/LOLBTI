@@ -20,19 +20,26 @@
     <v-row>
       <v-col md="12">
         <v-card style="display: flex">
-          <div style="width: 10%">
-            <!-- qq qqqqqqqqqqq -->
-            <!-- <img :src="items[1].worstAvatar" width="80px"> -->
-            <!-- <v-img :src="items[1].worstAvatar"></v-img>
-            <v-img :src="items[3].worstAvatar"></v-img>
-            <v-img :src="items[5].worstAvatar"></v-img>
-            <v-img :src="items[7].worstAvatar"></v-img>
-            <v-img :src="items[9].worstAvatar"></v-img> -->
-          </div>
-          <div style="width: 80%; display: flex">
-            <recommend-champ-list ref="list1" />
-            <recommend-champ-list2 ref="list2" />
-          </div>
+          <v-row>
+            <v-col cols="1">
+              <template v-for="(ava, index) in worstimgSrcArr">
+                <v-img :src="ava.worstAvatar" :key="index"></v-img>
+                <br :key="index" />
+              </template>
+            </v-col>
+            <v-col cols="5">
+              <recommend-champ-list ref="list1" />
+            </v-col>
+            <v-col cols="5">
+              <recommend-champ-list2 ref="list2" />
+            </v-col>
+            <v-col cols="1">
+              <template v-for="(ava, index) in bestimgSrcArr">
+                <v-img :src="ava.bestAvatar" :key="index"></v-img>
+                <br :key="index" />
+              </template>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
     </v-row>
@@ -58,6 +65,8 @@ export default {
   data() {
     return {
       type: 0,
+      bestimgSrcArr: [],
+      worstimgSrcArr: [],
       items: [{ header: "숙련도 기반 챔프 추천" }],
     };
   },
@@ -77,26 +86,30 @@ export default {
         for (var index = 0; index < res.data.bestChampList.length; index++) {
           var bestPoint = (res.data.bestPointList[index] * 100).toFixed(2);
           var worstPoint = (res.data.worstPointList[index] * 1000).toFixed(2);
+          var bestAvatar =
+            "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
+            self.$store.getters.getChampIdByNo(
+              String(res.data.bestChampList[index])
+            ) +
+            ".png";
+          var worstAvatar =
+            "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
+            self.$store.getters.getChampIdByNo(
+              String(res.data.worstChampList[index])
+            ) +
+            ".png";
+          this.bestimgSrcArr.push({ bestAvatar });
+          this.worstimgSrcArr.push({ worstAvatar });
           this.items.push({
             bestChampion: self.$store.getters.getChampNameByNo(
               String(res.data.bestChampList[index])
             ),
-            bestAvatar:
-              "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
-              self.$store.getters.getChampIdByNo(
-                String(res.data.bestChampList[index])
-              ) +
-              ".png",
+            bestAvatar: bestAvatar,
             bestPoint: bestPoint,
             worstChampion: self.$store.getters.getChampNameByNo(
               String(res.data.worstChampList[index])
             ),
-            worstAvatar:
-              "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
-              self.$store.getters.getChampIdByNo(
-                String(res.data.worstChampList[index])
-              ) +
-              ".png",
+            worstAvatar: worstAvatar,
             worstPoint: worstPoint,
           });
           if (index != res.length - 1) {
@@ -106,6 +119,8 @@ export default {
             });
           }
         }
+        console.log(this.worstimgSrcArr);
+        console.log(this.bestimgSrcArr);
         this.gogo(this.items);
       },
       (error) => {}
