@@ -21,8 +21,7 @@
       <v-col md="12">
         <v-card style="display: flex;">
           <div style="width: 10%;">
-            <!-- qq qqqqqqqqqqq -->
-            <!-- <img :src="items[1].worstAvatar" width="80px"> -->
+            <!-- <img :src="items[1].worstAvatar" width="30px"> -->
             <!-- <v-img :src="items[1].worstAvatar"></v-img>
             <v-img :src="items[3].worstAvatar"></v-img>
             <v-img :src="items[5].worstAvatar"></v-img>

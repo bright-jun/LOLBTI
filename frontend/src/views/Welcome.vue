@@ -3,10 +3,10 @@
     <nav-bar :viewType="navbarType" />
     <v-container>
       <v-img
-        class="ma-auto"
+        class="mx-auto" style="margin-top: 150px; margin-bottom: 50px;"
         src="../assets/images/lolbti_logo_2.png"
-        height="180"
-        width="310"
+        height="300"
+        width="600"
       />
       <v-row class="pt-5">
         <v-col md="3"></v-col>

@@ -28,13 +28,14 @@
           <v-btn
             class="mt-13"
             block
-            color="orange"
+            color="btncolor"
             @click="onLogin"
             :disabled="!isSubmit"
             :class="{disabled : !isSubmit}"
           >Login</v-btn>
-          <v-btn class="my-3" block color="orange">Join</v-btn>
-          <v-divider></v-divider>
+          <v-btn class="mt-5" block color="btncolor">Join</v-btn>
+          <br>
+          <br>
         </div>
       </v-card>
     </v-col>
