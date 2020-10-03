@@ -6,6 +6,7 @@ from django.http.response import JsonResponse, HttpResponse
 from . import defs
 from . import recommend
 from . import update
+from . import recommendItem as rI
 
 @api_view(['GET'])
 def test(request):
@@ -14,6 +15,7 @@ def test(request):
     
 @api_view(['GET'])
 def userInfo(request, summonerName):
+    summonerName = summonerName.replace(" ","").lower()
     rank_info, recent_matches = defs.sohwan_info(summonerName)
     return JsonResponse({
         'rankInfo' : rank_info,
@@ -22,6 +24,7 @@ def userInfo(request, summonerName):
 
 @api_view(['GET'])
 def recommendByMastery(request, summonerName):
+    summonerName = summonerName.replace(" ","").lower()
     best = recommend.recommend_champ_by_mastery(summonerName, ascending=False, include=False)
     worst = recommend.recommend_champ_by_mastery(summonerName, ascending=True, include=False)
     return JsonResponse({
@@ -33,6 +36,7 @@ def recommendByMastery(request, summonerName):
 
 @api_view(['GET'])
 def showFreqChamp(request, summonerName):
+    summonerName = summonerName.replace(" ","").lower()
     freq_champ_list = recommend.load_freq_champ(summonerName)
     return JsonResponse({
         'freqChampAvartar' : list(freq_champ_list.index),
@@ -41,6 +45,7 @@ def showFreqChamp(request, summonerName):
 
 @api_view(['GET'])
 def showFreqLane(request, summonerName):
+    summonerName = summonerName.replace(" ","").lower()
     freq_lane = defs.freq_lane_info(summonerName)
     return JsonResponse({
         'lane': list(freq_lane.index),
@@ -49,7 +54,15 @@ def showFreqLane(request, summonerName):
 
 @api_view(['GET'])
 def updateMastery(request, summonerName):
+    summonerName = summonerName.replace(" ","").lower()
     result = update.update_sohwan_mastery(summonerName)
     return JsonResponse({
         'result' : result
+    })
+@api_view(['GET'])
+def recommendItem(request, myChamp, opponentChamp):
+    key,value = rI.getItems(int(myChamp), int(opponentChamp))
+    return JsonResponse({
+        'key' : key,
+        'value' : value
     })
