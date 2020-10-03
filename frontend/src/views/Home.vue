@@ -85,6 +85,7 @@ export default {
             this.$store.state.summonerWinLose = {
               wins: res.data.rankInfo[index].wins,
               losses: res.data.rankInfo[index].losses,
+              summonerName: res.data.rankInfo[index].summonerName,
             };
           }
         }

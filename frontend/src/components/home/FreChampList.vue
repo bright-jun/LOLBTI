@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card class="mx-auto"  height="450">
     <v-card-text>선호챔피언</v-card-text>
     <v-list>
       <v-list-item v-for="item in items" :key="item.title">
@@ -48,9 +48,9 @@ export default {
     UserApi.requestFreqChampList(
       this.$route.params.summonername,
       (res) => {
-        console.log(res.data);
+        // console.log(res.data);
         for (var index = 0; index < res.data.freqChampAvartar.length; index++) {
-          console.log(res.data.freqChampAvartar[index]);
+          // console.log(res.data.freqChampAvartar[index]);
           this.items.push({
             champion: self.$store.getters.getChampNameByNo(
               res.data.freqChampAvartar[index]
