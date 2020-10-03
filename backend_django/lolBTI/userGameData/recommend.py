@@ -23,7 +23,7 @@ def dump_pkl(data, path, file):
     print("{} dumped by recommend".format(file))
     return pd.to_pickle(data, os.path.join(path, file))
 
-sohwan_mastery = pd.read_pickle("./userGameData/sohwan_mastery.pkl")
+sohwan_mastery = pd.read_pickle(os.path.join(("./userGameData/dummy33.pkl")))
 print(len(sohwan_mastery))
 
 
