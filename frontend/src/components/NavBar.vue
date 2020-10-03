@@ -2,13 +2,13 @@
   <nav>
     <v-toolbar flat app class="maincolor">
       <v-toolbar-title class="grey--text">
-
         <v-img
           class="mt-2 mb-2"
           src="../assets/images/lolbti_logo_2.png"
           height="55"
           width="100"
           @click="$router.push('/').catch(() => {})"
+          style="cursor: pointer"
         />
       </v-toolbar-title>
 
@@ -26,20 +26,29 @@
         ></v-text-field>
       </v-form>
 
-      <v-btn v-if="!isLog" flat class="btncolor mr-4" @click="$router.push('/login').catch(() => {})">
+      <v-btn
+        v-if="!isLog"
+        flat
+        class="btncolor mr-4"
+        @click="$router.push('/login').catch(() => {})"
+      >
         <span>로그인</span>
         <v-icon right>login</v-icon>
       </v-btn>
-      
-      <v-btn v-if="!isLog" flat class="btncolor" @click="$router.push('/join').catch(() => {})">
+
+      <v-btn
+        v-if="!isLog"
+        flat
+        class="btncolor"
+        @click="$router.push('/join').catch(() => {})"
+      >
         <span>회원가입</span>
       </v-btn>
 
       <v-btn v-if="isLog" flat class="btncolor" @click="logout()">
-        <span>{{userName}}로그아웃</span>
+        <span>{{ userName }} 로그아웃</span>
       </v-btn>
     </v-toolbar>
-
   </nav>
 </template>
 
@@ -56,9 +65,9 @@ export default {
   },
   props: ["viewType"],
   created() {
-    if(this.$session.get('userinfo')){
-      this.isLog = true
-      this.userName = this.$session.get('userinfo')['summonerName']
+    if (this.$session.get("userinfo")) {
+      this.isLog = true;
+      this.userName = this.$session.get("userinfo")["summonerName"];
     }
   },
   methods: {
@@ -73,11 +82,11 @@ export default {
         .push("/home/" + this.$store.state.summoner.name)
         .catch(() => {});
     },
-    logout(){
-            this.$session.remove("userinfo")
-            this.$store.dispatch("logout")
-            this.$router.push('/').catch(()=>{});
-    }, 
+    logout() {
+      this.$session.remove("userinfo");
+      this.$store.dispatch("logout");
+      this.$router.push("/").catch(() => {});
+    },
   },
 };
 </script>

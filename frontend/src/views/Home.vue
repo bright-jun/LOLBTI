@@ -75,7 +75,7 @@ export default {
     UserApi.requestUserGameInfo(
       this.$route.params.summonername,
       (res) => {
-        // console.log(res.data);
+        console.log(res.data);
         for (var index = 0; index < res.data.rankInfo.length; index++) {
           if (res.data.rankInfo[index].queueType == "RANKED_SOLO_5x5") {
             this.gameInfo = res.data.rankInfo[index];
@@ -98,11 +98,54 @@ export default {
     );
   },
   methods: {
+    timeForToday(value) {
+      const today = new Date();
+      const timeValue = new Date(value);
+
+      const betweenTime = Math.floor(
+        (today.getTime() - timeValue.getTime()) / 1000 / 60
+      );
+      if (betweenTime < 1) return "방금전";
+      if (betweenTime < 60) {
+        return `${betweenTime}분전`;
+      }
+
+      const betweenTimeHour = Math.floor(betweenTime / 60);
+      if (betweenTimeHour < 24) {
+        return `${betweenTimeHour}시간전`;
+      }
+
+      const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+      if (betweenTimeDay < 365) {
+        return `${betweenTimeDay}일전`;
+      }
+
+      return `${Math.floor(betweenTimeDay / 365)}년전`;
+    },
+
     getRecentMatch(res) {
       var self = this;
-      // console.log(res);
+      console.log(res);
       for (var index = 0; index < res.length; index++) {
         // console.log(res[index].champion);
+        var date = this.timeForToday(res[index].timestamp);
+        var lane = res[index].lane;
+        if (lane == "NONE") {
+          lane = "서폿";
+        }
+        if (lane == "BOTTOM") {
+          lane = "봇";
+        }
+        if (lane == "TOP") {
+          lane = "탑";
+        }
+        if (lane == "MID") {
+          lane = "미드";
+        }
+        if (lane == "JUNGLE") {
+          lane = "정글";
+        }
+        // console.log(date);
         this.items.push({
           champion: self.$store.getters.getChampNameByNo(
             String(res[index].champion)
@@ -111,8 +154,9 @@ export default {
             "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
             self.$store.getters.getChampIdByNo(String(res[index].champion)) +
             ".png",
-          role: res[index].role,
-          lane: res[index].lane,
+          // role: res[index].role,
+          lane: lane,
+          time: date,
         });
         if (index != res.length - 1) {
           this.items.push({
