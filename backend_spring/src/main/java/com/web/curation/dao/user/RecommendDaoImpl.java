@@ -76,6 +76,26 @@ public class RecommendDaoImpl implements RecommendDao {
 
         return result.toString();
     }
+
+    @Override
+    public String recommendItem(String myChamp, String opponentChamp) throws IOException {
+        String request = "/userGameData/recommend/item/" + myChamp + "/" + opponentChamp;
+        String requestUrl = root + request;
+        URL url = new URL(requestUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+        String returnLine;
+        StringBuffer result = new StringBuffer();
+        while ((returnLine = br.readLine()) != null) {
+            result.append(returnLine + "\n");
+        }
+        conn.disconnect();
+
+        return result.toString();
+    }
     
     
 }
