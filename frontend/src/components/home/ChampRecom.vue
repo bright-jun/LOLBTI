@@ -23,8 +23,12 @@
           <v-row>
             <v-col cols="1">
               <template v-for="(ava, index) in worstimgSrcArr">
-                <v-img :src="ava.worstAvatar" :key="index"></v-img>
-                <br :key="index" />
+                <v-img
+                  :src="ava.worstAvatar"
+                  :key="index"
+                  class="mt-6 ml-2"
+                ></v-img>
+                <!-- <br :key="index" /> -->
               </template>
             </v-col>
             <v-col cols="5">
@@ -35,8 +39,12 @@
             </v-col>
             <v-col cols="1">
               <template v-for="(ava, index) in bestimgSrcArr">
-                <v-img :src="ava.bestAvatar" :key="index"></v-img>
-                <br :key="index" />
+                <v-img
+                  :src="ava.bestAvatar"
+                  :key="index"
+                  class="mt-6 mr-2"
+                ></v-img>
+                <!-- <br :key="index" /> -->
               </template>
             </v-col>
           </v-row>
@@ -119,8 +127,8 @@ export default {
             });
           }
         }
-        console.log(this.worstimgSrcArr);
-        console.log(this.bestimgSrcArr);
+        // console.log(this.worstimgSrcArr);
+        // console.log(this.bestimgSrcArr);
         this.gogo(this.items);
       },
       (error) => {}
