@@ -33,7 +33,7 @@ def load_freq_champ(sohwan):
 
     if(setting.updated):
         sohwan_mastery = read_pkl("./userGameData", "dummy.pkl")
-    return sohwan_mastery.loc[sohwan].sort_values(axis=0,ascending=False)[:4]
+    return sohwan_mastery.loc[sohwan].sort_values(axis=0,ascending=False)[:5]
 
 from numpy import dot
 from numpy.linalg import norm

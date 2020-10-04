@@ -3,11 +3,10 @@
     <v-container>
       <v-row class="mb-3">
         <div class="ml-3">MBTI 유형</div>
-        
       </v-row>
       <v-row>
         <v-card-text>
-          <p class="text-sm-center text-md-center text-sm-h3 text-md-h2">
+          <p class="text-center text-h2">
             {{ mtype }}
           </p>
         </v-card-text>
@@ -19,11 +18,8 @@
 <script>
 import UserApi from "../../api/UserApi.js";
 
-
 export default {
-  components: {
-    
-  },
+  components: {},
   data() {
     return {
       mtype: "",
@@ -50,5 +46,4 @@ export default {
 };
 </script>
 
-<style lang="">
-</style>
+<style lang=""></style>
