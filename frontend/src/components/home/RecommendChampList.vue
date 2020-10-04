@@ -6,11 +6,11 @@ export default {
     gogo(items) {
       var datacollection = {
         labels: [
-          items[1]["worstChampion"],
-          items[3]["worstChampion"],
-          items[5]["worstChampion"],
-          items[7]["worstChampion"],
-          items[9]["worstChampion"],
+          // items[1]["worstChampion"],
+          // items[3]["worstChampion"],
+          // items[5]["worstChampion"],
+          // items[7]["worstChampion"],
+          // items[9]["worstChampion"],
         ],
         datasets: [
           {
@@ -20,15 +20,19 @@ export default {
             borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1,
             data: [
-              Math.round(items[1]["worstPoint"] * 10) - 100,
-              Math.round(items[3]["worstPoint"] * 10) - 100,
-              Math.round(items[5]["worstPoint"] * 10) - 100,
-              Math.round(items[7]["worstPoint"] * 10) - 100,
-              Math.round(items[9]["worstPoint"] * 10) - 100,
+              // Math.round(items[1]["worstPoint"] * 10) - 100,
+              // Math.round(items[3]["worstPoint"] * 10) - 100,
+              // Math.round(items[5]["worstPoint"] * 10) - 100,
+              // Math.round(items[7]["worstPoint"] * 10) - 100,
+              // Math.round(items[9]["worstPoint"] * 10) - 100,
             ],
           },
         ],
       };
+      datacollection.labels = items.worstChampion;
+      datacollection.datasets[0].data = items.worstPoint;
+      // console.log(datacollection.labels);
+      // console.log(datacollection.datasets[0].data);
       var options = {
         scales: {
           yAxes: [
@@ -50,8 +54,8 @@ export default {
                 offsetGridLines: false,
               },
               ticks: {
-                min: Math.ceil(10 - items[1]["worstPoint"]) * -10,
-                max: Math.floor(10 - items[9]["worstPoint"]) * -10,
+                // min: Math.ceil(10 - items[1]["worstPoint"]) * -10,
+                // max: Math.floor(10 - items[9]["worstPoint"]) * -10,
               },
             },
           ],

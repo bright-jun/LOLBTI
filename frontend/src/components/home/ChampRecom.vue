@@ -75,7 +75,13 @@ export default {
       type: 0,
       bestimgSrcArr: [],
       worstimgSrcArr: [],
-      items: [{ header: "숙련도 기반 챔프 추천" }],
+      // items: [{ header: "숙련도 기반 챔프 추천" }],
+      items: {
+        bestChampion: [],
+        bestPoint: [],
+        worstChampion: [],
+        worstPoint: [],
+      },
     };
   },
   methods: {
@@ -108,27 +114,40 @@ export default {
             ".png";
           this.bestimgSrcArr.push({ bestAvatar });
           this.worstimgSrcArr.push({ worstAvatar });
-          this.items.push({
-            bestChampion: self.$store.getters.getChampNameByNo(
+          this.items.bestChampion.push(
+            self.$store.getters.getChampNameByNo(
               String(res.data.bestChampList[index])
-            ),
-            bestAvatar: bestAvatar,
-            bestPoint: bestPoint,
-            worstChampion: self.$store.getters.getChampNameByNo(
+            )
+          );
+          this.items.bestPoint.push(bestPoint);
+          this.items.worstChampion.push(
+            self.$store.getters.getChampNameByNo(
               String(res.data.worstChampList[index])
-            ),
-            worstAvatar: worstAvatar,
-            worstPoint: worstPoint,
-          });
-          if (index != res.length - 1) {
-            this.items.push({
-              divider: true,
-              inset: true,
-            });
-          }
+            )
+          );
+          this.items.worstPoint.push(Math.round(worstPoint * 10 - 100));
+          // this.items.push({
+          //   bestChampion: self.$store.getters.getChampNameByNo(
+          //     String(res.data.bestChampList[index])
+          //   ),
+          //   bestAvatar: bestAvatar,
+          //   bestPoint: bestPoint,
+          //   worstChampion: self.$store.getters.getChampNameByNo(
+          //     String(res.data.worstChampList[index])
+          //   ),
+          //   worstAvatar: worstAvatar,
+          //   worstPoint: worstPoint,
+          // });
+          // if (index != res.length - 1) {
+          //   this.items.push({
+          //     divider: true,
+          //     inset: true,
+          //   });
+          // }
         }
         // console.log(this.worstimgSrcArr);
         // console.log(this.bestimgSrcArr);
+        // console.log(this.items);
         this.gogo(this.items);
       },
       (error) => {}

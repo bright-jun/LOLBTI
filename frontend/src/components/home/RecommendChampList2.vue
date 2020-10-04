@@ -6,11 +6,11 @@ export default {
     gogo(items) {
       var datacollection = {
         labels: [
-          items[1]["bestChampion"],
-          items[3]["bestChampion"],
-          items[5]["bestChampion"],
-          items[7]["bestChampion"],
-          items[9]["bestChampion"],
+          // items[1]["bestChampion"],
+          // items[3]["bestChampion"],
+          // items[5]["bestChampion"],
+          // items[7]["bestChampion"],
+          // items[9]["bestChampion"],
         ],
         datasets: [
           {
@@ -20,15 +20,20 @@ export default {
             borderColor: "rgba(54, 162, 235, 1)",
             borderWidth: 1,
             data: [
-              Math.round(items[1]["bestPoint"] * 10),
-              Math.round(items[3]["bestPoint"] * 10),
-              Math.round(items[5]["bestPoint"] * 10),
-              Math.round(items[7]["bestPoint"] * 10),
-              Math.round(items[9]["bestPoint"] * 10),
+              // Math.round(items[1]["bestPoint"] * 10),
+              // Math.round(items[3]["bestPoint"] * 10),
+              // Math.round(items[5]["bestPoint"] * 10),
+              // Math.round(items[7]["bestPoint"] * 10),
+              // Math.round(items[9]["bestPoint"] * 10),
             ],
           },
         ],
       };
+      datacollection.labels = items.bestChampion;
+      datacollection.datasets[0].data = items.bestPoint;
+      // console.log("찍히나");
+      // console.log(datacollection.labels);
+      // console.log(datacollection.datasets[0].data);
       var options = {
         scales: {
           yAxes: [
@@ -51,8 +56,8 @@ export default {
                 offsetGridLines: false,
               },
               ticks: {
-                min: Math.floor((items[9]["bestPoint"] * 10) / 10) * 10,
-                max: Math.ceil((items[1]["bestPoint"] * 10) / 10) * 10,
+                // min: Math.floor((items[9]["bestPoint"] * 10) / 10) * 10,
+                // max: Math.ceil((items[1]["bestPoint"] * 10) / 10) * 10,
               },
             },
           ],
