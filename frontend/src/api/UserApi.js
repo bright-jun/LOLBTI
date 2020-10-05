@@ -1,9 +1,9 @@
 import store from "../vuex/store";
 
 const axios = require("axios");
-const hostname = "localhost:8080/api";
-// const hostname = "j3a109.p.ssafy.io/api";
-const BASE_URL = "http://" + hostname;
+// const hostname = "localhost:8080/api";
+const hostname = "j3a109.p.ssafy.io/api";
+const BASE_URL = "https://" + hostname;
 
 const requestLogin = (data, callback, errorCallback) => {
   axios({
@@ -216,7 +216,7 @@ const updateUserInfo = (summonerName, email, mbti, callback, errorCallback) => {
     });
 };
 
-const requestItemRecom = (data , callback, errorCallback) => {
+const requestItemRecom = (data, callback, errorCallback) => {
   axios({
     method: "get",
     url: BASE_URL + "/recommend/item",
@@ -264,7 +264,7 @@ const UserApi = {
   updateUserInfo: (summonerName, email, mbti, callback, errorCallback) =>
     updateUserInfo(summonerName, email, mbti, callback, errorCallback),
 
-    requestItemRecom: (data, callback, errorCallback) =>
+  requestItemRecom: (data, callback, errorCallback) =>
     requestItemRecom(data, callback, errorCallback),
 };
 

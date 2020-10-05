@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRankDaoImpl implements UserRankDao {
-     static String root = "http://localhost:8081";
-//    static String root = "http://j3a109.p.ssafy.io:8081";
+//     static String root = "http://localhost:8081";
+    static String root = "http://j3a109.p.ssafy.io:8081";
 
     @Override
     public String userRank(String summonerName) throws IOException {
