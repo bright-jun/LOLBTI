@@ -21,7 +21,7 @@
       <v-col md="12">
         <v-card style="display: flex">
           <v-row>
-            <v-col cols="1">
+            <v-col md="1">
               <template v-for="(ava, index) in worstimgSrcArr">
                 <v-img
                   :src="ava.worstAvatar"
@@ -31,13 +31,13 @@
                 <!-- <br :key="index" /> -->
               </template>
             </v-col>
-            <v-col cols="5">
+            <v-col md="5">
               <recommend-champ-list ref="list1" />
             </v-col>
-            <v-col cols="5">
+            <v-col md="5">
               <recommend-champ-list2 ref="list2" />
             </v-col>
-            <v-col cols="1">
+            <v-col md="1">
               <template v-for="(ava, index) in bestimgSrcArr">
                 <v-img
                   :src="ava.bestAvatar"
