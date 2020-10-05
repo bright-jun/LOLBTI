@@ -30,7 +30,7 @@ def dump_pkl(data, path, file):
     pd.to_pickle(data, os.path.join(path, file))
 
 champ_dict = read_pkl("./userGameData","champ_dict.pkl")
-sohwan_mastery = read_pkl("../pkl_file","dummy.pkl")
+sohwan_mastery = read_pkl("./userGameData","dummy.pkl")
 
 def mastery_info(sohwan_r, key_idx):
     # 소환사 챔피언 숙련도 정보 수집
