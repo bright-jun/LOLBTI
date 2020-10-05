@@ -39,7 +39,6 @@ print(len(mbti_mastery))
 
 def recommend_champ_by_mbti(mbti,ascending):
     global mbti_mastery
-    create_mbti_mastery()
 
     if(setting.updated):
         mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")
