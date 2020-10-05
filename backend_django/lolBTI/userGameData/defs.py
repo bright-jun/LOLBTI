@@ -85,9 +85,15 @@ def freq_lane_info(sohwan):
     temp = sohwan_info_lane(sohwan)
     temp = temp['matches']
     temp = pd.DataFrame(temp)
-    temp = temp.groupby('lane').count()['role']
-    temp = temp.rename(index={"NONE":"서폿","BOTTOM":"바텀","JUNGLE":"정글","MID":"미드","TOP":"탑"}) 
-    return temp
+    tempA = temp.groupby(['lane','role']).count()
+    tempB = temp.groupby('lane').count()
+    onedil = tempA.loc['BOTTOM','DUO_CARRY'].platformId
+    support = tempA.loc['BOTTOM','DUO_SUPPORT'].platformId
+    tempB.platformId.loc['NONE'] = support
+    tempB.platformId.loc['BOTTOM'] = onedil
+    # temp = temp.groupby('lane').count()['role']
+    tempB = tempB.rename(index={"NONE":"서폿","BOTTOM":"바텀","JUNGLE":"정글","MID":"미드","TOP":"탑"}) 
+    return tempB.platformId
 
 def getRequests(root,key_idx):
   api_key = getApiKey(key_idx)
