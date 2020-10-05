@@ -23,7 +23,7 @@ def dump_pkl(data, path, file):
     print("{} dumped by recommend".format(file))
     pd.to_pickle(data, os.path.join(path, file))
 
-sohwan_mastery = pd.read_pickle(os.path.join(("./userGameData/dummy.pkl")))
+sohwan_mastery = read_pkl("../pkl_file", "dummy.pkl")
 print(type(sohwan_mastery))
 print(len(sohwan_mastery))
 
@@ -32,7 +32,7 @@ def load_freq_champ(sohwan):
     global sohwan_mastery
 
     if(setting.updated):
-        sohwan_mastery = read_pkl("./userGameData", "dummy.pkl")
+        sohwan_mastery = read_pkl("../pkl_file", "dummy.pkl")
     return sohwan_mastery.loc[sohwan].sort_values(axis=0,ascending=False)[:5]
 
 from numpy import dot
@@ -54,7 +54,7 @@ def recommend_champ_by_mastery(sohwan, ascending, n=5, k=10,threshold=0, include
     global sohwan_mastery
 
     if(setting.updated):
-        sohwan_mastery = read_pkl("./userGameData", "dummy.pkl")
+        sohwan_mastery = read_pkl("../pkl_file", "dummy.pkl")
 
     # 유사도 상위 k개의 유저 리스트
     top_k_sohwan_info = sim_sohwan(sohwan).T[1:].sort_values(by=[sohwan],ascending=False)[:k]
