@@ -50,9 +50,21 @@
     </v-row>    
     <v-row>
       <v-col cols="12">
-        <v-card class="text-center" height='200px' style="padding: 10px;">
-          <p class="my-6" style="fontSize: 30px;">추천 아이템</p>
+        <v-card class="text-center" height='500px' style="padding: 10px;">
           
+          <p class="my-6" style="fontSize: 30px;">추천 아이템</p>
+          <p v-if="!itemList" class="my-6" style="fontSize: 20px;"> 매치 데이터가 존재하지 않습니다.</p>
+          <div v-else>
+            <v-row class="mx-3">
+              <v-col v-for="index in itemList.length" :key="index" class="d-flex child-flex" cols="2" style="padding: 15px;">
+                <div>
+                  <p style="fontSize: 15px;">{{index}}순위 ({{itemValue[index-1]}}%)</p>
+                  <v-img :src="`http://ddragon.leagueoflegends.com/cdn/10.20.1/img/item/${itemList[index-1]}.png`" aspect-ratio="1" class="grey lighten-2"></v-img>
+                  <p style="fontSize: 10px;">{{itemName[index-1]}}</p>
+                </div>
+              </v-col>
+            </v-row>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -60,6 +72,8 @@
 </template>
 
 <script>
+import UserApi from "../../api/UserApi";
+
 export default {
   components: {},
   data() {
@@ -71,6 +85,9 @@ export default {
       vsChampName : "",
       myChamp : {id : "", key : "", name: ""},
       vsChamp : {id : "", key : "", name: ""},
+      itemList : [],
+      itemValue : [],
+      itemName : [],
     };
   },
   created() {
@@ -101,6 +118,25 @@ export default {
       this.myChamp.name = this.myChampName
       this.myChamp.id = this.$store.getters.getChampIdByName(this.myChampName);
       this.myChamp.key = this.$store.getters.getChampKeyByName(this.myChampName);
+      if(this.myChamp.key && this.vsChamp.key){
+        let myChampKey = this.myChamp.key
+        let vsChampKey = this.vsChamp.key;
+        let data = {
+          myChampKey,
+          vsChampKey,
+        };
+        UserApi.requestItemRecom(
+          data,
+          (res) => {
+            this.itemList = res.data.key
+            this.itemValue = res.data.value
+            for(var i=0; i < this.itemList.length; i++){
+              this.itemName.push(this.$store.state.gameitems[this.itemList[i]])
+            }
+          },
+          (error) => {}
+        );
+      }
     },
     vsChampName: function() {
       this.vsChamp.name = this.vsChampName

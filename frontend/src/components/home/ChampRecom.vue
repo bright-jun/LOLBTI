@@ -99,7 +99,7 @@ export default {
         var self = this;
         for (var index = 0; index < res.data.bestChampList.length; index++) {
           var bestPoint = (res.data.bestPointList[index] * 100).toFixed(2);
-          var worstPoint = (res.data.worstPointList[index] * 1000).toFixed(2);
+          var worstPoint = (res.data.worstPointList[index] * 100).toFixed(2);
           var bestAvatar =
             "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
             self.$store.getters.getChampIdByNo(
@@ -119,13 +119,14 @@ export default {
               String(res.data.bestChampList[index])
             )
           );
-          this.items.bestPoint.push(bestPoint);
+          this.items.bestPoint.push(Math.round(bestPoint));
           this.items.worstChampion.push(
             self.$store.getters.getChampNameByNo(
               String(res.data.worstChampList[index])
             )
           );
           this.items.worstPoint.push(Math.round(worstPoint * 10 - 100));
+          //Math.round(worstPoint * 10 - 100)
           // this.items.push({
           //   bestChampion: self.$store.getters.getChampNameByNo(
           //     String(res.data.bestChampList[index])
