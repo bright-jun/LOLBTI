@@ -29,7 +29,7 @@
             <v-img :src="items[7].worstAvatar"></v-img>
             <v-img :src="items[9].worstAvatar"></v-img> -->
           </div>
-          <div style="width: 80%; display: flex">
+          <div style="width: 80%; display: flex;">
             <recommend-champ-list ref="list1" />
             <recommend-champ-list2 ref="list2" />
           </div>

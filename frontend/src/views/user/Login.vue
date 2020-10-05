@@ -5,7 +5,7 @@
       <v-img class="white--text align-end" width="600" height="300" src="../../assets/images/lolbti_logo_2.png"></v-img>
 
       <v-card class="mx-auto my-5" max-width="500">
-        <v-card-text class="display-1 text--primary">Member Login</v-card-text>
+        <v-card-text class="text--primary" style="">로그인</v-card-text>
         <div class="px-10">
           <v-text-field class="mt-10" v-model="email" label="이메일" outlined hide-details></v-text-field>
           <div align="left" class="error-text" v-if="error.email">
