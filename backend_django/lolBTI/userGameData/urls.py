@@ -10,7 +10,7 @@ urlpatterns = [
     path('update/mastery/<str:summonerName>', views.updateMastery),
     path('recommend/mastery/freqchamp/<str:summonerName>',views.showFreqChamp),
     path('recommend/freqlane/<str:summonerName>',views.showFreqLane),
-    path('recommend/item/<str:myChamp>/<str:opponentChamp>',views.recommendItem)
-    path('recommend/mbtitomastery/<str:mbti>',views.recommendByMbti)
-    path('recommend/masterytombti/<str:sohwan>',views.recommendByMastery)
+    path('recommend/item/<str:myChamp>/<str:opponentChamp>',views.recommendItem),
+    path('recommend/mbtitomastery/<str:mbti>',views.recommendByMbti),
+    path('recommend/masterytombti/<str:sohwan>',views.recommendByMastery),
 ]
