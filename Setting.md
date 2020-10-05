@@ -212,6 +212,8 @@
 		- `pgrep -f gunicorn`로 gunicorn 포트번호 확인
 		- `sudo kill -9 포트번호`
 		- `screen -ls`
+		- `screen -X -S 포트번호 quit`
+
 
 		
 
@@ -317,7 +319,14 @@
 				`Maven Version: mvn 3.6.3`  
 				`Goals: clean package`
 				- invoke top-Level Maven targets > 고급  
-				- `POM:backend_spring/pom.xml`(해당 pom 위치는 다를 수 있음)  
+				- `POM:backend_spring/pom.xml`(해당 pom 위치는 다를 수 있음)
+
+			- Backend Build (Django 백엔드 배포)
+				- send build artifacts over SSH 항목 추가    
+				Permisson denied 문제 해결을 위해 폴더를 옮긴다  
+				`Source files: backend_django/lolBTI/`  
+				`Remote directory: dist/server_django`
+			  
 	- 빌드 후 조치하기  
 		✍️ 빌드하고 나서 실행할 명령어를 설정  
 		SSH로 AWS EC2에 접근해서 빌드된 파일을 지정한 곳으로 이동하고 배포
@@ -330,6 +339,18 @@
 			Remote directory: 배포할 파일이 저장될 디렉토리를 지정 (없으면 새로 생성 X, 미리 만들기)
 			- `Exec command: sudo pm2 restart /home/ubuntu/dist/server/app.json`  
 			Exec command : 배포 후 실행 할 명령어를 입력 (pm2 실행)
+
+- https 자동설정  
+	✅ 참고 사이트: https://certbot.eff.org/  
+	- certbot instructions > My HTTP website is running `Nginx on Ubuntu 16.04 (xenial)`  
+	```
+	sudo snap install core; sudo snap refresh core
+	sudo snap install --classic certbot
+	sudo ln -s /snap/bin/certbot /usr/bin/certbot
+	sudo certbot --nginx
+	```
+	
+	이메일 입력 후, 설정 완료하면 https를 사용할 수 있다(Base Url 유의)  
 	
 
 

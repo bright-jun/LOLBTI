@@ -10,26 +10,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRankDaoImpl implements UserRankDao {
-<<<<<<< HEAD
     static String root = "http://localhost:8081";
-    // static String root = "http://j3a109.p.ssafy.io:8081";
-=======
-//    static String root = "http://localhost:8081";
-    static String root = "http://j3a109.p.ssafy.io:8081";
->>>>>>> bf605a7ef42c400d84165c9cfc555ae2c9e76ffd
+//    static String root = "http://j3a109.p.ssafy.io:8081";
 
     @Override
     public String userRank(String summonerName) throws IOException {
         String request = "/userGameData/userinfo/";
-<<<<<<< HEAD
-        String requestUrl = root + request + summonerName;
-        URL url = new URL(requestUrl);
-=======
         String requestUrl = root + request;
         // String summon= URLEncoder.encode(summonerName, "UTF-8");
         // URL url = new URL(requestUrl+summon);
         URL url = new URL(requestUrl+summonerName);
->>>>>>> bf605a7ef42c400d84165c9cfc555ae2c9e76ffd
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
