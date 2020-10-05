@@ -35,7 +35,7 @@
           <v-card-text>
             <ChampRecom v-if="i === '챔프추천'" />
             <MbtiRecom v-if="i === 'MBTI추천'" />
-            <DuoRecom v-if="i === '아이템추천'" />
+            <ItemRecom v-if="i === '아이템추천'" />
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import DuoRecom from "../../components/home/DuoRecom.vue";
+import ItemRecom from "../../components/home/ItemRecom.vue";
 import ChampRecom from "../../components/home/ChampRecom.vue";
 import MbtiRecom from "../../components/home/MbtiRecom";
 import UserInfoDialog from "../home/userInfoDialog.vue";
@@ -52,7 +52,7 @@ import UserApi from "../../api/UserApi.js";
 
 export default {
   components: {
-    DuoRecom,
+    ItemRecom,
     ChampRecom,
     MbtiRecom,
     UserInfoDialog,
@@ -92,6 +92,9 @@ export default {
           alert("갱신 실패");
         }
       );
+      // this.$router.push({
+      //   path: "/home/" + this.$route.params.summonername,
+      // });
     },
   },
 };

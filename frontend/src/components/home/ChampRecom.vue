@@ -19,24 +19,37 @@
     </v-row>
     <v-row>
       <v-col md="12">
-        <v-card style="display: flex;">
-          <div style="width: 10%;">
-            <!-- qq qqqqqqqqqqq -->
-            <!-- <img :src="items[1].worstAvatar" width="80px"> -->
-            <!-- <v-img :src="items[1].worstAvatar"></v-img>
-            <v-img :src="items[3].worstAvatar"></v-img>
-            <v-img :src="items[5].worstAvatar"></v-img>
-            <v-img :src="items[7].worstAvatar"></v-img>
-            <v-img :src="items[9].worstAvatar"></v-img> -->
-          </div>
-          <div style="width: 80%; display: flex;">
-            <recommend-champ-list ref="list1"/>
-            <recommend-champ-list2 ref="list2"/>
-          </div>
-
+        <v-card style="display: flex">
+          <v-row>
+            <v-col cols="1">
+              <template v-for="(ava, index) in worstimgSrcArr">
+                <v-img
+                  :src="ava.worstAvatar"
+                  :key="index"
+                  class="mt-6 ml-2"
+                ></v-img>
+                <!-- <br :key="index" /> -->
+              </template>
+            </v-col>
+            <v-col cols="5">
+              <recommend-champ-list ref="list1" />
+            </v-col>
+            <v-col cols="5">
+              <recommend-champ-list2 ref="list2" />
+            </v-col>
+            <v-col cols="1">
+              <template v-for="(ava, index) in bestimgSrcArr">
+                <v-img
+                  :src="ava.bestAvatar"
+                  :key="index"
+                  class="mt-6 mr-2"
+                ></v-img>
+                <!-- <br :key="index" /> -->
+              </template>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
-
     </v-row>
   </div>
 </template>
@@ -60,14 +73,22 @@ export default {
   data() {
     return {
       type: 0,
-      items: [{ header: "숙련도 기반 챔프 추천" }],
+      bestimgSrcArr: [],
+      worstimgSrcArr: [],
+      // items: [{ header: "숙련도 기반 챔프 추천" }],
+      items: {
+        bestChampion: [],
+        bestPoint: [],
+        worstChampion: [],
+        worstPoint: [],
+      },
     };
   },
-  methods:{
-    gogo(items){
+  methods: {
+    gogo(items) {
       this.$refs.list1.gogo(items);
       this.$refs.list2.gogo(items);
-    }
+    },
   },
 
   created() {
@@ -79,35 +100,54 @@ export default {
         for (var index = 0; index < res.data.bestChampList.length; index++) {
           var bestPoint = (res.data.bestPointList[index] * 100).toFixed(2);
           var worstPoint = (res.data.worstPointList[index] * 1000).toFixed(2);
-          this.items.push({
-            bestChampion: self.$store.getters.getChampNameByNo(
+          var bestAvatar =
+            "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
+            self.$store.getters.getChampIdByNo(
               String(res.data.bestChampList[index])
-            ),
-            bestAvatar:
-              "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
-              self.$store.getters.getChampIdByNo(
-                String(res.data.bestChampList[index])
-              ) +
-              ".png",
-            bestPoint: bestPoint,
-            worstChampion: self.$store.getters.getChampNameByNo(
+            ) +
+            ".png";
+          var worstAvatar =
+            "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
+            self.$store.getters.getChampIdByNo(
               String(res.data.worstChampList[index])
-            ),
-            worstAvatar:
-              "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
-              self.$store.getters.getChampIdByNo(
-                String(res.data.worstChampList[index])
-              ) +
-              ".png",
-            worstPoint: worstPoint,
-          });
-          if (index != res.length - 1) {
-            this.items.push({
-              divider: true,
-              inset: true,
-            });
-          }
+            ) +
+            ".png";
+          this.bestimgSrcArr.push({ bestAvatar });
+          this.worstimgSrcArr.push({ worstAvatar });
+          this.items.bestChampion.push(
+            self.$store.getters.getChampNameByNo(
+              String(res.data.bestChampList[index])
+            )
+          );
+          this.items.bestPoint.push(bestPoint);
+          this.items.worstChampion.push(
+            self.$store.getters.getChampNameByNo(
+              String(res.data.worstChampList[index])
+            )
+          );
+          this.items.worstPoint.push(Math.round(worstPoint * 10 - 100));
+          // this.items.push({
+          //   bestChampion: self.$store.getters.getChampNameByNo(
+          //     String(res.data.bestChampList[index])
+          //   ),
+          //   bestAvatar: bestAvatar,
+          //   bestPoint: bestPoint,
+          //   worstChampion: self.$store.getters.getChampNameByNo(
+          //     String(res.data.worstChampList[index])
+          //   ),
+          //   worstAvatar: worstAvatar,
+          //   worstPoint: worstPoint,
+          // });
+          // if (index != res.length - 1) {
+          //   this.items.push({
+          //     divider: true,
+          //     inset: true,
+          //   });
+          // }
         }
+        // console.log(this.worstimgSrcArr);
+        // console.log(this.bestimgSrcArr);
+        // console.log(this.items);
         this.gogo(this.items);
       },
       (error) => {}

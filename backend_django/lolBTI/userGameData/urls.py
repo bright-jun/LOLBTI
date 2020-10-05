@@ -9,5 +9,6 @@ urlpatterns = [
     path('recommend/mastery/<str:summonerName>', views.recommendByMastery),
     path('update/mastery/<str:summonerName>', views.updateMastery),
     path('recommend/mastery/freqchamp/<str:summonerName>',views.showFreqChamp),
-    path('recommend/freqlane/<str:summonerName>',views.showFreqLane)
+    path('recommend/freqlane/<str:summonerName>',views.showFreqLane),
+    path('recommend/item/<str:myChamp>/<str:opponentChamp>',views.recommendItem)
 ]

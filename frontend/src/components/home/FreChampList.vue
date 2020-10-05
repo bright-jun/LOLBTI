@@ -1,17 +1,21 @@
 <template>
-  <v-card class="mx-auto"  height="450">
+  <v-card class="mx-auto" height="450">
     <v-card-text>선호챔피언</v-card-text>
     <v-list>
-      <v-list-item v-for="item in items" :key="item.title">
-        <v-list-item-avatar>
+      <v-list-item v-for="(item, index) in items" :key="item.title">
+        <v-list-item-avatar size="40">
           <v-img :src="item.avatar"></v-img>
         </v-list-item-avatar>
-
+        <!-- <v-spacer></v-spacer> -->
         <v-list-item-content>
-          <v-list-item-title
-            >{{ item.champion }} {{ item.freq }}</v-list-item-title
-          >
+          <v-list-item-title>
+            {{ item.champion }}
+          </v-list-item-title>
+          <v-list-item-title>
+            {{ item.freq }}
+          </v-list-item-title>
         </v-list-item-content>
+        <v-list-item-content> {{ index + 1 }}위 </v-list-item-content>
       </v-list-item>
     </v-list>
   </v-card>

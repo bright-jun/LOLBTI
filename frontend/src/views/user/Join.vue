@@ -38,9 +38,33 @@
 
           <v-text-field class="mt-10" v-model="userId" label="소환사명" outlined hide-details></v-text-field>
 
-          <v-text-field class="mt-5" v-model="userMbti" label="소환사 MBTI" outlined hide-details></v-text-field>
+          <v-autocomplete class="mt-10" v-model="userMbti" outlined hide_details
+                  :items="[
+                    'ENFJ',
+                    'ENFP',
+                    'ENTJ',
+                    'ENTP',
+                    'ESFJ',
+                    'ESFP',
+                    'ESTJ',
+                    'ESTP',
+                    'INFJ',
+                    'INFP',
+                    'INTJ',
+                    'INTP',
+                    'ISFJ',
+                    'ISFP',
+                    'ISTJ',
+                    'ISTP',
+                  ]"
+                  label="MBTI 유형"
+                ></v-autocomplete>
+                <a
+                href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC"
+                target="_blank"
+                >무료 MBTI 검사</a>
 
-          <v-btn class="my-10" block color="orange" @click="onJoin">Join</v-btn>
+          <v-btn class="my-10" block color="btncolor" @click="onJoin">Join</v-btn>
           <v-divider></v-divider>
         </div>
       </v-card>
@@ -116,6 +140,7 @@ export default {
         UserApi.requestJoin(
           data,
           (res) => {
+            this.$router.push({path : "/"});
           },
           (error) => {
           }
