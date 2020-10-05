@@ -24,6 +24,7 @@ def dump_pkl(data, path, file):
     pd.to_pickle(data, os.path.join(path, file))
 
 sohwan_mastery = read_pkl("../pkl_file", "dummy.pkl")
+
 mbti = pd.read_excel(os.path.join("../pkl_file", "lolBTI설문_전처리.xlsx"), # write your directory here
                             sheet_name = 'Sheet1', 
                             header = 0)
