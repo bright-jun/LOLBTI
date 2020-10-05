@@ -25,23 +25,16 @@ def dump_pkl(data, path, file):
 
 def create_mbti_mastery():
     sohwan_mastery = read_pkl("../pkl_file", "sohwan_mastery.pkl")
-    mbti = df.to_excel('../pkl_file/lolBTI설문_전처리.xlsx', # directory and file name to write
-            sheet_name = 'Sheet1', 
-            na_rep = 'NaN', 
-            float_format = "%.2f", 
-            header = True, 
-            #columns = ["group", "value_1", "value_2"], # if header is False
-            index = True, 
-            index_label = "id", 
-            startrow = 1, 
-            startcol = 1, 
-            #engine = 'xlsxwriter', 
-            freeze_panes = (2, 0)
-            )
-
-    
+    mbti = pd.read_excel(os.path.join("../pkl_file", "lolBTI설문_전처리.xlsx"), # write your directory here
+                              sheet_name = 'Sheet1', 
+                              header = 0)
+    mbti.set_index(mbti['name'], inplace=True)
+    mbti = pd.DataFrame(mbti['mbti'])
+    mbti_mastery = pd.merge(sohwan_mastery, mbti, left_index=True, right_index=True,how='right')
+    dump_pkl(mbti_mastery,"../pkl_file", "mbti_mastery.pkl")
     pass
-    
+
+create_mbti_mastery()
 mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")
 print(type(mbti_mastery))
 print(len(mbti_mastery))
