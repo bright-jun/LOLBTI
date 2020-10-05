@@ -92,6 +92,9 @@ export default {
           alert("갱신 실패");
         }
       );
+      // this.$router.push({
+      //   path: "/home/" + this.$route.params.summonername,
+      // });
     },
   },
 };

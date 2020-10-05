@@ -27,7 +27,7 @@ def read_pkl(path, file):
 
 def dump_pkl(data, path, file):
     print("{} dumped by update".format(file))
-    return pd.to_pickle(data, os.path.join(path, file))
+    pd.to_pickle(data, os.path.join(path, file))
 
 champ_dict = read_pkl("./userGameData","champ_dict.pkl")
 sohwan_mastery = read_pkl("./userGameData","dummy.pkl")

@@ -75,7 +75,7 @@ export default {
     UserApi.requestUserGameInfo(
       this.$route.params.summonername,
       (res) => {
-        console.log(res.data);
+        // console.log(res.data);
         for (var index = 0; index < res.data.rankInfo.length; index++) {
           if (res.data.rankInfo[index].queueType == "RANKED_SOLO_5x5") {
             this.gameInfo = res.data.rankInfo[index];
@@ -125,7 +125,7 @@ export default {
 
     getRecentMatch(res) {
       var self = this;
-      console.log(res);
+      // console.log(res);
       for (var index = 0; index < res.length; index++) {
         // console.log(res[index].champion);
         var date = this.timeForToday(res[index].timestamp);
