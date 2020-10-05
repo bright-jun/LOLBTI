@@ -1,6 +1,6 @@
 <template>
   <v-footer dark padless>
-    <v-card flat tile class="maincolor white--text text-center">
+    <v-card flat tile class="maincolor white--text text-center" style="width: 100%;">
       <v-card-text>
         <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
           <v-icon size="24px">{{ icon }}</v-icon>
@@ -8,17 +8,14 @@
       </v-card-text>
 
       <v-card-text class="white--text pt-0">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
-        Mauris cursus commodo interdum. Praesent ut risus eget metus luctus
-        accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a
-        sit amet dui. Duis commodo vitae velit et faucibus.
+        우리들이 나아가야 할 길을 알려드립니다.
       </v-card-text>
 
       <v-divider></v-divider>
 
       <v-card-text class="white--text">
         {{ new Date().getFullYear() }} —
-        <strong>Vuetify</strong>
+        <strong>LOLBTI</strong>
       </v-card-text>
     </v-card>
   </v-footer>
