@@ -7,7 +7,7 @@ from . import defs
 from . import recommend
 from . import update
 from . import recommendItem as rI
-# from . import mbti as mb
+from . import mbti as mb
 
 @api_view(['GET'])
 def test(request):
