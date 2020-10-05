@@ -216,6 +216,23 @@ const updateUserInfo = (summonerName, email, mbti, callback, errorCallback) => {
     });
 };
 
+const requestItemRecom = (data , callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/recommend/item",
+    params: {
+      myChamp: data.myChampKey,
+      opponentChamp: data.vsChampKey,
+    },
+  })
+    .then(function(response) {
+      callback(response);
+    })
+    .catch(function(error) {
+      errorCallback(error);
+    });
+};
+
 const UserApi = {
   requestLogin: (data, callback, errorCallback) =>
     requestLogin(data, callback, errorCallback),
@@ -246,6 +263,9 @@ const UserApi = {
 
   updateUserInfo: (summonerName, email, mbti, callback, errorCallback) =>
     updateUserInfo(summonerName, email, mbti, callback, errorCallback),
+
+    requestItemRecom: (data, callback, errorCallback) =>
+    requestItemRecom(data, callback, errorCallback),
 };
 
 export default UserApi;

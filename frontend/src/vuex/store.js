@@ -12,7 +12,7 @@ const state = {
   summonerName: "",
   summonerWinLose: {},
   summoner: {},
-  gameitmes: {
+  gameitems: {
     "1400": "마법 부여: 용사",
     "1401": "마법 부여: 잿불거인",
     "1402": "마법 부여: 룬의 메아리",
