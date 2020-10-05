@@ -24,6 +24,22 @@ def dump_pkl(data, path, file):
     pd.to_pickle(data, os.path.join(path, file))
 
 def create_mbti_mastery():
+    sohwan_mastery = read_pkl("../pkl_file", "sohwan_mastery.pkl")
+    mbti = df.to_excel('../pkl_file/lolBTI설문_전처리.xlsx', # directory and file name to write
+            sheet_name = 'Sheet1', 
+            na_rep = 'NaN', 
+            float_format = "%.2f", 
+            header = True, 
+            #columns = ["group", "value_1", "value_2"], # if header is False
+            index = True, 
+            index_label = "id", 
+            startrow = 1, 
+            startcol = 1, 
+            #engine = 'xlsxwriter', 
+            freeze_panes = (2, 0)
+            )
+
+    
     pass
     
 mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")

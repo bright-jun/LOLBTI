@@ -7,7 +7,7 @@ from . import defs
 from . import recommend
 from . import update
 from . import recommendItem as rI
-from . import mbti
+# from . import mbti
 
 @api_view(['GET'])
 def test(request):
@@ -68,24 +68,24 @@ def recommendItem(request, myChamp, opponentChamp):
         'value' : value
     })
 
-@api_view(['GET'])
-def recommendByMbti(request, mbti):
-    best = mbti.recommend_champ_by_mbti(mbti, ascending=False)
-    worst = mbti.recommend_champ_by_mbti(mbti, ascending=True)
-    return JsonResponse({
-        'bestChampList' : list(best.index),
-        'bestPointList' : list(best.values),
-        'worstChampList' : list(worst.index),
-        'worstPointList' : list(worst.values),
-    })
+# @api_view(['GET'])
+# def recommendByMbti(request, mbti):
+#     best = mbti.recommend_champ_by_mbti(mbti, ascending=False)
+#     worst = mbti.recommend_champ_by_mbti(mbti, ascending=True)
+#     return JsonResponse({
+#         'bestChampList' : list(best.index),
+#         'bestPointList' : list(best.values),
+#         'worstChampList' : list(worst.index),
+#         'worstPointList' : list(worst.values),
+#     })
 
-@api_view(['GET'])
-def recommendBySohwan(request, sohwan):
-    best = mbti.recommend_champ_by_mastery(mbti, ascending=False)
-    worst = mbti.recommend_champ_by_mastery(mbti, ascending=True)
-    return JsonResponse({
-        'bestChampList' : list(best.index),
-        'bestPointList' : list(best.values),
-        'worstChampList' : list(worst.index),
-        'worstPointList' : list(worst.values),
-    })
+# @api_view(['GET'])
+# def recommendBySohwan(request, sohwan):
+#     best = mbti.recommend_champ_by_mastery(mbti, ascending=False)
+#     worst = mbti.recommend_champ_by_mastery(mbti, ascending=True)
+#     return JsonResponse({
+#         'bestChampList' : list(best.index),
+#         'bestPointList' : list(best.values),
+#         'worstChampList' : list(worst.index),
+#         'worstPointList' : list(worst.values),
+#     })
