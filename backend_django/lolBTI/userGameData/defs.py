@@ -87,8 +87,25 @@ def freq_lane_info(sohwan):
     temp = pd.DataFrame(temp)
     tempA = temp.groupby(['lane','role']).count()
     tempB = temp.groupby('lane').count()
-    onedil = tempA.loc['BOTTOM','DUO_CARRY'].platformId
-    support = tempA.loc['BOTTOM','DUO_SUPPORT'].platformId
+
+    if ('BOTTOM','DUO_CARRY') in tempA.index :
+      onedil = tempA.loc['BOTTOM','DUO_CARRY'].platformId
+    else :
+      onedil = 0
+
+    if ('BOTTOM','DUO_SUPPORT') in tempA.index :
+      support = tempA.loc['BOTTOM','DUO_SUPPORT'].platformId
+    else :
+      support = 0
+    
+    if 'TOP' not in tempB.index :
+
+      tempB=tempB.platformId.append(pd.Series(0,index=["TOP"]))
+    if 'MID' not in tempB.index :
+      tempB=tempB.platformId.append(pd.Series(0,index=["MID"]))
+    if 'JUNGLE' not in tempB.index :
+      tempB=tempB.platformId.append(pd.Series(0,index=["JUNGLE"]))
+
     tempB.platformId.loc['NONE'] = support
     tempB.platformId.loc['BOTTOM'] = onedil
     # temp = temp.groupby('lane').count()['role']
