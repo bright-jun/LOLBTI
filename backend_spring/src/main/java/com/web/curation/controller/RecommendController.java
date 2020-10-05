@@ -55,16 +55,16 @@ public class RecommendController {
 		return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/recommend/mbti")
-	@ApiOperation(value = "user MBTI 성향에 따른 챔피언 추천")
-	public Object recommendChampionByMBTI(@RequestParam String summonerName, @RequestParam String mbti) {
-		List<Champion> champList = new ArrayList<>();
-		BasicResponse result = new BasicResponse();
-
-		result.status = true;
-		result.object = champList;
-		return new ResponseEntity<>(result, HttpStatus.OK);
-	}
+//	@GetMapping("/recommend/mbti")
+//	@ApiOperation(value = "user MBTI 성향에 따른 챔피언 추천")
+//	public Object recommendChampionByMBTI(@RequestParam String summonerName, @RequestParam String mbti) {
+//		List<Champion> champList = new ArrayList<>();
+//		BasicResponse result = new BasicResponse();
+//
+//		result.status = true;
+//		result.object = champList;
+//		return new ResponseEntity<>(result, HttpStatus.OK);
+//	}
 
 	@GetMapping("/recommend/item")
     @ApiOperation(value = "챔피언 매치에 따른 아이템 템트리 추천")
@@ -75,6 +75,16 @@ public class RecommendController {
             return new ResponseEntity<>(recommend,HttpStatus.OK);
         return new ResponseEntity<> ("fail", HttpStatus.NOT_FOUND);
     }
+	
+	@GetMapping("/recommend/mbti")
+	@ApiOperation(value = "MBTI 성향에 따른 챔피언 추천")
+	public Object recommendChampByMbti(@RequestParam String mbti ) throws IOException {
+		String recommend = null;
+		recommend = recommendDao.getChampByMbti(mbti);
+		if(recommend != null)
+			return new ResponseEntity<>(recommend,HttpStatus.OK);
+		return new ResponseEntity<> ("fail", HttpStatus.NOT_FOUND);
+	}
 
 	@GetMapping("/update/gamedata")
 	@ApiOperation(value = "갱신하기 버튼 클릭 이벤트")
