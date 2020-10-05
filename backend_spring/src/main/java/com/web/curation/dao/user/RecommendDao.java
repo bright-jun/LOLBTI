@@ -9,5 +9,6 @@ public interface RecommendDao {
     boolean renewalPoint(String summonerName) throws IOException;
     String recommendPoint(String summonerName) throws IOException;
     String recommendItem(String myChamp, String opponentChamp) throws IOException;
+    String getChampByMbti(String mbti) throws IOException;
     String test() throws IOException;
 }
