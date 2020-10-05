@@ -32,7 +32,6 @@ def create_mbti_mastery():
     mbti = pd.DataFrame(mbti['mbti'])
     mbti_mastery = pd.merge(sohwan_mastery, mbti, left_index=True, right_index=True,how='right')
     dump_pkl(mbti_mastery,"../pkl_file", "mbti_mastery.pkl")
-    pass
 
 create_mbti_mastery()
 mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")
@@ -42,6 +41,7 @@ print(len(mbti_mastery))
 
 def recommend_champ_by_mbti(mbti,ascending):
     global mbti_mastery
+    screate_mbti_mastery()
 
     if(setting.updated):
         mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")
