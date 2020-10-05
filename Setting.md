@@ -192,17 +192,29 @@
     - django 설치
         - `pip install django~=2.2.7`
 	- requirements.txt
-		- `pip install -r requirements.txt --user`
+		- `sudo pip install -r requirements.txt --user`
+	- ❗ `ImportError: cannot import name 'main'` 에러 시  
+		✍️ pip를 업데이트 한 후에 문제가 계속 발생, 일단 pip를 지우고 다시 설치하면 해결  
+		-`sudo python3 -m pip uninstall pip && sudo apt-get install python3-pip --reinstall`
 
 - 백엔드(Django)  
 	- ❌ `python manage.py runserver 0:8081`
 		- local 에서 test server 용이지, 배포용은 아니다. django 내장 server를 사용해서 배포하면 안된다
 	- Gunicorn 설치
-		- requirement.txt에 gunicorn==19.7.1 추가
+		- requirement.txt에 `gunicorn==19.7.1` 추가
 		- `pip install -r requirements.txt --user`
 	- 실행
+		- `screen`입력 후 enter  
+		✍️ screen 은 서버 연결을 꺼도, 실행 중이던 프로그램을 그대로 유지, screen에서 실행한다
 		- ⭕️ `gunicorn lolBTI.wsgi:application --bind=0:8081 --reload`  
 		✍️ --reload: 소스코드가 바뀌면 재기동
+	- stop
+		- `pgrep -f gunicorn`로 gunicorn 포트번호 확인
+		- `sudo kill -9 포트번호`
+		- `screen -ls`
+		- `screen -X -S 포트번호 quit`
+
+
 		
 
 - 젠킨스(CI/CD) 관리  
@@ -217,7 +229,7 @@
 		-p 호스트 7070포트와 도커 네트워크 상의 8080포트를 연결(이미 8080 사용중이라 임의 변경)  
 		-v 호스트의 파일 시스템과 도커 컨테이터 파일 시스템 연결(/app/swim 디렉터리에/var/jekins_home을 마운트시킨다)  
 		--name 도커 컨테이너 이름 지정 (여기서는 swim_jenkins)  
-		-u 사용자를 root로 지정  
+		-u 사용자를 root로 지정
 	- jenkins컨테이너 작동 확인
 		- `sudo docker ps -a`  
 	  
@@ -307,7 +319,14 @@
 				`Maven Version: mvn 3.6.3`  
 				`Goals: clean package`
 				- invoke top-Level Maven targets > 고급  
-				- `POM:backend_spring/pom.xml`(해당 pom 위치는 다를 수 있음)  
+				- `POM:backend_spring/pom.xml`(해당 pom 위치는 다를 수 있음)
+
+			- Backend Build (Django 백엔드 배포)
+				- send build artifacts over SSH 항목 추가    
+				Permisson denied 문제 해결을 위해 폴더를 옮긴다  
+				`Source files: backend_django/lolBTI/`  
+				`Remote directory: dist/server_django`
+			  
 	- 빌드 후 조치하기  
 		✍️ 빌드하고 나서 실행할 명령어를 설정  
 		SSH로 AWS EC2에 접근해서 빌드된 파일을 지정한 곳으로 이동하고 배포
@@ -320,6 +339,18 @@
 			Remote directory: 배포할 파일이 저장될 디렉토리를 지정 (없으면 새로 생성 X, 미리 만들기)
 			- `Exec command: sudo pm2 restart /home/ubuntu/dist/server/app.json`  
 			Exec command : 배포 후 실행 할 명령어를 입력 (pm2 실행)
+
+- https 자동설정  
+	✅ 참고 사이트: https://certbot.eff.org/  
+	- certbot instructions > My HTTP website is running `Nginx on Ubuntu 16.04 (xenial)`  
+	```
+	sudo snap install core; sudo snap refresh core
+	sudo snap install --classic certbot
+	sudo ln -s /snap/bin/certbot /usr/bin/certbot
+	sudo certbot --nginx
+	```
+	
+	이메일 입력 후, 설정 완료하면 https를 사용할 수 있다(Base Url 유의)  
 	
 
 
