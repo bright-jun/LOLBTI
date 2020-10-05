@@ -23,19 +23,6 @@ def dump_pkl(data, path, file):
     print("{} dumped by recommend".format(file))
     pd.to_pickle(data, os.path.join(path, file))
 
-def create_mbti_mastery():
-    sohwan_mastery = read_pkl("../pkl_file", "sohwan_mastery.pkl")
-    mbti = pd.read_excel(os.path.join("../pkl_file", "lolBTI설문_전처리.xlsx"), # write your directory here
-                              sheet_name = 'Sheet1', 
-                              header = 0)
-    mbti.set_index(mbti['name'], inplace=True)
-    mbti = pd.DataFrame(mbti['mbti'])
-    mbti_mastery = pd.merge(sohwan_mastery, mbti, left_index=True, right_index=True,how='right')
-    dump_pkl(mbti_mastery,"../pkl_file", "mbti_mastery.pkl")
-
-create_mbti_mastery()
-
-
 sohwan_mastery = read_pkl("../pkl_file", "dummy.pkl")
 print(type(sohwan_mastery))
 print(len(sohwan_mastery))
