@@ -1,9 +1,9 @@
 import store from "../vuex/store";
 
 const axios = require("axios");
-const hostname = "localhost:8080/api";
-// const hostname = "j3a109.p.ssafy.io/api";
-const BASE_URL = "http://" + hostname;
+// const hostname = "localhost:8080/api";
+const hostname = "j3a109.p.ssafy.io/api";
+const BASE_URL = "https://" + hostname;
 
 const requestLogin = (data, callback, errorCallback) => {
   axios({
