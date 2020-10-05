@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import org.springframework.stereotype.Repository;
 
@@ -22,9 +21,9 @@ public class UserRankDaoImpl implements UserRankDao {
         // URL url = new URL(requestUrl+summon);
         URL url = new URL(requestUrl+summonerName);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
 
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-        System.out.println("하이");
 
         String returnLine;
         StringBuffer result = new StringBuffer();
