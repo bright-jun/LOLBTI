@@ -16,9 +16,9 @@ def getItems(myChamp, opponentChamp):
         if(opponentChamp in items[myChamp]):
             itemDict = items[myChamp][opponentChamp].copy()
         else:
-            return "데이터가 없음", "데이터가 없음"
+            return "", ""
     else:
-        return "데이터가 없음", "데이터가 없음"
+        return "", ""
     cnt = itemDict.pop('cnt')
     # del itemDict['cnt']
     keyList = list(itemDict.keys())
