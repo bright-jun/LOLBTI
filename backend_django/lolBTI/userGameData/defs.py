@@ -112,8 +112,8 @@ def freq_lane_info(sohwan):
         if 'JUNGLE' not in tempB.index :
           tempB=tempB.platformId.append(pd.Series(0,index=["JUNGLE"]))
     
-        tempB.platformId.loc['NONE'] = support
-        tempB.platformId.loc['BOTTOM'] = onedil
+        tempB.loc['NONE'] = support
+        tempB.loc['BOTTOM'] = onedil
         # temp = temp.groupby('lane').count()['role']
         tempB = tempB.rename(index={"NONE":"서폿","BOTTOM":"바텀","JUNGLE":"정글","MID":"미드","TOP":"탑"}) 
         
