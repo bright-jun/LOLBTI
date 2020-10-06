@@ -1,3 +1,37 @@
+# 👩‍👦‍👦 협업 도구 설정
+
+## 💾 GitLab
+
+- 커밋 기록까지 병합하는 방법(추후 Git hub에 잔디심기할 때 용이)
+  ```
+  git remote -v
+  git remote remove origin
+  ```
+  remote 가 올리는 경로를 설정하는 명령어
+  
+  remote 를 Sub3로 변경해서 기존의 저장소를 Sub3로 옮겨버림
+  ```
+  git remote add origin https://lab.ssafy.com/s03-bigdata-sub3/s03p23a109.git
+  git push origin develop
+  ```
+
+## 🔨JIRA
+
+- 연동
+  - Jira - mattermost 연동 방법입니다
+  `/jira connect`
+  `/jira subscribe`
+- filtering view 설정
+  board -> configure -> quick filters
+
+## 📣 MatterMost
+
+- GitLab - MM 연동
+  - `통합기능`
+  - incoming webhook 주소 복사
+  - mm notification -> 입력
+
+
 # 🌏 AWS
 
 - server : ubuntu 18.04
@@ -204,11 +238,13 @@
     - `pip install django~=2.2.7`
   - requirements.txt
     - `sudo pip install -r requirements.txt --user`
-  - ❗ `ImportError: cannot import name 'main'` 에러 시  
-    ✍️ pip를 업데이트 한 후에 문제가 계속 발생, 일단 pip를 지우고 다시 설치하면 해결  
-    -`sudo python3 -m pip uninstall pip && sudo apt-get install python3-pip --reinstall`
-  - `tensorboard 1.14.0 has requirement setuptools>=41.0.0, but you'll have setuptools 40.6.2 which is incompatible.`
-    -
+  - ❗Error❗
+    - `ImportError: cannot import name 'main'` 에러 시  
+      - ✍️ pip를 업데이트 한 후에 문제가 계속 발생, 일단 pip를 지우고 다시 설치하면 해결
+      - `sudo python3 -m pip uninstall pip && sudo apt-get install python3-pip --reinstall`
+    - `tensorboard 1.14.0 has requirement setuptools>=41.0.0, but you'll have setuptools 40.6.2 which is incompatible.`
+      - 버젼오류같음...
+      
 - 백엔드(Django)
 
   - ❌ `python manage.py runserver 0:8081`

@@ -120,7 +120,7 @@ export default {
               summonerName: this.$store.state.summonerName,
             });
 
-            this.$router.push({ path: "/" });
+            this.$router.push({ path: "/" }).catch(() => {});
           },
           (error) => {}
         );
