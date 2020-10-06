@@ -108,13 +108,9 @@ def recommendByMbti(request, mbti):
 @api_view(['GET'])
 def recommendBySohwan(request, sohwan):
     try:     
-        best = mbti.recommend_champ_by_mbti(mbti, ascending=False)
-        worst = mbti.recommend_champ_by_mbti(mbti, ascending=True)
+        mbti = mb.recommend_mbti_by_sohwan(sohwan)
         return JsonResponse({
-            'bestChampList' : list(best.index),
-            'bestPointList' : list(best.values),
-            'worstChampList' : list(worst.index),
-            'worstPointList' : list(worst.values),
+            'mbti' : mbti
         })
     except:
         return JsonResponse({
