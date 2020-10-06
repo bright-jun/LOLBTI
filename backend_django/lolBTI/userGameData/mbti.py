@@ -17,17 +17,17 @@ from . import setting
 
 # deeplearning
 
-from keras.models import Sequential
-from keras.layers.core import Dense
-from keras.utils import np_utils
-from sklearn.preprocessing import LabelEncoder
+# from keras.models import Sequential
+# from keras.layers.core import Dense
+# from keras.utils import np_utils
+# from sklearn.preprocessing import LabelEncoder
 
-import tensorflow.keras as keras
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import numpy as np
-import tensorflow as tf
+# import tensorflow.keras as keras
+# import pandas as pd
+# import seaborn as sns
+# import matplotlib.pyplot as plt
+# import numpy as np
+# import tensorflow as tf
 
 def read_pkl(path, file):
     print("{} read by mbti".format(file))
