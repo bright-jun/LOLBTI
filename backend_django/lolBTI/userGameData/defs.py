@@ -51,6 +51,8 @@ def sohwan_info(sohwan, n=5):
         elif r_match.status_code == 403: # api갱신이 필요
           print('you need renewal key no.{}'.format(key_idx))
           return '키갱신필요'
+        elif r_match.status_code == 404: # match 데이터 없음
+          return 'match 정보가 없습니다.'
         else:
           key_idx = renewKeyIdx(key_idx)
           r , key_idx = getRequests(url,key_idx)
@@ -73,6 +75,8 @@ def sohwan_info_lane(sohwan, n=100):
         elif r_match.status_code == 403: # api갱신이 필요
           print('you need renewal key no.{}'.format(key_idx))
           return '키갱신필요'
+        elif r_match.status_code == 404: # match 정보 없음
+          return 'match 정보가 없습니다.'
         else:
           key_idx = renewKeyIdx(key_idx)
           r , key_idx = getRequests(url,key_idx)
