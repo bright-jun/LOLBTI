@@ -17,17 +17,17 @@ from . import setting
 
 # deeplearning
 
-from keras.models import Sequential
-from keras.layers.core import Dense
-from keras.utils import np_utils
-from sklearn.preprocessing import LabelEncoder
+# from keras.models import Sequential
+# from keras.layers.core import Dense
+# from keras.utils import np_utils
+# from sklearn.preprocessing import LabelEncoder
 
-import keras
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import numpy as np
-import tensorflow as tf
+# import tensorflow.keras as keras
+# import pandas as pd
+# import seaborn as sns
+# import matplotlib.pyplot as plt
+# import numpy as np
+# import tensorflow as tf
 
 def read_pkl(path, file):
     print("{} read by mbti".format(file))
@@ -58,9 +58,9 @@ sohwan_mastery = read_pkl("../pkl_file", "dummy.pkl")
 mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")
 print(type(mbti_mastery))
 print(len(mbti_mastery))
-model = keras.models.load_model(os.path.join("../pkl_file","mbti_model.h5"))
-encoder = LabelEncoder()
-encoder.classes_ = np.load(os.path.join("../pkl_file","encoder.npy"))
+# model = tf.keras.models.load_model(os.path.join("../pkl_file","mbti_model.h5"))
+# encoder = LabelEncoder()
+# encoder.classes_ = np.load(os.path.join("../pkl_file","encoder.npy"))
 
 def recommend_champ_by_mbti(mbti,ascending):
     global mbti_mastery
@@ -75,11 +75,11 @@ def recommend_mbti_by_sohwan(sohwan,ascending):
     global model
     global encoder
 
-    X = np.mat(sohwan_mastery.loc[sohwan,:])
-    Y_pred = model.predict(X)
+    # X = np.mat(sohwan_mastery.loc[sohwan,:])
+    # Y_pred = model.predict(X)
 
-    return model.inverse_transform(np.argmax(Y_pred,axis=1))[0]
-
+    # return model.inverse_transform(np.argmax(Y_pred,axis=1))[0]
+    return 'TEST'
 def learning():
     #
     mbti_merged = read_pkl("../pkl_file", "mbti_merged.pkl")

@@ -154,6 +154,9 @@ export default {
     onJoin() {
       if (this.isSubmit) {
         let { email, password, userId, userMbti } = this;
+        console.log(email);
+        console.log(userId);
+        console.log(userMbti);
         let data = {
           email,
           password,
@@ -164,7 +167,9 @@ export default {
         UserApi.requestJoin(
           data,
           (res) => {
-            this.$router.push({ path: "/" }).catch(() => {});
+            this.$router.push({ path: "/" }).catch(() => {
+              console.log("error 회원가입안됨");
+            });
           },
           (error) => {
           }
