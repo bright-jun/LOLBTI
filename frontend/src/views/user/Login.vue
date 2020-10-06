@@ -27,7 +27,7 @@
             class="mt-10"
             v-model="password"
             type="password"
-            @keyup.enter="Login"
+            @keydown.enter="Login"
             label="비밀번호"
             outlined
             hide-details

@@ -1,6 +1,7 @@
 <template>
   <div>
     <Doughnut v-if="loaded" :chartData="chartData" :options="options" />
+    <p v-if="!loaded">데이터가 없습니다~!</p>
   </div>
 </template>
 

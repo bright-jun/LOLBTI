@@ -86,7 +86,12 @@
             >무료 MBTI 검사</a
           >
 
-          <v-btn class="my-10" block color="btncolor" @click="onJoin"
+          <v-btn
+            class="my-10"
+            block
+            color="btncolor"
+            @click="onJoin"
+            @keydown.enter="onJoin"
             >Join</v-btn
           >
           <v-divider></v-divider>
