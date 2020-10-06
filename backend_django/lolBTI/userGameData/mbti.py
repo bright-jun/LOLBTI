@@ -58,7 +58,7 @@ sohwan_mastery = read_pkl("../pkl_file", "dummy.pkl")
 mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")
 print(type(mbti_mastery))
 print(len(mbti_mastery))
-model = keras.models.load_model(os.path.join("../pkl_file","mbti_model.h5"))
+# model = tf.keras.models.load_model(os.path.join("../pkl_file","mbti_model.h5"))
 encoder = LabelEncoder()
 encoder.classes_ = np.load(os.path.join("../pkl_file","encoder.npy"))
 
@@ -75,11 +75,11 @@ def recommend_mbti_by_sohwan(sohwan,ascending):
     global model
     global encoder
 
-    X = np.mat(sohwan_mastery.loc[sohwan,:])
-    Y_pred = model.predict(X)
+    # X = np.mat(sohwan_mastery.loc[sohwan,:])
+    # Y_pred = model.predict(X)
 
-    return model.inverse_transform(np.argmax(Y_pred,axis=1))[0]
-
+    # return model.inverse_transform(np.argmax(Y_pred,axis=1))[0]
+    return 'TEST'
 def learning():
     #
     mbti_merged = read_pkl("../pkl_file", "mbti_merged.pkl")
