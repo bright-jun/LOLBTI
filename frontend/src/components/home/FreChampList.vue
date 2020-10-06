@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" height="450">
     <v-card-text>선호챔피언</v-card-text>
-    <v-list>
+    <v-list v-if="items.length != 0">
       <v-list-item v-for="(item, index) in items" :key="item.title">
         <v-list-item-avatar size="40">
           <v-img :src="item.avatar"></v-img>
@@ -17,6 +17,11 @@
         </v-list-item-content>
         <v-list-item-content> {{ index + 1 }}위 </v-list-item-content>
       </v-list-item>
+    </v-list>
+    <v-list v-if="items.length == 0">
+      <p class="mt-3 text-center font-weight-black text-h5">
+        데이터가 없습니다.
+      </p>
     </v-list>
   </v-card>
 </template>

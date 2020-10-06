@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto">
-    <v-list three-line v-if="!isEmpty">
+    <v-list three-line>
       <template v-for="(item, index) in items">
         <v-subheader
           v-if="item.header"
@@ -35,11 +35,6 @@
         </v-list-item>
       </template>
     </v-list>
-    <v-list v-if="isEmpty">
-      <p class="mt-3 text-center font-weight-black text-h5">
-        데이터가 없습니다.
-      </p>
-    </v-list>
   </v-card>
 </template>
 
@@ -57,17 +52,8 @@ export default {
     // },
     // { divider: true, inset: true },
     // ],
-    isEmpty: false,
   }),
   props: ["items"],
-  created() {
-    // console.log(typeof items);
-    if (this.items.length == 1) {
-      console.log("들어오니");
-      this.isEmpty = true;
-    } else {
-      console.log("안들어와");
-    }
-  },
+  created() {},
 };
 </script>
