@@ -87,8 +87,8 @@ def sohwan_info_lane(sohwan, n=100):
 
 def freq_lane_info(sohwan):
     temp = sohwan_info_lane(sohwan)
-    
-    if 'matches' in recent_matches.keys() :
+     
+    if 'matches' in temp.keys() :
         temp = temp['matches']
         temp = pd.DataFrame(temp)
         tempA = temp.groupby(['lane','role']).count()
