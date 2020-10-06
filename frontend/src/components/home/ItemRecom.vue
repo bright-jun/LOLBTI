@@ -9,7 +9,7 @@
             style="margin: auto; width: 100px"
           ></v-img>
           <p style="margin-top: 10px; fontsize: 15px">
-            {{ myChamp.name }}{{ myChamp.key }}
+            {{ myChamp.name }}
           </p>
           <v-autocomplete
             class="mt-5"
@@ -53,7 +53,7 @@
             style="margin: auto; width: 100px"
           ></v-img>
           <p style="margin-top: 10px; fontsize: 15px">
-            {{ vsChamp.name }}{{ vsChamp.key }}
+            {{ vsChamp.name }}
           </p>
           <v-autocomplete
             class="mt-5"
