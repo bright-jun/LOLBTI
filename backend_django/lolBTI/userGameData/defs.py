@@ -105,19 +105,20 @@ def freq_lane_info(sohwan):
           support = 0
         
         if 'TOP' not in tempB.index :
-    
           tempB=tempB.platformId.append(pd.Series(0,index=["TOP"]))
-        if 'MID' not in tempB.index :
+        elif 'MID' not in tempB.index :
           tempB=tempB.platformId.append(pd.Series(0,index=["MID"]))
-        if 'JUNGLE' not in tempB.index :
+        elif 'JUNGLE' not in tempB.index :
           tempB=tempB.platformId.append(pd.Series(0,index=["JUNGLE"]))
-    
+        else :
+          tempB = tempB.platformId
+          
         tempB.loc['NONE'] = support
         tempB.loc['BOTTOM'] = onedil
         # temp = temp.groupby('lane').count()['role']
         tempB = tempB.rename(index={"NONE":"서폿","BOTTOM":"바텀","JUNGLE":"정글","MID":"미드","TOP":"탑"}) 
         
-    return tempB.platformId
+    return tempB
 
 def getRequests(root,key_idx):
   api_key = getApiKey(key_idx)
