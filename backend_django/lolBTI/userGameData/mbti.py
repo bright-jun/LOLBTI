@@ -23,16 +23,17 @@ def dump_pkl(data, path, file):
     print("{} dumped by mbti".format(file))
     pd.to_pickle(data, os.path.join(path, file))
 
-sohwan_mastery = read_pkl("../pkl_file", "dummy.pkl")
-
-mbti = pd.read_excel(os.path.join("../pkl_file", "lolBTI설문_전처리.xlsx"), # write your directory here
-                            sheet_name = 'Sheet1', 
-                            header = 0)
-mbti.set_index(mbti['name'], inplace=True)
-mbti = pd.DataFrame(mbti['mbti'])
-mbti_mastery = pd.merge(sohwan_mastery, mbti, left_index=True, right_index=True,how='right')
-mbti_mastery = mbti_mastery.groupby(['mbti']).mean()
-dump_pkl(mbti_mastery,"../pkl_file", "mbti_mastery.pkl")
+def update_mbti_mastery():
+    sohwan_mastery = read_pkl("../pkl_file", "dummy.pkl")
+    # db랑 연동해서 mbti 만들어줘야함.
+    mbti = pd.read_excel(os.path.join("../pkl_file", "lolBTI설문_전처리.xlsx"), # write your directory here
+                                sheet_name = 'Sheet1', 
+                                header = 0)
+    mbti.set_index(mbti['name'], inplace=True)
+    mbti = pd.DataFrame(mbti['mbti'])
+    mbti_mastery = pd.merge(sohwan_mastery, mbti, left_index=True, right_index=True,how='right')
+    mbti_mastery = mbti_mastery.groupby(['mbti']).mean()
+    dump_pkl(mbti_mastery,"../pkl_file", "mbti_mastery.pkl")
 
 mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")
 print(type(mbti_mastery))
@@ -43,5 +44,6 @@ def recommend_champ_by_mbti(mbti,ascending):
     global mbti_mastery
 
     if(setting.updated):
+        update_mbti_mastery()
         mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")
     return mbti_mastery.loc[mbti].sort_values(axis=0,ascending=ascending)[:5]
