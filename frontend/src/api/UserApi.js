@@ -106,6 +106,24 @@ const requestRecommendChampList = (
     });
 };
 
+const requestRecommendChampListByMbti = (mbti, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/recommend/mbti",
+    params: {
+      mbti: mbti,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
+
 const requestFreqChampList = (summonerName, callback, errorCallback) => {
   axios({
     method: "get",
@@ -216,7 +234,7 @@ const updateUserInfo = (summonerName, email, mbti, callback, errorCallback) => {
     });
 };
 
-const requestItemRecom = (data , callback, errorCallback) => {
+const requestItemRecom = (data, callback, errorCallback) => {
   axios({
     method: "get",
     url: BASE_URL + "/recommend/item",
@@ -264,8 +282,11 @@ const UserApi = {
   updateUserInfo: (summonerName, email, mbti, callback, errorCallback) =>
     updateUserInfo(summonerName, email, mbti, callback, errorCallback),
 
-    requestItemRecom: (data, callback, errorCallback) =>
+  requestItemRecom: (data, callback, errorCallback) =>
     requestItemRecom(data, callback, errorCallback),
+
+  requestRecommendChampListByMbti: (mbti, callback, errorCallback) =>
+    requestRecommendChampListByMbti(mbti, callback, errorCallback),
 };
 
 export default UserApi;
