@@ -89,37 +89,34 @@ def freq_lane_info(sohwan):
     temp = sohwan_info_lane(sohwan)
     
     if 'matches' in temp.keys:
-          pass
-    else:
-          return "ERROR"
+        temp = temp['matches']
+        temp = pd.DataFrame(temp)
+        tempA = temp.groupby(['lane','role']).count()
+        tempB = temp.groupby('lane').count()
     
-    temp = temp['matches']
-    temp = pd.DataFrame(temp)
-    tempA = temp.groupby(['lane','role']).count()
-    tempB = temp.groupby('lane').count()
-
-    if ('BOTTOM','DUO_CARRY') in tempA.index :
-      onedil = tempA.loc['BOTTOM','DUO_CARRY'].platformId
-    else :
-      onedil = 0
-
-    if ('BOTTOM','DUO_SUPPORT') in tempA.index :
-      support = tempA.loc['BOTTOM','DUO_SUPPORT'].platformId
-    else :
-      support = 0
+        if ('BOTTOM','DUO_CARRY') in tempA.index :
+          onedil = tempA.loc['BOTTOM','DUO_CARRY'].platformId
+        else :
+          onedil = 0
     
-    if 'TOP' not in tempB.index :
-
-      tempB=tempB.platformId.append(pd.Series(0,index=["TOP"]))
-    if 'MID' not in tempB.index :
-      tempB=tempB.platformId.append(pd.Series(0,index=["MID"]))
-    if 'JUNGLE' not in tempB.index :
-      tempB=tempB.platformId.append(pd.Series(0,index=["JUNGLE"]))
-
-    tempB.platformId.loc['NONE'] = support
-    tempB.platformId.loc['BOTTOM'] = onedil
-    # temp = temp.groupby('lane').count()['role']
-    tempB = tempB.rename(index={"NONE":"서폿","BOTTOM":"바텀","JUNGLE":"정글","MID":"미드","TOP":"탑"}) 
+        if ('BOTTOM','DUO_SUPPORT') in tempA.index :
+          support = tempA.loc['BOTTOM','DUO_SUPPORT'].platformId
+        else :
+          support = 0
+        
+        if 'TOP' not in tempB.index :
+    
+          tempB=tempB.platformId.append(pd.Series(0,index=["TOP"]))
+        if 'MID' not in tempB.index :
+          tempB=tempB.platformId.append(pd.Series(0,index=["MID"]))
+        if 'JUNGLE' not in tempB.index :
+          tempB=tempB.platformId.append(pd.Series(0,index=["JUNGLE"]))
+    
+        tempB.platformId.loc['NONE'] = support
+        tempB.platformId.loc['BOTTOM'] = onedil
+        # temp = temp.groupby('lane').count()['role']
+        tempB = tempB.rename(index={"NONE":"서폿","BOTTOM":"바텀","JUNGLE":"정글","MID":"미드","TOP":"탑"}) 
+        
     return tempB.platformId
 
 def getRequests(root,key_idx):
