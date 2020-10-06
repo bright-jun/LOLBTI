@@ -34,6 +34,7 @@ export default {
       // console.log("찍히나");
       // console.log(datacollection.labels);
       // console.log(datacollection.datasets[0].data);
+      
       var options = {
         scales: {
           yAxes: [
@@ -56,8 +57,8 @@ export default {
                 offsetGridLines: false,
               },
               ticks: {
-                // min: Math.floor((items[9]["bestPoint"] * 10) / 10) * 10,
-                // max: Math.ceil((items[1]["bestPoint"] * 10) / 10) * 10,
+                min: Math.floor((items.bestPoint[items.bestPoint.length-1]-1) / 10) * 10,
+                max: Math.ceil((items.bestPoint[0]+1) / 10) * 10,
               },
             },
           ],

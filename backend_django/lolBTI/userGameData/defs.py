@@ -51,6 +51,8 @@ def sohwan_info(sohwan, n=5):
         elif r_match.status_code == 403: # api갱신이 필요
           print('you need renewal key no.{}'.format(key_idx))
           return '키갱신필요'
+        elif r_match.status_code == 404: # match 데이터 없음
+          return 'match 정보가 없습니다.'
         else:
           key_idx = renewKeyIdx(key_idx)
           r , key_idx = getRequests(url,key_idx)
@@ -73,6 +75,8 @@ def sohwan_info_lane(sohwan, n=100):
         elif r_match.status_code == 403: # api갱신이 필요
           print('you need renewal key no.{}'.format(key_idx))
           return '키갱신필요'
+        elif r_match.status_code == 404: # match 정보 없음
+          return 'match 정보가 없습니다.'
         else:
           key_idx = renewKeyIdx(key_idx)
           r , key_idx = getRequests(url,key_idx)
@@ -83,16 +87,36 @@ def sohwan_info_lane(sohwan, n=100):
 
 def freq_lane_info(sohwan):
     temp = sohwan_info_lane(sohwan)
-    temp = temp['matches']
-    temp = pd.DataFrame(temp)
-    tempA = temp.groupby(['lane','role']).count()
-    tempB = temp.groupby('lane').count()
-    onedil = tempA.loc['BOTTOM','DUO_CARRY'].platformId
-    support = tempA.loc['BOTTOM','DUO_SUPPORT'].platformId
-    tempB.platformId.loc['NONE'] = support
-    tempB.platformId.loc['BOTTOM'] = onedil
-    # temp = temp.groupby('lane').count()['role']
-    tempB = tempB.rename(index={"NONE":"서폿","BOTTOM":"바텀","JUNGLE":"정글","MID":"미드","TOP":"탑"}) 
+    
+    if 'matches' in recent_matches.keys() :
+        temp = temp['matches']
+        temp = pd.DataFrame(temp)
+        tempA = temp.groupby(['lane','role']).count()
+        tempB = temp.groupby('lane').count()
+    
+        if ('BOTTOM','DUO_CARRY') in tempA.index :
+          onedil = tempA.loc['BOTTOM','DUO_CARRY'].platformId
+        else :
+          onedil = 0
+    
+        if ('BOTTOM','DUO_SUPPORT') in tempA.index :
+          support = tempA.loc['BOTTOM','DUO_SUPPORT'].platformId
+        else :
+          support = 0
+        
+        if 'TOP' not in tempB.index :
+    
+          tempB=tempB.platformId.append(pd.Series(0,index=["TOP"]))
+        if 'MID' not in tempB.index :
+          tempB=tempB.platformId.append(pd.Series(0,index=["MID"]))
+        if 'JUNGLE' not in tempB.index :
+          tempB=tempB.platformId.append(pd.Series(0,index=["JUNGLE"]))
+    
+        tempB.platformId.loc['NONE'] = support
+        tempB.platformId.loc['BOTTOM'] = onedil
+        # temp = temp.groupby('lane').count()['role']
+        tempB = tempB.rename(index={"NONE":"서폿","BOTTOM":"바텀","JUNGLE":"정글","MID":"미드","TOP":"탑"}) 
+        
     return tempB.platformId
 
 def getRequests(root,key_idx):

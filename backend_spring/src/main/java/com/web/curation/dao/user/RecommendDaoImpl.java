@@ -62,7 +62,30 @@ public class RecommendDaoImpl implements RecommendDao {
 
         return result.toString();
     }
+    
+    @Override
+    public String getChampByMbti(String mbti) throws IOException {
+        String request = "/userGameData/recommend/mbtitomastery/";
+        String requestUrl = root + request;
+        // String summon= URLEncoder.encode(summonerName, "UTF-8");
+        // URL url = new URL(requestUrl+summon);
+        URL url = new URL(requestUrl+mbti);
 
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+        String returnLine;
+        StringBuffer result = new StringBuffer();
+        while ((returnLine = br.readLine()) != null) {
+            result.append(returnLine + "\n");
+        }
+        conn.disconnect();
+
+        return result.toString();
+    }
+    
     @Override
     public String test() throws IOException {
         String request = "/userGameData/test/";
