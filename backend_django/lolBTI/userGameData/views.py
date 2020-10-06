@@ -17,11 +17,17 @@ def test(request):
 @api_view(['GET'])
 def userInfo(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
-    rank_info, recent_matches = defs.sohwan_info(summonerName)
-    return JsonResponse({
-        'rankInfo' : rank_info,
-        'recentMatches' : recent_matches
-    })
+    try:
+        rank_info, recent_matches = defs.sohwan_info(summonerName)
+        return JsonResponse({
+            'rankInfo' : rank_info,
+            'recentMatches' : recent_matches
+        })
+    except:
+        return JsonResponse({
+            'rankInfo' : null,
+            'recentMatches' : null
+        })
 
 @api_view(['GET'])
 def recommendByMastery(request, summonerName):
