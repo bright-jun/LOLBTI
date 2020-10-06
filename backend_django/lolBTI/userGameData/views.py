@@ -59,15 +59,15 @@ def showFreqChamp(request, summonerName):
 @api_view(['GET'])
 def showFreqLane(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
-    try:
-        freq_lane = defs.freq_lane_info(summonerName)
-        return JsonResponse({
-            'lane': list(freq_lane.index),
-            'laneFreq' : list(freq_lane),
-        })
-    except:
-        return JsonResponse({
-        })
+    # try:
+    freq_lane = defs.freq_lane_info(summonerName)
+    return JsonResponse({
+        'lane': list(freq_lane.index),
+        'laneFreq' : list(freq_lane),
+    })
+    # except:
+    #     return JsonResponse({
+    #     })
 @api_view(['GET'])
 def updateMastery(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
