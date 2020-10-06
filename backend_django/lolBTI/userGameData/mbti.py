@@ -59,8 +59,8 @@ mbti_mastery = read_pkl("../pkl_file", "mbti_mastery.pkl")
 print(type(mbti_mastery))
 print(len(mbti_mastery))
 # model = tf.keras.models.load_model(os.path.join("../pkl_file","mbti_model.h5"))
-encoder = LabelEncoder()
-encoder.classes_ = np.load(os.path.join("../pkl_file","encoder.npy"))
+# encoder = LabelEncoder()
+# encoder.classes_ = np.load(os.path.join("../pkl_file","encoder.npy"))
 
 def recommend_champ_by_mbti(mbti,ascending):
     global mbti_mastery
