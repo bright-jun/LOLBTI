@@ -207,7 +207,8 @@
   - ❗ `ImportError: cannot import name 'main'` 에러 시  
     ✍️ pip를 업데이트 한 후에 문제가 계속 발생, 일단 pip를 지우고 다시 설치하면 해결  
     -`sudo python3 -m pip uninstall pip && sudo apt-get install python3-pip --reinstall`
-
+  - `tensorboard 1.14.0 has requirement setuptools>=41.0.0, but you'll have setuptools 40.6.2 which is incompatible.`
+    -
 - 백엔드(Django)
 
   - ❌ `python manage.py runserver 0:8081`
