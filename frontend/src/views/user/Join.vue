@@ -164,11 +164,9 @@ export default {
         UserApi.requestJoin(
           data,
           (res) => {
-            console.log("왔니?")
             this.$router.push({ path: "/" }).catch(() => {});
           },
           (error) => {
-            console.log("에러")
           }
         );
       }
