@@ -86,12 +86,7 @@
             >무료 MBTI 검사</a
           >
 
-          <v-btn
-            class="my-10"
-            block
-            color="btncolor"
-            @click="onJoin"
-            @keydown.enter="onJoin"
+          <v-btn class="my-10" block color="btncolor" @click="onJoin"
             >Join</v-btn
           >
           <v-divider></v-divider>
@@ -159,6 +154,9 @@ export default {
     onJoin() {
       if (this.isSubmit) {
         let { email, password, userId, userMbti } = this;
+        console.log(email);
+        console.log(userId);
+        console.log(userMbti);
         let data = {
           email,
           password,
@@ -169,7 +167,9 @@ export default {
         UserApi.requestJoin(
           data,
           (res) => {
-            this.$router.push({ path: "/" }).catch(() => {});
+            this.$router.push({ path: "/" }).catch(() => {
+              console.log("error 회원가입안됨");
+            });
           },
           (error) => {}
         );

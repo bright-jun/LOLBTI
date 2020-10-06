@@ -27,10 +27,10 @@
             class="mt-10"
             v-model="password"
             type="password"
-            @keydown.enter="Login"
             label="비밀번호"
             outlined
             hide-details
+            @keydown.enter="onLogin"
           ></v-text-field>
           <div align="left" class="error-text" v-if="error.password">
             <b>{{ error.password }}</b>
