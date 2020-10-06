@@ -76,7 +76,7 @@ export default {
       this.$route.params.summonername,
       (res) => {
         // console.log(res.data);
-        
+
         for (var index = 0; index < res.data.rankInfo.length; index++) {
           if (res.data.rankInfo[index].queueType == "RANKED_SOLO_5x5") {
             this.gameInfo = res.data.rankInfo[index];
