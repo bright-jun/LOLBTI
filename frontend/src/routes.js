@@ -2,6 +2,7 @@ import Home from "./views/Home.vue";
 import Welcome from "./views/Welcome.vue";
 import Login from "./views/user/Login.vue";
 import Join from "./views/user/Join.vue";
+import PageNotFound from './views/error/PageNotFound.vue';
 
 export default [
   {
@@ -23,5 +24,10 @@ export default [
     path: "/join",
     name: "Join",
     component: Join,
+  },
+  {
+    path : '*',
+    name : 'PageNotFound',
+    component : PageNotFound
   },
 ];

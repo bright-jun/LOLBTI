@@ -65,10 +65,7 @@ export default {
   },
   props: ["viewType"],
   created() {
-    if (this.$session.get("userinfo")) {
-      this.isLog = true;
-      this.userName = this.$session.get("userinfo")["summonerName"];
-    }
+    this.isUserInfo();
   },
   methods: {
     searchSummoner() {
@@ -84,9 +81,18 @@ export default {
     },
     logout() {
       this.$session.remove("userinfo");
-      this.$store.dispatch("logout");
+      this.isUserInfo()
       this.$router.push("/").catch(() => {});
     },
+    isUserInfo() {
+      if (this.$session.get("userinfo")) {
+        this.isLog = true;
+        this.userName = this.$session.get("userinfo")["summonerName"];
+      } else {
+        this.isLog = false;
+        this.userName = "";
+      }
+    }
   },
 };
 </script>
