@@ -25,22 +25,25 @@ def userInfo(request, summonerName):
         })
     except:
         return JsonResponse({
-            'rankInfo' : null,
-            'recentMatches' : null
+            # 'rankInfo' : [],
+            # 'recentMatches' : {}
         })
 
 @api_view(['GET'])
 def recommendByMastery(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
-    best = recommend.recommend_champ_by_mastery(summonerName, ascending=False, include=False)
-    worst = recommend.recommend_champ_by_mastery(summonerName, ascending=True, include=False)
-    return JsonResponse({
-        'bestChampList' : list(best.index),
-        'bestPointList' : list(best.values),
-        'worstChampList' : list(worst.index),
-        'worstPointList' : list(worst.values),
-    })
-
+    try:
+        best = recommend.recommend_champ_by_mastery(summonerName, ascending=False, include=False)
+        worst = recommend.recommend_champ_by_mastery(summonerName, ascending=True, include=False)
+        return JsonResponse({
+            'bestChampList' : list(best.index),
+            'bestPointList' : list(best.values),
+            'worstChampList' : list(worst.index),
+            'worstPointList' : list(worst.values),
+        })
+    except:
+        return JsonResponse({
+        })
 @api_view(['GET'])
 def showFreqChamp(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
