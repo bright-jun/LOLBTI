@@ -22,7 +22,7 @@ from keras.layers.core import Dense
 from keras.utils import np_utils
 from sklearn.preprocessing import LabelEncoder
 
-import keras
+import tensorflow.keras as keras
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
