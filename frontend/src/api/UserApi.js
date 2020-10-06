@@ -43,7 +43,9 @@ const requestJoin = (data, callback, errorCallback) => {
       mbti: data.userMbti,
     },
   })
-    .then(function(response) {})
+    .then(function(response) {
+      callback();
+    })
     .catch(function(error) {
       errorCallback();
     });

@@ -171,7 +171,8 @@ export default {
               console.log("error 회원가입안됨");
             });
           },
-          (error) => {}
+          (error) => {
+          }
         );
       }
     },
