@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import os
-import math
 
 DATA_DIR = "./userGameData"
 DUMP_FILE = os.path.join(DATA_DIR, "item.pkl")
@@ -40,7 +39,7 @@ def getItems(myChamp, opponentChamp):
                 maxN = valueList[j]
                 maxIdx = j
         sortedKeyList.append(keyList[maxIdx])
-        sortedValueList.append(math.round(maxN*100.0/cnt))
+        sortedValueList.append(round(maxN*100.0/cnt))
         visit[maxIdx] = 1
     print(sortedKeyList)
     print(sortedValueList)
