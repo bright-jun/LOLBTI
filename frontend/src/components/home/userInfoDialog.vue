@@ -92,7 +92,7 @@ export default {
     UserApi.requestSummonerNameAndMbtiTypeById(
       this.$session.get("userinfo")["email"],
       (res) => {
-        // console.log(res.data);
+        console.log(res.data);
         this.summonerName = res.data.summonername;
         this.mbti = res.data.mbti;
       },
