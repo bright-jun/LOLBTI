@@ -174,11 +174,15 @@
 4.	기타 통계분석
 	-	MBTI별 티어, 라인, 역할군 차트 및 추천
 	-	MBTI와 티어의 상관관계
+5.	개발 도구 활용
+	-	SonarQube
+	-	Error Exception ~ MM 연동
 
 ## 기술 스택
 > 프로젝트를 구현 할 때 사용한 기술들을 적어주세요
 1. Frontend
 	-	Vue
+	-	Vuetify
 	-	chartjs
 		-	통계 시각화
 
@@ -209,6 +213,11 @@
 		-	Jenkins~GitLab~Jira=>MatterMost 연동
 
 ## 기술 설명
+
+### Vue
+
+-	Vuetify
+-	Chartjs
 
 ### ERD
 > DB 및 백엔드를 구현할 때 ERD를 그려보고 리드미에 남겨주세요
