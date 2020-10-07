@@ -7,6 +7,7 @@ from . import defs
 from . import recommend
 from . import update
 from . import recommendItem as rI
+from . import mbti as mb
 
 @api_view(['GET'])
 def test(request):
@@ -16,53 +17,101 @@ def test(request):
 @api_view(['GET'])
 def userInfo(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
-    rank_info, recent_matches = defs.sohwan_info(summonerName)
-    return JsonResponse({
-        'rankInfo' : rank_info,
-        'recentMatches' : recent_matches
-    })
+    try:
+        rank_info, recent_matches = defs.sohwan_info(summonerName)
+        return JsonResponse({
+            'rankInfo' : rank_info,
+            'recentMatches' : recent_matches
+        })
+    except:
+        return JsonResponse({
+            # 'rankInfo' : [],
+            # 'recentMatches' : {}
+        })
 
 @api_view(['GET'])
 def recommendByMastery(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
-    best = recommend.recommend_champ_by_mastery(summonerName, ascending=False, include=False)
-    worst = recommend.recommend_champ_by_mastery(summonerName, ascending=True, include=False)
-    return JsonResponse({
-        'bestChampList' : list(best.index),
-        'bestPointList' : list(best.values),
-        'worstChampList' : list(worst.index),
-        'worstPointList' : list(worst.values),
-    })
-
+    try:
+        best = recommend.recommend_champ_by_mastery(summonerName, ascending=False, include=False)
+        worst = recommend.recommend_champ_by_mastery(summonerName, ascending=True, include=False)
+        return JsonResponse({
+            'bestChampList' : list(best.index),
+            'bestPointList' : list(best.values),
+            'worstChampList' : list(worst.index),
+            'worstPointList' : list(worst.values),
+        })
+    except:
+        return JsonResponse({
+        })
 @api_view(['GET'])
 def showFreqChamp(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
-    freq_champ_list = recommend.load_freq_champ(summonerName)
-    return JsonResponse({
-        'freqChampAvartar' : list(freq_champ_list.index),
-        'freqChampScore' : list(freq_champ_list.values),
-    })
-
+    try:
+        freq_champ_list = recommend.load_freq_champ(summonerName)
+        return JsonResponse({
+            'freqChampAvartar' : list(freq_champ_list.index),
+            'freqChampScore' : list(freq_champ_list.values),
+        })
+    except:
+        return JsonResponse({
+        })
 @api_view(['GET'])
 def showFreqLane(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
-    freq_lane = defs.freq_lane_info(summonerName)
-    return JsonResponse({
-        'lane': list(freq_lane.index),
-        'laneFreq' : list(freq_lane),
-    })
-
+    try:
+        freq_lane = defs.freq_lane_info(summonerName)
+        return JsonResponse({
+            'lane': list(freq_lane.index),
+            'laneFreq' : list(freq_lane),
+        })
+    except:
+        return JsonResponse({
+        })
 @api_view(['GET'])
 def updateMastery(request, summonerName):
     summonerName = summonerName.replace(" ","").lower()
-    result = update.update_sohwan_mastery(summonerName)
-    return JsonResponse({
-        'result' : result
-    })
+    try:
+        result = update.update_sohwan_mastery(summonerName)
+        return JsonResponse({
+            'result' : result
+        })
+    except:
+        return JsonResponse({
+        })
+
 @api_view(['GET'])
 def recommendItem(request, myChamp, opponentChamp):
-    key,value = rI.getItems(int(myChamp), int(opponentChamp))
-    return JsonResponse({
-        'key' : key,
-        'value' : value
-    })
+    try:
+        key,value = rI.getItems(int(myChamp), int(opponentChamp))
+        return JsonResponse({
+            'key' : key,
+            'value' : value
+        })
+    except:
+        return JsonResponse({
+        })
+@api_view(['GET'])
+def recommendByMbti(request, mbti):
+    try:
+        best = mb.recommend_champ_by_mbti(mbti, ascending=False)
+        worst = mb.recommend_champ_by_mbti(mbti, ascending=True)
+        return JsonResponse({
+            'bestChampList' : list(best.index),
+            'bestPointList' : list(best.values),
+            'worstChampList' : list(worst.index),
+            'worstPointList' : list(worst.values),
+        })
+    except:
+        return JsonResponse({
+        })
+@api_view(['GET'])
+def recommendBySohwan(request, sohwan):
+    try:     
+        mbti = mb.recommend_mbti_by_sohwan(sohwan)
+        return JsonResponse({
+            'mbti' : mbti
+        })
+    except:
+        return JsonResponse({
+        })

@@ -2,27 +2,38 @@
   <div>
     <nav-bar :viewType="navbarType" />
     <v-col align="center" md="4" offset-md="4" class="my-10">
-      <v-img class="white--text align-end" width="600" height="300" src="../../assets/images/lolbti_logo_2.png"></v-img>
+      <v-img
+        class="white--text align-end"
+        width="600"
+        height="300"
+        src="../../assets/images/lolbti_logo_2.png"
+      ></v-img>
 
       <v-card class="mx-auto my-5" max-width="500">
         <v-card-text class="text--primary" style="">로그인</v-card-text>
         <div class="px-10">
-          <v-text-field class="mt-10" v-model="email" label="이메일" outlined hide-details></v-text-field>
+          <v-text-field
+            class="mt-10"
+            v-model="email"
+            label="이메일"
+            outlined
+            hide-details
+          ></v-text-field>
           <div align="left" class="error-text" v-if="error.email">
-            <b>{{error.email}}</b>
+            <b>{{ error.email }}</b>
           </div>
 
           <v-text-field
             class="mt-10"
             v-model="password"
             type="password"
-            @keyup.enter="Login"
             label="비밀번호"
             outlined
             hide-details
+            @keydown.enter="onLogin"
           ></v-text-field>
           <div align="left" class="error-text" v-if="error.password">
-            <b>{{error.password}}</b>
+            <b>{{ error.password }}</b>
           </div>
 
           <v-btn
@@ -31,11 +42,12 @@
             color="btncolor"
             @click="onLogin"
             :disabled="!isSubmit"
-            :class="{disabled : !isSubmit}"
-          >Login</v-btn>
+            :class="{ disabled: !isSubmit }"
+            >Login</v-btn
+          >
           <v-btn class="mt-5" block color="btncolor">Join</v-btn>
-          <br>
-          <br>
+          <br />
+          <br />
         </div>
       </v-card>
     </v-col>
@@ -103,12 +115,12 @@ export default {
           (res) => {
             this.isSubmit = true;
             this.$session.start();
-            this.$session.set('userinfo',{
+            this.$session.set("userinfo", {
               email: this.$store.state.email,
               summonerName: this.$store.state.summonerName,
             });
-          
-            this.$router.push({path : "/home/"+this.$store.state.summonerName });
+
+            this.$router.push({ path: "/" }).catch(() => {});
           },
           (error) => {}
         );

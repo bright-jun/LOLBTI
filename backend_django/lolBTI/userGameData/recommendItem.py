@@ -14,13 +14,13 @@ def getItems(myChamp, opponentChamp):
     global items
     if(myChamp in items):
         if(opponentChamp in items[myChamp]):
-            itemDict = items[myChamp][opponentChamp]
+            itemDict = items[myChamp][opponentChamp].copy()
         else:
-            return "데이터가 없음", "데이터가 없음"
+            return "", ""
     else:
-        return "데이터가 없음", "데이터가 없음"
-    cnt = itemDict['cnt']
-    del itemDict['cnt']
+        return "", ""
+    cnt = itemDict.pop('cnt')
+    # del itemDict['cnt']
     keyList = list(itemDict.keys())
     valueList = list(itemDict.values())
     visit = [0] * len(valueList)
@@ -39,7 +39,7 @@ def getItems(myChamp, opponentChamp):
                 maxN = valueList[j]
                 maxIdx = j
         sortedKeyList.append(keyList[maxIdx])
-        sortedValueList.append(maxN*100.0/cnt)
+        sortedValueList.append(round(maxN*100.0/cnt))
         visit[maxIdx] = 1
     print(sortedKeyList)
     print(sortedValueList)

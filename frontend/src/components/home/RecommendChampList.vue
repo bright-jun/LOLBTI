@@ -54,8 +54,8 @@ export default {
                 offsetGridLines: false,
               },
               ticks: {
-                // min: Math.ceil(10 - items[1]["worstPoint"]) * -10,
-                // max: Math.floor(10 - items[9]["worstPoint"]) * -10,
+                max: Math.floor((-items.worstPoint[items.bestPoint.length-1]-1)/10) * -10,
+                min: Math.ceil((-items.worstPoint[0]+1)/10) * -10,
               },
             },
           ],

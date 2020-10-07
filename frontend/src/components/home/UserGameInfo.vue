@@ -10,11 +10,18 @@
             height="150"
             width="120"
           ></v-img>
+          <v-img
+            v-if="imgURL == ''"
+            class="ma-auto"
+            src="@/assets/img/unranked.png"
+            height="150"
+            width="120"
+          ></v-img>
         </v-col>
         <v-col md="7">
           <h2 class="mb-0">솔로랭크</h2>
           <br />
-          <p class="mb-0 text-md-h6">{{ gameInfo.tier }}</p>
+          <p class="mb-0 text-md-h6">{{ gameInfo.tier }} {{ gameInfo.rank }}</p>
           <p class="mb-0">{{ gameInfo.leaguePoints }}LP</p>
           <p class="mb-0">{{ gameInfo.wins }}승 {{ gameInfo.losses }}패</p>
           <br />
@@ -34,7 +41,9 @@ export default {
   },
   props: ["gameInfo", "imgURL"],
 
-  created() {},
+  created() {
+    // console.log(this.gameInfo.rank);
+  },
 };
 </script>
 

@@ -25,7 +25,7 @@
           </v-list-item-content>
           <v-sapcer></v-sapcer>
           <v-list-item-content>
-            {{ item.lane }}
+            <!-- {{ item.lane }} -->
           </v-list-item-content>
           <v-sapcer></v-sapcer>
           <v-list-item-content>

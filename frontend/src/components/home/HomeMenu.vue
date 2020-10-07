@@ -27,7 +27,7 @@
           absolute
           right
           @click="updateGameInfo()"
-          >갱신하기</v-btn
+          >추천 받기</v-btn
         >
       </div>
       <v-tab-item v-for="i in tabs" :key="i" :value="'tab-' + i">
@@ -92,9 +92,7 @@ export default {
           alert("갱신 실패");
         }
       );
-      // this.$router.push({
-      //   path: "/home/" + this.$route.params.summonername,
-      // });
+      location.reload();
     },
   },
 };

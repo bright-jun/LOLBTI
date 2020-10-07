@@ -88,7 +88,11 @@ public class UserController {
 		BasicResponse result = new BasicResponse();
 		if(user.isPresent()){
 			result.status = true;
-			result.object = user.get();
+			Optional<Mbti> mbti = mbtiDao.findById(user.get().getSummonerName());
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("summonerName",user.get().getSummonerName());
+			map.put("mbti",mbti.get().getMbti());
+			result.object=map;
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else{
 			result.status = false;
@@ -106,7 +110,7 @@ public class UserController {
 		if (!userOpt.isPresent()) {
 			result.status = true;
 			// 소환사 명을 입력한 경우에만 소환사,mbti 추가한다(일단 공백으로 했음 , null이면 바꿀 예정)
-			if (!user.getSummonerName().equals("")) {
+			if (user.getSummonerName()!=null && !user.getSummonerName().equals("") && mbti != null) {
 				// Mbti 추가 로직 구현해주세요
 				String summonerName = user.getSummonerName();
 				summonerName = summonerName.replaceAll(" ","");

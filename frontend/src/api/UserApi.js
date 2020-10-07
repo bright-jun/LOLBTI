@@ -43,7 +43,9 @@ const requestJoin = (data, callback, errorCallback) => {
       mbti: data.userMbti,
     },
   })
-    .then(function(response) {})
+    .then(function(response) {
+      callback();
+    })
     .catch(function(error) {
       errorCallback();
     });
@@ -94,6 +96,24 @@ const requestRecommendChampList = (
     params: {
       summonerName: summonerName,
       type: type,
+    },
+  })
+    .then(function(response) {
+      // console.log(response);
+      callback(response);
+    })
+    .catch(function(error) {
+      // console.log("error");
+      errorCallback(error);
+    });
+};
+
+const requestRecommendChampListByMbti = (mbti, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/recommend/mbti",
+    params: {
+      mbti: mbti,
     },
   })
     .then(function(response) {
@@ -216,6 +236,23 @@ const updateUserInfo = (summonerName, email, mbti, callback, errorCallback) => {
     });
 };
 
+const requestItemRecom = (data, callback, errorCallback) => {
+  axios({
+    method: "get",
+    url: BASE_URL + "/recommend/item",
+    params: {
+      myChamp: data.myChampKey,
+      opponentChamp: data.vsChampKey,
+    },
+  })
+    .then(function(response) {
+      callback(response);
+    })
+    .catch(function(error) {
+      errorCallback(error);
+    });
+};
+
 const UserApi = {
   requestLogin: (data, callback, errorCallback) =>
     requestLogin(data, callback, errorCallback),
@@ -246,6 +283,12 @@ const UserApi = {
 
   updateUserInfo: (summonerName, email, mbti, callback, errorCallback) =>
     updateUserInfo(summonerName, email, mbti, callback, errorCallback),
+
+  requestItemRecom: (data, callback, errorCallback) =>
+    requestItemRecom(data, callback, errorCallback),
+
+  requestRecommendChampListByMbti: (mbti, callback, errorCallback) =>
+    requestRecommendChampListByMbti(mbti, callback, errorCallback),
 };
 
 export default UserApi;

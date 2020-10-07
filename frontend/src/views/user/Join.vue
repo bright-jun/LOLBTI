@@ -2,14 +2,25 @@
   <div>
     <nav-bar :viewType="navbarType" />
     <v-col align="center" md="4" offset-md="4" class="my-10">
-      <v-img class="white--text align-end" width="600" height="300" src="../../assets/images/lolbti_logo_2.png"></v-img>
+      <v-img
+        class="white--text align-end"
+        width="600"
+        height="300"
+        src="../../assets/images/lolbti_logo_2.png"
+      ></v-img>
 
       <v-card class="mx-auto my-5" max-width="500">
         <v-card-text class="display-1 text--primary">Sign Up</v-card-text>
         <div class="px-10">
-          <v-text-field class="mt-10" v-model="email" label="이메일" outlined hide-details></v-text-field>
+          <v-text-field
+            class="mt-10"
+            v-model="email"
+            label="이메일"
+            outlined
+            hide-details
+          ></v-text-field>
           <div align="left" class="error-text" v-if="error.email">
-            <b>{{error.email}}</b>
+            <b>{{ error.email }}</b>
           </div>
 
           <v-text-field
@@ -21,7 +32,7 @@
             hide-details
           ></v-text-field>
           <div align="left" class="error-text" v-if="error.password">
-            <b>{{error.password}}</b>
+            <b>{{ error.password }}</b>
           </div>
 
           <v-text-field
@@ -33,38 +44,51 @@
             hide-details
           ></v-text-field>
           <div align="left" class="error-text" v-if="error.passwordRe">
-            <b>{{error.passwordRe}}</b>
+            <b>{{ error.passwordRe }}</b>
           </div>
 
-          <v-text-field class="mt-10" v-model="userId" label="소환사명" outlined hide-details></v-text-field>
+          <v-text-field
+            class="mt-10"
+            v-model="userId"
+            label="소환사명"
+            outlined
+            hide-details
+          ></v-text-field>
 
-          <v-autocomplete class="mt-10" v-model="userMbti" outlined hide_details
-                  :items="[
-                    'ENFJ',
-                    'ENFP',
-                    'ENTJ',
-                    'ENTP',
-                    'ESFJ',
-                    'ESFP',
-                    'ESTJ',
-                    'ESTP',
-                    'INFJ',
-                    'INFP',
-                    'INTJ',
-                    'INTP',
-                    'ISFJ',
-                    'ISFP',
-                    'ISTJ',
-                    'ISTP',
-                  ]"
-                  label="MBTI 유형"
-                ></v-autocomplete>
-                <a
-                href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC"
-                target="_blank"
-                >무료 MBTI 검사</a>
+          <v-autocomplete
+            class="mt-10"
+            v-model="userMbti"
+            outlined
+            hide_details
+            :items="[
+              'ENFJ',
+              'ENFP',
+              'ENTJ',
+              'ENTP',
+              'ESFJ',
+              'ESFP',
+              'ESTJ',
+              'ESTP',
+              'INFJ',
+              'INFP',
+              'INTJ',
+              'INTP',
+              'ISFJ',
+              'ISFP',
+              'ISTJ',
+              'ISTP',
+            ]"
+            label="MBTI 유형"
+          ></v-autocomplete>
+          <a
+            href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC"
+            target="_blank"
+            >무료 MBTI 검사</a
+          >
 
-          <v-btn class="my-10" block color="btncolor" @click="onJoin">Join</v-btn>
+          <v-btn class="my-10" block color="btncolor" @click="onJoin"
+            >Join</v-btn
+          >
           <v-divider></v-divider>
         </div>
       </v-card>
@@ -130,6 +154,9 @@ export default {
     onJoin() {
       if (this.isSubmit) {
         let { email, password, userId, userMbti } = this;
+        console.log(email);
+        console.log(userId);
+        console.log(userMbti);
         let data = {
           email,
           password,
@@ -140,7 +167,9 @@ export default {
         UserApi.requestJoin(
           data,
           (res) => {
-            this.$router.push({path : "/"});
+            this.$router.push({ path: "/" }).catch(() => {
+              console.log("error 회원가입안됨");
+            });
           },
           (error) => {
           }

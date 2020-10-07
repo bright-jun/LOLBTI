@@ -21,7 +21,7 @@
       <v-col md="12">
         <v-card style="display: flex">
           <v-row>
-            <v-col cols="1">
+            <v-col md="1">
               <template v-for="(ava, index) in worstimgSrcArr">
                 <v-img
                   :src="ava.worstAvatar"
@@ -31,13 +31,18 @@
                 <!-- <br :key="index" /> -->
               </template>
             </v-col>
-            <v-col cols="5">
+            <v-col md="10" v-if="isEmpty">
+              <p class="mt-3 text-center font-weight-black text-h3">
+                추천 받기 버튼을 누르세요.
+              </p>
+            </v-col>
+            <v-col md="5">
               <recommend-champ-list ref="list1" />
             </v-col>
-            <v-col cols="5">
+            <v-col md="5">
               <recommend-champ-list2 ref="list2" />
             </v-col>
-            <v-col cols="1">
+            <v-col md="1">
               <template v-for="(ava, index) in bestimgSrcArr">
                 <v-img
                   :src="ava.bestAvatar"
@@ -73,6 +78,7 @@ export default {
   data() {
     return {
       type: 0,
+      isEmpty: false,
       bestimgSrcArr: [],
       worstimgSrcArr: [],
       // items: [{ header: "숙련도 기반 챔프 추천" }],
@@ -99,7 +105,7 @@ export default {
         var self = this;
         for (var index = 0; index < res.data.bestChampList.length; index++) {
           var bestPoint = (res.data.bestPointList[index] * 100).toFixed(2);
-          var worstPoint = (res.data.worstPointList[index] * 1000).toFixed(2);
+          var worstPoint = (res.data.worstPointList[index] * 100).toFixed(2);
           var bestAvatar =
             "http://ddragon.leagueoflegends.com/cdn/10.19.1/img/champion/" +
             self.$store.getters.getChampIdByNo(
@@ -119,13 +125,14 @@ export default {
               String(res.data.bestChampList[index])
             )
           );
-          this.items.bestPoint.push(bestPoint);
+          this.items.bestPoint.push(Math.round(bestPoint));
           this.items.worstChampion.push(
             self.$store.getters.getChampNameByNo(
               String(res.data.worstChampList[index])
             )
           );
           this.items.worstPoint.push(Math.round(worstPoint * 10 - 100));
+          //Math.round(worstPoint * 10 - 100)
           // this.items.push({
           //   bestChampion: self.$store.getters.getChampNameByNo(
           //     String(res.data.bestChampList[index])
@@ -145,12 +152,15 @@ export default {
           //   });
           // }
         }
+
         // console.log(this.worstimgSrcArr);
         // console.log(this.bestimgSrcArr);
         // console.log(this.items);
         this.gogo(this.items);
       },
-      (error) => {}
+      (error) => {
+        this.isEmpty = true;
+      }
     );
   },
 };

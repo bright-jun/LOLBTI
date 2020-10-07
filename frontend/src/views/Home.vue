@@ -89,12 +89,22 @@ export default {
             };
           }
         }
+        // console.log(res.data.recentMatches.matches);
         // console.log(this.gameInfo);
         // console.log(this.$store.state.summonerWinLose);
         // console.log(this.recentGames);
         this.getRecentMatch(res.data.recentMatches.matches);
       },
-      (error) => {}
+      (error) => {
+        this.gameInfo = {
+          tier: "UNRANKED",
+          leaguePoints: "0",
+          wins: "0",
+          losses: "0",
+          summonerName: this.$route.params.summonername,
+        };
+        this.items.push({ champion: "데이터가", time: "없습니다." });
+      }
     );
   },
   methods: {
