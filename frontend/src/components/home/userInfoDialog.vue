@@ -93,7 +93,7 @@ export default {
       this.$session.get("userinfo")["email"],
       (res) => {
         // console.log(res);
-        this.summonerName = res.data.object.summonername;
+        this.summonerName = res.data.object.summonerName;
         this.mbti = res.data.object.mbti;
       },
       (error) => {
