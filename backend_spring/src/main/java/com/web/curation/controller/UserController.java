@@ -92,7 +92,7 @@ public class UserController {
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("summonerName",user.get().getSummonerName());
 			map.put("mbti",mbti.get().getMbti());
-			result.data=map.toString();
+			result.object=map;
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else{
 			result.status = false;
