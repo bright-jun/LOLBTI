@@ -22,6 +22,7 @@
           <h2 class="mb-0">솔로랭크</h2>
           <br />
           <p class="mb-0 text-md-h6">{{ gameInfo.tier }}</p>
+          <p class="mb-0 text-md-h6">{{ gameInfo.rank }}</p>
           <p class="mb-0">{{ gameInfo.leaguePoints }}LP</p>
           <p class="mb-0">{{ gameInfo.wins }}승 {{ gameInfo.losses }}패</p>
           <br />
