@@ -31,6 +31,11 @@
                 <!-- <br :key="index" /> -->
               </template>
             </v-col>
+            <v-col md="10" v-if="isEmpty">
+              <p class="mt-3 text-center font-weight-black text-h3">
+                추천 받기 버튼을 누르세요.
+              </p>
+            </v-col>
             <v-col md="5">
               <recommend-champ-list ref="list1" />
             </v-col>
@@ -73,6 +78,7 @@ export default {
   data() {
     return {
       type: 0,
+      isEmpty: false,
       bestimgSrcArr: [],
       worstimgSrcArr: [],
       // items: [{ header: "숙련도 기반 챔프 추천" }],
@@ -146,12 +152,15 @@ export default {
           //   });
           // }
         }
+
         // console.log(this.worstimgSrcArr);
         // console.log(this.bestimgSrcArr);
         // console.log(this.items);
         this.gogo(this.items);
       },
-      (error) => {}
+      (error) => {
+        this.isEmpty = true;
+      }
     );
   },
 };
