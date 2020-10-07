@@ -338,6 +338,91 @@
 		-	중간중간 키의 요청권한을 넘거나, 키가 만료되는 경우를 다 생각해주어야 함. 
 
 ## 테스트 방법
+> 프로젝트를 배포한 url과 테스트하기 위한 계정 ID/PW를 적어주세요
+
+## 데이터 정제
+
+0.전처리용 테이블
+> 최상위유저 테이블 /lol/league/v4/challengerleagues/by-queue/{queue}
+/lol/league/v4/grandmasterleagues/by-queue/{queue}
+
+1. Django
+소환사 테이블 /lol/league/v4/challengerleagues/by-queue/{queue}
+/lol/summoner/v4/summoners/by-name/{summonerName} -> accountId가져오기
+
+summonerId, summonerName, leaguePoint, rank, wins, losses, accountId
+
+챔피언정보테이블
+아이템정보테이블
+
+소환사별 챔피언 숙련도 /lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}
+championId, championLevel, championPoints, lastPlayTime,
+ chestGranted, tokensEarned, summonerId
+
+소환사별 매치기록 /lol/match/v4/matchlists/by-account/{encryptedAccountId}
+championId, gameId
+
+매치테이블 /lol/match/v4/matches/{matchId}
+input: championId, gameId
+output: win, item0, item1, item2, item3, item4, item5, item6, lane, teamId
+ -> input: lane, teamId(100,200)
+     output: championId
+
+
+MBTI테이블
+summonerId, MBTI
+
+2. Spring
+유저테이블
+uId, password, summonerId, summonerName, accountId
+
+3. 예시 및 방식
+id = k1yKswuFwjLUjBLCM1OSiZqje_i8TJURNeblpioB6RdVnA
+accountid = PtVDGmeP546DaWTdsjdBwdwxZGQUbvZHXs3l5tR9voGh
+puuid = FTuNdqNCmoLUsmQFNp8jHfI3JklwPLQajWoX-85SkR5VEhznRq78VMnh5VVhWe9ULW9f5UXVGzANew
+4628056135
+
+matchlists -> championID == match -> championID
+-> stats -> item
+type
+participantId -> 몇번째 유저
+itemId -> 아이템 아이디
+
+user가 플레이한 챔피언 성향에 따른 추천  - 명준
+
+user MBTI 성향에 따른 챔피언 추천 - 명준
+
+챔피언 매치에 따른 아이템 템트리 추천 - 효준
+
+mbti 궁합(간단), mbti + 챔프 ->듀오 추천 -나
+예) ENTP(나랑 궁합이 잘맞는 mbti)가 많이쓰는 챔프들
+     중에 나의 모스트와? 승률이 높은 챔프 추천?
+    
+    나의 모스트와 승률이 가장 높은 챔피언을 많이쓰는 mbti유저를 추천
+
+    INFP(나)와 다른 mbti와 듀오했을때 승률이 가장 높은 mbti를 추천(데이터가 적음)
+
+    나의 mbti의 모스트 5개에서 승률이 높은 챔피언 각 2개씩 뽑아서 이 챔프를 플레이를 많이하는 mbti를 추천
+    (mbti궁합추천 및 챔프 추천)
+    챔프 10개를 띄워줌 이 10개에 각각 mbti 출력?
+
+	이즈	레오나(승률) - mbti
+		쓰레쉬(승률) - mbti
+	케틀
+	모데
+	아트
+	아칼리
+
+통계(ex mbti 별 티어, 라인 ) 차트 등
+예) mbti별 모스트1(판수)
+     mbti와 티어의 상관관계
+     
+
+
+라인추천 주, 부 (생각좀 ㄱㄱ)
+챔피언 역할군 (암살자, 전사, 마법사 등)
+itemId -> 아이템 아이디
+.
 >	프로젝트를 배포한 url과 테스트하기 위한 계정 ID/PW를 적어주세요
 
 >	[https://j3a109.p.ssafy.io/](https://j3a109.p.ssafy.io/)

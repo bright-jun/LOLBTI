@@ -88,7 +88,11 @@ public class UserController {
 		BasicResponse result = new BasicResponse();
 		if(user.isPresent()){
 			result.status = true;
-			result.object = user.get();
+			Optional<Mbti> mbti = mbtiDao.findById(user.get().getSummonerName());
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("summonerName",user.get().getSummonerName());
+			map.put("mbti",mbti.get().getMbti());
+			result.object=map;
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else{
 			result.status = false;
