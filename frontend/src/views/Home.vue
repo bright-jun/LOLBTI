@@ -9,6 +9,13 @@
           </v-card>
         </v-row>
         <v-row>
+          <v-col xs="12" sm="12" md="8" class="pt-6">
+            <!-- <v-card class="pa-2" outlined tile>
+            </v-card>-->
+            <HomeMenu />
+            <!-- <v-card class="pa-2" outlined tile>승률 원형 그래프, 챔프 기록, 라인 기록</v-card>
+            <v-card class="pa-2" outlined tile>챔프 추천 목록</v-card>-->
+          </v-col>
           <v-col xs="12" sm="12" md="4">
             <v-col>
               <!-- <v-card class="pa-2" outlined tile>mbti 유형</v-card> -->
@@ -18,15 +25,17 @@
               <UserGameInfo :gameInfo="gameInfo" :imgURL="imgURL" />
             </v-col>
             <v-col>
+              <v-card class="text-center">
+                <a
+                  href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC"
+                  target="_blank"
+                  >무료 MBTI 검사</a
+                >
+              </v-card>
+            </v-col>
+            <v-col>
               <RecentChampList :items="items" />
             </v-col>
-          </v-col>
-          <v-col xs="12" sm="12" md="8" class="pt-6">
-            <!-- <v-card class="pa-2" outlined tile>
-            </v-card>-->
-            <HomeMenu />
-            <!-- <v-card class="pa-2" outlined tile>승률 원형 그래프, 챔프 기록, 라인 기록</v-card>
-            <v-card class="pa-2" outlined tile>챔프 추천 목록</v-card>-->
           </v-col>
         </v-row>
       </v-container>

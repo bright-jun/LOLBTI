@@ -27,7 +27,7 @@
           absolute
           right
           @click="updateGameInfo()"
-          >추천 받기</v-btn
+          >추천 갱신</v-btn
         >
       </div>
       <v-tab-item v-for="i in tabs" :key="i" :value="'tab-' + i">
