@@ -19,9 +19,16 @@
       </v-list-item>
     </v-list>
     <v-list v-if="items.length == 0">
-      <p class="mt-3 text-center font-weight-black text-h5">
+      <p v-if="start" class="mt-3 text-center font-weight-black text-h5">
         데이터가 없습니다.
       </p>
+      <v-img
+        v-if="!start"
+        class="ma-auto"
+        src="@/assets/img/spinner.gif"
+        height="150"
+        width="120"
+      ></v-img>
     </v-list>
   </v-card>
 </template>
@@ -32,6 +39,7 @@ import UserApi from "../../api/UserApi.js";
 export default {
   data() {
     return {
+      start: false,
       items: [
         // { icon: true },
         //   title: "Jason Oner",
@@ -73,6 +81,7 @@ export default {
             freq: (res.data.freqChampScore[index] * 100).toFixed(2),
           });
         }
+        this.start = true;
       },
       (error) => {}
     );

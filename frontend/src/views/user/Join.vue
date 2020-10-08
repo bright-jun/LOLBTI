@@ -15,7 +15,7 @@
           <v-text-field
             class="mt-10"
             v-model="email"
-            label="이메일"
+            label="이메일*"
             outlined
             hide-details
           ></v-text-field>
@@ -27,7 +27,7 @@
             class="mt-5"
             v-model="password"
             type="password"
-            label="비밀번호"
+            label="비밀번호*"
             outlined
             hide-details
           ></v-text-field>
@@ -39,7 +39,7 @@
             class="mt-5"
             v-model="passwordRe"
             type="password"
-            label="비밀번호 확인"
+            label="비밀번호 확인*"
             outlined
             hide-details
           ></v-text-field>
@@ -85,7 +85,7 @@
             target="_blank"
             >무료 MBTI 검사</a
           >
-
+          <p class="text-red">* 표시는 필수로 작성해야합니다.</p>
           <v-btn class="my-10" block color="btncolor" @click="onJoin"
             >Join</v-btn
           >
@@ -171,8 +171,7 @@ export default {
               console.log("error 회원가입안됨");
             });
           },
-          (error) => {
-          }
+          (error) => {}
         );
       }
     },
