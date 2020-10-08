@@ -1,6 +1,9 @@
 <template>
   <div>
     <Doughnut v-if="loaded" :chartData="chartData" :options="options" />
+    <p class="mt-16 font-weight-black text-h3 text-center" v-if="!loaded">
+      데이터가 없습니다.
+    </p>
   </div>
 </template>
 
@@ -18,19 +21,28 @@ export default {
       chartData: null,
     };
   },
+
   async mounted() {
-    this.chartData = {
-      labels: ["승", "패"],
-      datasets: [
-        {
-          backgroundColor: ["#41B883", "#E46651"],
-          data: [40, 60],
+    this.$store.watch(this.$store.getters.getSummonerWinLose, (n) => {
+      // console.log(n);
+      this.chartData = {
+        labels: ["승", "패"],
+        datasets: [
+          {
+            backgroundColor: ["#0DA970", "#E46651"],
+            data: [n.wins, n.losses],
+          },
+        ],
+      };
+      this.options = {
+        animation: {
+          animateScale: true,
         },
-      ],
-    };
-    this.loaded = true;
+        maintainAspectRatio: false,
+      };
+      this.loaded = true;
+    });
   },
 };
 </script>
 
-<style lang=""></style>

@@ -1,41 +1,62 @@
 <template>
   <div>
-    <Doughnut v-if="loaded" :chartData="chartData" :options="options" />
+    <RadarChart v-if="loaded" :chartData="chartData" :options="options" />
   </div>
 </template>
 
 <script>
-import Doughnut from "./Doughnut.js";
+import RadarChart from "../home/RadarChart.js";
+import UserApi from "../../api/UserApi.js";
 
 export default {
   components: {
-    Doughnut,
+    RadarChart,
   },
+  props: {},
   data() {
     return {
       loaded: false,
       chartData: null,
+      options: {
+        maintainAspectRatio: false,
+      },
     };
   },
   async mounted() {
-    this.chartData = {
-      labels: ["탑", "미들", "정글", "바텀", "써폿"],
-      datasets: [
-        {
-          backgroundColor: [
-            "#EF6C00",
-            "#1E88E5",
-            "#B2FF59",
-            "#00838F",
-            "#D81B60",
-          ],
-          data: [20, 20, 20, 20, 20],
-        },
-      ],
-    };
-    this.loaded = true;
+    UserApi.requestFreqLane(
+      this.$route.params.summonername,
+      (res) => {
+        // console.log(res.data);
+        this.chartData = {
+          labels: res.data.lane,
+          datasets: [],
+        };
+        this.chartData.datasets.push({
+          label: this.$route.params.summonername,
+          backgroundColor: "#0DA970",
+          data: res.data.laneFreq,
+        });
+        this.loaded = true;
+      },
+      (error) => {}
+    );
+  },
+  methods: {
+    color() {
+      var a = Math.floor(Math.random() * 256);
+      var b = Math.floor(Math.random() * 256);
+      var c = Math.floor(Math.random() * 256);
+
+      var str = `rgba(${a},${b},${c},0.5)`;
+      return str;
+    },
   },
 };
 </script>
 
-<style lang=""></style>
+<style>
+.small {
+  max-width: 600px;
+  margin: 150px auto;
+}
+</style>

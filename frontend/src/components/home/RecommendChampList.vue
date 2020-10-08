@@ -1,67 +1,73 @@
-<template>
-  <v-card class="mx-auto ml-2 mr-2">
-    <v-list three-line>
-      <template v-for="(item, index) in items">
-        <v-subheader v-if="item.header" :key="item.header" v-text="item.header"></v-subheader>
-
-        <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
-
-        <v-list-item v-else :key="item.title">
-          <!-- 위에 빠짐 @click  -->
-          <v-list-item-avatar>
-            <v-img :src="item.avatar"></v-img>
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title v-html="item.title"></v-list-item-title>
-            <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </template>
-    </v-list>
-  </v-card>
-</template>
-
 <script>
+import { HorizontalBar } from "vue-chartjs";
 export default {
-  data: () => ({
-    items: [
-      { header: "recent" },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        title: "Brunch this weekend?",
-        subtitle:
-          "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-        title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-        subtitle:
-          "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        title: "Oui oui",
-        subtitle:
-          "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Birthday gift",
-        subtitle:
-          "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-        title: "Recipe to try",
-        subtitle:
-          "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
-      },
-    ],
-  }),
+  extends: HorizontalBar,
+  methods: {
+    gogo(items) {
+      var datacollection = {
+        labels: [
+          // items[1]["worstChampion"],
+          // items[3]["worstChampion"],
+          // items[5]["worstChampion"],
+          // items[7]["worstChampion"],
+          // items[9]["worstChampion"],
+        ],
+        datasets: [
+          {
+            label: "비추천 챔피언",
+            barThickness: 30,
+            backgroundColor: "rgba(255, 99, 132, 1)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+            data: [
+              // Math.round(items[1]["worstPoint"] * 10) - 100,
+              // Math.round(items[3]["worstPoint"] * 10) - 100,
+              // Math.round(items[5]["worstPoint"] * 10) - 100,
+              // Math.round(items[7]["worstPoint"] * 10) - 100,
+              // Math.round(items[9]["worstPoint"] * 10) - 100,
+            ],
+          },
+        ],
+      };
+      datacollection.labels = items.worstChampion;
+      datacollection.datasets[0].data = items.worstPoint;
+      // console.log(datacollection.labels);
+      // console.log(datacollection.datasets[0].data);
+      var options = {
+        scales: {
+          yAxes: [
+            {
+              gridLines: {
+                display: true,
+              },
+              ticks: {
+                fontStyle: "bold",
+                fontSize: 18,
+              },
+            },
+          ],
+          xAxes: [
+            {
+              display: false,
+              gridLines: {
+                display: false,
+                offsetGridLines: false,
+              },
+              ticks: {
+                max: Math.floor((-items.worstPoint[items.bestPoint.length-1]-1)/10) * -10,
+                min: Math.ceil((-items.worstPoint[0]+1)/10) * -10,
+              },
+            },
+          ],
+          legend: {
+            display: true,
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+        },
+      };
+      this.renderChart(datacollection, options);
+    },
+  },
 };
 </script>
