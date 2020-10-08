@@ -171,6 +171,7 @@ export default {
           (res) => {
             this.itemList = res.data.key
             this.itemValue = res.data.value
+            this.itemName = []
             for(var i=0; i < this.itemList.length; i++){
               this.itemName.push(this.$store.state.gameitems[this.itemList[i]])
             }
@@ -195,6 +196,7 @@ export default {
           (res) => {
             this.itemList = res.data.key
             this.itemValue = res.data.value
+            this.itemName = []
             for(var i=0; i < this.itemList.length; i++){
               this.itemName.push(this.$store.state.gameitems[this.itemList[i]])
             }
