@@ -253,10 +253,16 @@
     - requirement.txt에 `gunicorn==19.7.1` 추가
     - `pip install -r requirements.txt --user`
   - 실행
+	screen 이란?  
+	screen은 여러 프로세스(일반적으로 대화식 shell을 가리킴)간의 물리적 터미널을 다중화하는 전체 화면 창 관리자  
+	한마디로,  screen에서는 세션을 끊고 나서도 원래 사용하고 있던 세션에서 시작된 프로세스는 계속 실행(동시에 다른작업 가능)  
     - `screen`입력 후 enter  
       ✍️ screen 은 서버 연결을 꺼도, 실행 중이던 프로그램을 그대로 유지, screen에서 실행한다
     - ⭕️ `gunicorn lolBTI.wsgi:application --bind=0:8081 --reload`  
-      ✍️ --reload: 소스코드가 바뀌면 재기동
+      ✍️ --reload: 소스코드가 바뀌면 재기동  
+  - 확인
+	- `screen -ls`로 현재 스크린의 상태와 포트번호 확인
+	-  screen 내부를 확인하고 싶으면 `screen -r`, 특정 screen `screen -r 스크린ID`   
   - stop
     - `pgrep -f gunicorn`로 gunicorn 포트번호 확인
     - `sudo kill -9 포트번호`
